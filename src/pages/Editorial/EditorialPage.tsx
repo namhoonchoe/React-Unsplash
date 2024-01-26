@@ -1,7 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { unsplashApi } from "@/components/libs/unsplash";
+import ImageCard from "@/components/ui/ImageCard";
 import { getAspectRatio } from "@/utils/utilFunctions";
 import useSWRInfinite from "swr/infinite";
+
 
 export default function EditorialPage() {
   const getEditorials = async (url: string) => {
@@ -24,19 +26,19 @@ export default function EditorialPage() {
   );
 
   return (
-    <div className="flex flex-col justify-start items-center w-full max-w-[70.5rem] gap-20">
+    <div className="column-layout">
       <header className="w-full aspect-[70/24] bg-slate-300"></header>
-      <main className="w-full columns-4	gap-8 mb-20">
+      <main className="masonry-layout">
         {homeFeeds?.map((homeFeed: Array<Photo>) => {
-          return homeFeed?.map((photo: Photo ) => {
+          return homeFeed?.map((photo: Photo) => {
             return (
               <div
-                className="rounded-md w-full rounded-xl masonry-item bg-slate-300 mb-8"
+                className="masonry-item"
                 style={{
                   aspectRatio: getAspectRatio(photo.width, photo.height),
                 }}
               >
-                <img src={photo.urls.regular} alt="" />
+                <ImageCard  imageUrl={photo.urls.regular}  blurHash={photo.blur_hash}/>
               </div>
             );
           });
