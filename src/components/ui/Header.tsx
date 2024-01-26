@@ -4,7 +4,7 @@ export default function Header() {
  
   return (
     <div className="w-full flex flex-col justify-start items-start">
-      <header className="w-full h-16 px-6 py-2 bg-white shadow-[-1px_0px_0_1px_rgba(0,0,0,0.3)] justify-between items-center inline-flex sticky top-0 z-[999] grid-header  ">
+      <header className="w-full h-16 px-6 py-2 bg-white  justify-between items-center inline-flex sticky top-0 z-[999] grid-header  ">
         <svg
           width="32"
           height="32"

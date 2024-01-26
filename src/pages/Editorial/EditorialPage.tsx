@@ -4,13 +4,11 @@ import ImageCard from "@/components/ui/ImageCard";
 import { getAspectRatio } from "@/utils/utilFunctions";
 import useSWRInfinite from "swr/infinite";
 
-
 export default function EditorialPage() {
   const getEditorials = async (url: string) => {
     const { data } = await unsplashApi.get(url, {
       params: {
-        per_page: 25,
-        order_by: "popular",
+        order_by: "latest",
       },
     });
     return data;
@@ -38,7 +36,10 @@ export default function EditorialPage() {
                   aspectRatio: getAspectRatio(photo.width, photo.height),
                 }}
               >
-                <ImageCard  imageUrl={photo.urls.regular}  blurHash={photo.blur_hash}/>
+                <ImageCard
+                  imageUrl={photo.urls.regular}
+                  blurHash={photo.blur_hash}
+                />
               </div>
             );
           });

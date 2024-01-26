@@ -20,7 +20,7 @@ const ThemeNavigatior: React.FC<TnProps> = ({topics}) => {
   const sliderRef = useRef(null);
 
   return (
-    <div className="w-full h-20 flex justify-start items-center  ">
+    <div className="w-full h-16 flex justify-start items-center shadow-[-1px_0px_0_1px_rgba(0,0,0,0.3)]  ">
       <Link to="/" state={{ refetchData: false }}>
         <div className="w-40 h-full flex items-center justify-center">
           <p className=" text-nowrap">보도/편집 전용</p>
@@ -33,8 +33,7 @@ const ThemeNavigatior: React.FC<TnProps> = ({topics}) => {
               <Link
                 key={topic.id}
                 to={`discover/${topic.id}`}
-                state={{ refetchData: false }}
-              >
+               >
                 <div className="px-3 py-2 flex items-center justify-center border rounded-full ">
                   <p className=" text-nowrap">{topic.title}</p>
                 </div>

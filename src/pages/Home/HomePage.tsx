@@ -7,20 +7,19 @@ export default function HomePage() {
   const getTopicList = async (url: string) => {
     const { data } = await unsplashApi.get(url, {
       params: {
-        per_page: 20,
         order_by: "featured",
       },
     });
     return data;
   };
 
-  const { data: topics } = useSWR<Array<Topic>>("/topics", getTopicList,  {
+  const { data: topics } = useSWR<Array<Topic>>("/topics", getTopicList, {
     revalidateOnFocus: false,
   });
-  
+
   return (
     <>
-      <ThemeNavigatior topics={topics}/>
+      <ThemeNavigatior topics={topics} />
       <Outlet />
     </>
   );

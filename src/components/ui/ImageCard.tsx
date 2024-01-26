@@ -18,6 +18,7 @@ const ImageCard: React.FC<ImageCardProps> = ({ blurHash, imageUrl }) => {
         style={{
           width: `${isImageLoading ? 0 : "100%"}`,
           height: `${isImageLoading ? 0 : "100%"}`,
+          objectFit: "cover",
         }}
       />
       {isImageLoading && blurHash && (

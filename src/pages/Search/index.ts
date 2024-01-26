@@ -1,3 +1,3 @@
-import SearchReseultsPage from "./SearchReseultsPage";
+import SearchReseultsPage from "./SearchPage";
 
 export default SearchReseultsPage;
