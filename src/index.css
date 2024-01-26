@@ -1,0 +1,28 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .fit-center {
+    @apply flex flex-col m-0 justify-start items-center w-full absolute left-1/2 -translate-x-1/2 min-h-dvh;
+  }
+
+  .masonry-item {
+    @apply inline-block break-inside-avoid overflow-hidden
+  }
+}
+
+@layer utilities {
+  .nav-slider {
+    display: inline-flex;
+    overflow-x: scroll;
+    scroll-behavior: smooth;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .nav-slider::-webkit-scrollbar {
+    display: none;
+  }
+ 
+}
