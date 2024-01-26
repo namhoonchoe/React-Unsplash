@@ -3,6 +3,7 @@ import { unsplashApi } from "@/components/libs/unsplash";
 import ImageCard from "@/components/ui/ImageCard";
 import { getAspectRatio } from "@/utils/utilFunctions";
 import useSWRInfinite from "swr/infinite";
+import imageUrl from "../../../public/assets/masonry image.png";
 
 export default function EditorialPage() {
   const getEditorials = async (url: string) => {
@@ -25,7 +26,21 @@ export default function EditorialPage() {
 
   return (
     <div className="column-layout">
-      <header className="w-full aspect-[70/24] bg-slate-300"></header>
+      <header className="w-full aspect-[70/24] overflow-hidden bg-slate-300 relative flex justify-center items-center">
+        <img
+          src={imageUrl}
+          className="w-full h-full object-cover brightness-75 absolute top-0 left-0"
+          alt="hero image"
+        />
+        <div className="z-10 w-full  max-w-[70.5rem] flex justify-start items-center *:text-white ">
+          <div className="flex flex-col gap-4 w-1/2 h-1/3">
+            <h1 className="text-4xl font-bold">Unsplash </h1>
+            <p className="text-pretty text-lg font-semibold">
+              The internet’s source for visuals. Powered by creators everywhere.
+            </p>
+          </div>
+        </div>
+      </header>
       <main className="masonry-layout">
         {homeFeeds?.map((homeFeed: Array<Photo>) => {
           return homeFeed?.map((photo: Photo) => {

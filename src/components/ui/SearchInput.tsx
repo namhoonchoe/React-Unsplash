@@ -1,43 +1,28 @@
-import { useEffect, useRef } from "react";
 import SearchIcon from "../svgIcons/SearchIcon";
 
 export default function SearchInput() {
-  const modalRef = useRef<HTMLDialogElement>(null);
-
-  const openModal = () => {
-    modalRef.current?.showModal();
-  };
-
-  const keyDownHandler = (event: KeyboardEvent) => {
-    if (event.ctrlKey && event.key === "k") {
-      event.preventDefault();
-      openModal();
-    }
-  };
-
-  useEffect(() => {
-    window.addEventListener("keydown", keyDownHandler);
-
-    return () => {
-      window.removeEventListener("keydown", keyDownHandler);
-    };
-  });
   return (
-    <>
-      <div className="w-full max-w-[60rem] h-12 relative bg-zinc-300 rounded-3xl" onClick={() => openModal()}>
+    <div className="dropdown w-full max-w-[60rem] h-12">
+      <div
+        tabIndex={0}
+        role="button"
+        className="w-full h-full relative bg-zinc-300 rounded-3xl "
+      >
         <div className="w-6 h-6 left-[19px] top-[12px] absolute">
           <SearchIcon />
         </div>
       </div>
-      <dialog ref={modalRef} className="modal">
-        <div className="modal-box">
-          <h3 className="font-bold text-lg">Hello!</h3>
-          <p className="py-4">Press ESC key or click outside to close</p>
-        </div>
-        <form method="dialog" className="modal-backdrop">
-          <button>close</button>
-        </form>
-      </dialog>
-    </>
+      <ul
+        tabIndex={0}
+        className="dropdown-content z-[1] menu p-2 shadow bg-base-100 border rounded-box mt-2 w-full max-w-[60rem] "
+      >
+        <li>
+          <a>Item 1</a>
+        </li>
+        <li>
+          <a>Item 2</a>
+        </li>
+      </ul>
+    </div>
   );
 }

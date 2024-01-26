@@ -39,7 +39,7 @@ const RootRouter = createBrowserRouter([
         element: <Collection />,
       },
       {
-        path: "s/search/",
+        path: "s/",
         element: <Search />,
         children: [
           {
