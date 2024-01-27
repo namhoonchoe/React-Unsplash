@@ -22,11 +22,10 @@ export default function Header() {
 
         <section className="w-[calc(100%-64px)] h-12 px-2 justify-center items-center flex">
           <SearchInput />
-          {/**아이콘만 있는것 보다 로그인 버튼 있는게 더 나을듯! */}
-        </section>
+         </section>
         <svg
-          width="24"
-          height="24"
+          width="32"
+          height="32"
           fill="none"
           viewBox="0 0 24 24"
           xmlns="http://www.w3.org/2000/svg"

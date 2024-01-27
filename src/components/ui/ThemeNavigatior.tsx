@@ -30,10 +30,7 @@ const ThemeNavigatior: React.FC<TnProps> = ({ topics }) => {
     function positionChecker() {
       if (current) {
         const gap = current.offsetWidth - current.scrollLeft;
-        console.log(gap, current.offsetWidth, current.scrollLeft)
-        if (gap < 370 ) {
-          setIsRightEnd(true);
-        }
+              
 
         if (gap === current.offsetWidth) {
           setIsLeftEnd(true);
@@ -63,7 +60,7 @@ const ThemeNavigatior: React.FC<TnProps> = ({ topics }) => {
         </div>
       </Link>
       <div className="w-[calc(100%-10rem)] relative">
-        <div className="w-full gap-2 nav-slider z-20 px-1" ref={sliderRef}>
+        <div className="w-full gap-2 nav-slider z-20 pl-1 pr-10"  ref={sliderRef}>
           {topics?.map((topic: Topic) => {
             return (
               <Link key={topic.id} to={`discover/${topic.id}`}>

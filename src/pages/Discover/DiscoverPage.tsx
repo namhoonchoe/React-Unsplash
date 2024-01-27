@@ -8,8 +8,7 @@ import useSWRInfinite from "swr/infinite";
 export default function DiscoverPage() {
   const { id } = useParams();
 
-  console.log(id);
-
+ 
   const getTopic = async (url: string) => {
     const { data } = await unsplashApi.get(url);
     return data;
