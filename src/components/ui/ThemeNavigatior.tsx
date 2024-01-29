@@ -23,6 +23,7 @@ const ThemeNavigatior: React.FC<TnProps> = ({ topics }) => {
   const sliderRef = useRef() as React.MutableRefObject<HTMLDivElement>;
   const [isLeftEnd, setIsLeftEnd] = useState<boolean>(true);
   const [isRightEnd, setIsRightEnd] = useState<boolean>(false);
+ 
 
   const { current } = sliderRef;
 
@@ -64,7 +65,7 @@ const ThemeNavigatior: React.FC<TnProps> = ({ topics }) => {
           {topics?.map((topic: Topic) => {
             return (
               <Link key={topic.id} to={`discover/${topic.id}`}>
-                <div className="px-3 py-2 flex items-center justify-center border rounded-full ">
+                <div className="px-3 py-2 flex items-center justify-center border rounded-full"  >
                   <p className=" text-nowrap">{topic.title}</p>
                 </div>
               </Link>

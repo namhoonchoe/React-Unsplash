@@ -1,33 +1,51 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import CloseIcon from "../svgIcons/CloseIcon";
 import SearchIcon from "../svgIcons/SearchIcon";
 
 export default function SearchInput() {
   const [keyword, setKeyword] = useState<string>("");
   const [isOpened, setIsOpened] = useState<boolean>(false);
+  const navigate = useNavigate();
 
-  const handleSubmit: React.FormEventHandler<HTMLFormElement> = (e) => {
+  const changeHandler: React.ChangeEventHandler<HTMLInputElement> = (e) => {
+    setKeyword(e.target.value);
+  };
+
+  const handleReset: React.MouseEventHandler<HTMLButtonElement> = (e) => {
     e.preventDefault();
-    if (keyword !== "") {
-    } else {
-      alert("enter search keyword");
-    }
+    setIsOpened(!isOpened);
+    setKeyword("");
+  };
+
+  const submitHandler: React.FormEventHandler<HTMLFormElement> = (e) => {
+    e.preventDefault();
+    console.log(keyword);
+    setIsOpened(!isOpened);
+    navigate(`/s/photo/${keyword}`);
+    setKeyword("");
   };
 
   return (
     <div className="relative inline-block w-full max-w-[60rem] h-12">
-      <form className="w-full h-full relative bg-zinc-300 rounded-3xl flex items-center">
+      <form
+        className="w-full h-full relative bg-zinc-300 rounded-3xl flex items-center form-control"
+        id="search-form"
+        onSubmit={submitHandler}
+      >
         {isOpened ? (
           <>
             <input
               type="text"
               placeholder="Search"
-              className="input w-full w-full h-full bg-transparent rounded-3xl input-info px-[19px] "
+              onChange={changeHandler}
+              className="input w-full h-full bg-transparent rounded-3xl input-info px-[19px] "
             />
 
             <button
               className="btn btn-ghost btn-circle z-1 absolute right-[0]"
-              onClick={() => setIsOpened(!isOpened)}
+              type="reset"
+              onClick={handleReset}
             >
               <CloseIcon />
             </button>

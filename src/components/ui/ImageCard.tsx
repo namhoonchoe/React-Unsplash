@@ -2,11 +2,16 @@ import React, { useState } from "react";
 import { Blurhash } from "react-blurhash";
 
 type ImageCardProps = {
-  blurHash: string;
+  blurHash?: string;
   imageUrl: string;
+  skeleton?: boolean;
 };
 
-const ImageCard: React.FC<ImageCardProps> = ({ blurHash, imageUrl }) => {
+const ImageCard: React.FC<ImageCardProps> = ({
+  blurHash,
+  imageUrl,
+  skeleton,
+}) => {
   const [isImageLoading, setIsImageLoading] = useState<boolean>(true);
 
   return (
@@ -23,6 +28,9 @@ const ImageCard: React.FC<ImageCardProps> = ({ blurHash, imageUrl }) => {
       />
       {isImageLoading && blurHash && (
         <Blurhash hash={blurHash} width={"100%"} height={"100%"} punch={1} />
+      )}
+      {isImageLoading && skeleton && (
+        <div className="w-full h-full bg-gray-300 skeleton rounded-none"></div>
       )}
     </>
   );

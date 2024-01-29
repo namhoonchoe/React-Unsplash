@@ -1,6 +1,6 @@
 export function getAspectRatio(width: number, height: number) {
-  const aspect = width / height;
-  if (aspect) {
-    return aspect.toFixed(3);
+  const aspectRatio = width / height;
+  if (aspectRatio) {
+    return aspectRatio.toFixed(3);
   }
 }
