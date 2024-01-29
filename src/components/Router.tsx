@@ -1,13 +1,17 @@
-import PhotoResultsPage from "@/pages/PhotoResults";
+import CollectionResults from "@/pages/Search/CollectionResults";
+import PhotoResultsPage from "@/pages/Search/PhotoResults";
+import UserResults from "@/pages/Search/UserResults";
+import UserPage from "@/pages/User";
+import UserCollections from "@/pages/User/UserCollections";
+import UserLikes from "@/pages/User/UserLikes";
+import UserPhotos from "@/pages/User/UserPhotos";
 import Root from "@components/Root";
 import Collection from "@pages/Collection";
-import CollectionResults from "@pages/CollectionResults";
 import Discover from "@pages/Discover";
 import Editorial from "@pages/Editorial";
 import Home from "@pages/Home";
 import Photo from "@pages/Photo";
 import Search from "@pages/Search";
-import UserResults from "@pages/UserResults";
 import { createBrowserRouter } from "react-router-dom";
 
 const RootRouter = createBrowserRouter([
@@ -38,6 +42,25 @@ const RootRouter = createBrowserRouter([
         path: "collection/:id",
         element: <Collection />,
       },
+      {
+        path: "user/:username",
+        element: <UserPage />,
+        children: [ 
+          {
+            path: "",
+            element: <UserPhotos />,
+          },
+          {
+            path: "likes",
+            element: <UserLikes />,
+          },
+          {
+            path: "collections",
+            element: <UserCollections />,
+          },
+        ]
+      },
+
       {
         path: "s/",
         element: <Search />,

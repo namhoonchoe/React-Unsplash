@@ -3,8 +3,8 @@ import SearchInput from "./SearchInput";
 
 export default function Header() {
   return (
-    <div className="w-full flex flex-col justify-start items-start">
-      <header className="w-full h-16 px-6 py-2 bg-white  justify-between items-center inline-flex sticky top-0 z-[999] grid-header  ">
+    <div className="w-full flex flex-col justify-start items-start sticky top-0 z-[999] ">
+      <header className="w-full h-16 px-6 py-2 bg-white  justify-between items-center inline-flex  ">
         <Link to="/">
           <svg
             width="32"

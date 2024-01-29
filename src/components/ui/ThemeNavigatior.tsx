@@ -54,7 +54,7 @@ const ThemeNavigatior: React.FC<TnProps> = ({ topics }) => {
   }, [current]);
 
   return (
-    <div className="w-full h-16 flex justify-start items-center shadow-[-1px_0px_0_1px_rgba(0,0,0,0.3)]  ">
+    <div className="w-full h-16 flex justify-start items-center  sticky top-16 z-[30] bg-white shadow-sm  ">
       <Link to="/"  >
         <div className="w-40 h-full flex items-center justify-center border-r-2">
           <p className=" text-nowrap capitalize">editorial</p>

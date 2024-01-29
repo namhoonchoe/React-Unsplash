@@ -1,5 +1,5 @@
 import { unsplashApi } from "@/components/libs/unsplash";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import useSWRInfinite from "swr/infinite";
 
 const searchUsers = async (url: string) => {
@@ -30,14 +30,15 @@ export default function UserResultsPage() {
       {userResultsArray?.map((userResults: Array<any>) => {
         return userResults?.map((user: any) => {
           return (
-            <div className="flex justify-start items-center gap-4 w-[356px] aspect-[3] p-3 rounded-xl border">
+            <Link to={`/user/${user.username}`}>
+             <div className="flex justify-start items-center gap-4 w-[356px] aspect-[3] p-3 rounded-xl border">
               <div className="avatar">
                 <div className="w-20 rounded-full">
-                  <img src={`${user.profile_image.medium}`} />
+                  <img src={`${user.profile_image.large}`} />
                 </div>
               </div>
               <div className="flex flex-col gap-2 items-start justify-start">
-                <h1 className="font-semibold capitalize text-nowrap text-clip text-slate-600 text-xl overflow-hidden text-ellipsis">
+                <h1 className="font-semibold capitalize   text-clip text-slate-600 text-xl overflow-hidden  ">
                   {user.name}
                 </h1>
 
@@ -46,6 +47,8 @@ export default function UserResultsPage() {
                 </p>
               </div>
             </div>
+            </Link>
+           
           );
         });
       })}
