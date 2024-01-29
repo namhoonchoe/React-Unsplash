@@ -1,6 +1,6 @@
 import { unsplashApi } from "@/components/libs/unsplash";
 import CollectionCard from "@/components/ui/CollectionCard";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import useSWRInfinite from "swr/infinite";
 
 const searchCollections = async (url: string) => {
@@ -28,7 +28,8 @@ export default function CollectionReseultPage() {
       {collectionResultsArray?.map((collectionResults: Array<any>) => {
         return collectionResults?.map((collection: any) => {
           return (
-            <CollectionCard
+            <Link to={`/collection/${collection.id}`}>
+              <CollectionCard
               sourceOne={`${collection.preview_photos[0].urls.small}q=50`}
               sourceTwo={`${collection.preview_photos[1]?.urls.thumb}q=50`}
               sourceThree={`${collection.preview_photos[2]?.urls.thumb}q=50`}
@@ -37,6 +38,8 @@ export default function CollectionReseultPage() {
               user={collection.user.name}
               tags={collection.tags.slice(3)}
             />
+            </Link>
+          
           );
         });
       })}
