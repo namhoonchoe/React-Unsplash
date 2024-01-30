@@ -37,7 +37,7 @@ export default function EditorialPage() {
           <div className="flex flex-col gap-4 w-1/2 h-1/3">
             <h1 className="text-4xl font-bold">Unsplash </h1>
             <p className="text-pretty text-lg font-semibold">
-              The internet’s source for visuals. Powered by creators everywhere.
+              The internet's source for visuals. Powered by creators everywhere.
             </p>
           </div>
         </div>
@@ -46,7 +46,7 @@ export default function EditorialPage() {
         {homeFeeds?.map((homeFeed: Array<Photo>) => {
           return homeFeed?.map((photo: Photo) => {
             return (
-              <Link to={`/photo/${photo.id}`}>
+              <Link to={`/photo/${photo.id}`} state={{ aspectRatio: getAspectRatio(photo.width, photo.height)}}>
                 <div
                   className="masonry-item"
                   style={{

@@ -1,7 +1,7 @@
 import { unsplashApi } from "@/components/libs/unsplash";
 import { getAspectRatio } from "@/utils/utilFunctions";
 import ImageCard from "@components/ui/ImageCard";
-import { useParams } from "react-router-dom";
+import { Link, Outlet, useParams } from "react-router-dom";
 import useSWRInfinite from "swr/infinite";
 
 const searchPhotos = async (url: string) => {
@@ -27,10 +27,14 @@ export default function PhotoResultsPage() {
     }
   );
   return (
-       <main className="masonry-layout">
-        {photoResultsArray?.map((photoResults: Array<any>) => {
-          return photoResults?.map((photo: Photo) => {
-            return (
+    <main className="masonry-layout">
+      {photoResultsArray?.map((photoResults: Array<any>) => {
+        return photoResults?.map((photo: Photo) => {
+          return (
+            <Link
+              to={`s/photo/${query}/photo/${photo.id}`}
+              state={{ aspectRatio: getAspectRatio(photo.width, photo.height) }}
+            >
               <div
                 className="masonry-item"
                 style={{
@@ -42,9 +46,11 @@ export default function PhotoResultsPage() {
                   blurHash={photo.blur_hash}
                 />
               </div>
-            );
-          });
-        })}
-      </main>
-   );
+            </Link>
+          );
+        });
+      })}
+      <Outlet />
+    </main>
+  );
 }

@@ -1,7 +1,7 @@
 import { unsplashApi } from "@/components/libs/unsplash";
 import { getAspectRatio } from "@/utils/utilFunctions";
 import ImageCard from "@components/ui/ImageCard";
-import { useParams } from "react-router-dom";
+import { Link, Outlet, useParams } from "react-router-dom";
 import useSWR from "swr";
 import useSWRInfinite from "swr/infinite";
 
@@ -38,7 +38,8 @@ export default function CollectionPage() {
         {photoPages?.map((collectionPhotos: Array<any>) => {
           return collectionPhotos?.map((photo: any) => {
             return (
-              <div
+              <Link to={`/collection/${id}/photo/${photo.id}`} state={{ aspectRatio: getAspectRatio(photo.width, photo.height)}}>
+                <div
                 className="masonry-item"
                 style={{
                   aspectRatio: getAspectRatio(photo.width, photo.height),
@@ -49,9 +50,12 @@ export default function CollectionPage() {
                   blurHash={photo.blur_hash}
                 />
               </div>
+              </Link>
+              
             );
           });
         })}
+         <Outlet />
       </main>
     </div>
   );

@@ -1,7 +1,7 @@
 import { unsplashApi } from "@/components/libs/unsplash";
 import ImageCard from "@/components/ui/ImageCard";
 import { getAspectRatio } from "@/utils/utilFunctions";
-import { Link, useParams } from "react-router-dom";
+import { Link, Outlet, useParams } from "react-router-dom";
 import useSWR from "swr";
 import useSWRInfinite from "swr/infinite";
 
@@ -58,7 +58,7 @@ export default function DiscoverPage() {
         {topicPhotoLists?.map((topicPhotoList: Array<any>) => {
           return topicPhotoList?.map((photo: any) => {
             return (
-              <Link to={`/photo/${photo.id}`}  >
+              <Link to={`/discover/${id}/photo/${photo.id}`} state={{ aspectRatio: getAspectRatio(photo.width, photo.height)}}>
                 <div
                   className="masonry-item"
                   style={{
@@ -74,6 +74,7 @@ export default function DiscoverPage() {
             );
           });
         })}
+          <Outlet />
       </main>
     </div>
   );

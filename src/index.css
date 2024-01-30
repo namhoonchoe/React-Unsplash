@@ -36,4 +36,34 @@
   .nav-slider::-webkit-scrollbar {
     display: none;
   }
+
+ /* ===== Scrollbar CSS ===== */
+  /* Firefox */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: #645e5e #bfbfbf;
+  }
+
+  /* Chrome, Edge, and Safari */
+  /* ===== Scrollbar CSS ===== */
+  /* Firefox */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: #a2a0a0 #ffffff;
+  }
+
+  /* Chrome, Edge, and Safari */
+  *::-webkit-scrollbar {
+    width: 16px;
+  }
+
+  *::-webkit-scrollbar-track {
+    background: #ffffff;
+  }
+
+  *::-webkit-scrollbar-thumb {
+    background-color: #5f5d5d;
+    border-radius: 10px;
+    border: 8px solid #ffffff;
+  }
 }
