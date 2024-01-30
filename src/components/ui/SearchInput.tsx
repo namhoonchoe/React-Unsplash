@@ -60,16 +60,7 @@ export default function SearchInput() {
           </div>
         )}
       </form>
-      {isOpened && (
-        <ul className="absoulte z-[1] menu p-2 shadow bg-base-100 border rounded-box mt-2 w-full max-w-[60rem] ">
-          <li>
-            <a>Item 1</a>
-          </li>
-          <li>
-            <a>Item 2</a>
-          </li>
-        </ul>
-      )}
+      
     </div>
   );
 }

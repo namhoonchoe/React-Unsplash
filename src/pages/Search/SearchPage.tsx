@@ -1,11 +1,14 @@
+import { Orientation, queryParamState } from "@/components/libs/recoil-atoms";
 import { Link, Outlet, useMatch, useParams } from "react-router-dom";
+import { useRecoilState, useResetRecoilState } from "recoil";
 
 export default function SearchReseultsPage() {
   const { query } = useParams();
   const matchPhotoTab = useMatch("/s/photo/:query");
   const matchUserTab = useMatch("/s/user/:query");
   const matchCollectionTab = useMatch("/s/collection/:query");
-
+  const [queryParams, setQueryParams] = useRecoilState(queryParamState);
+  const resetFilter = useResetRecoilState(queryParamState);
   return (
     <>
       <header className="w-full h-12 px-2 flex justify-between items-center  shadow-sm sticky top-16 z-[30] bg-white">
@@ -84,32 +87,109 @@ export default function SearchReseultsPage() {
           </Link>
         </section>
         {matchPhotoTab && (
-          <div className="flex justify-start items-center gap-4 pr-2 *:text-slate-500 font-semibold">
-            <details className="dropdown w-20 aspect-[3] ronded-full  ">
-              <summary className="btn btn-ghost w-full  p-0">
-                Orientation
-              </summary>
-              <ul className="p-2 shadow menu dropdown-content z-[1] bg-base-100 rounded-box ">
-                <li>
-                  <a>Item 1</a>
-                </li>
-                <li>
-                  <a>Item 2</a>
-                </li>
-              </ul>
-            </details>
+          <div className="flex justify-start items-center gap-4 pr-4 *:text-slate-500 font-semibold">
+            {(queryParams.isRelevant === false ||
+              queryParams.orientation !== undefined) && (
+              <div
+                role="button"
+                onClick={resetFilter}
+                className="btn btn-sm btn-ghost border  "
+              >
+                reset
+              </div>
+            )}
 
-            <details className="dropdown  dropdown-end w-20 aspect-[3] ronded-full ">
-              <summary className=" btn btn-ghost w-full  p-0">Order by</summary>
-              <ul className="p-2 shadow menu dropdown-content z-[1] bg-base-100 rounded-box ">
+            <div className="dropdown">
+              <div
+                tabIndex={0}
+                role="button"
+                className="btn btn-sm btn-ghost border  "
+              >
+                Orientation
+              </div>
+              <ul
+                tabIndex={0}
+                className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box  *:capitalize"
+              >
                 <li>
-                  <a>Item 1</a>
+                  <p
+                    onClick={() =>
+                      setQueryParams({ ...queryParams, orientation: undefined })
+                    }
+                  >
+                    ALL
+                  </p>
                 </li>
                 <li>
-                  <a>Item 2</a>
+                  <p
+                    onClick={() =>
+                      setQueryParams({
+                        ...queryParams,
+                        orientation: Orientation.Landscape,
+                      })
+                    }
+                  >
+                    landscape
+                  </p>
+                </li>
+                <li>
+                  <p
+                    onClick={() =>
+                      setQueryParams({
+                        ...queryParams,
+                        orientation: Orientation.Portrait,
+                      })
+                    }
+                  >
+                    portrait
+                  </p>
+                </li>
+                <li>
+                  <p
+                    onClick={() =>
+                      setQueryParams({
+                        ...queryParams,
+                        orientation: Orientation.Squarish,
+                      })
+                    }
+                  >
+                    squarish
+                  </p>
                 </li>
               </ul>
-            </details>
+            </div>
+            <div className="dropdown">
+              <div
+                tabIndex={0}
+                role="button"
+                className="btn btn-sm btn-ghost border "
+              >
+                Order by
+              </div>
+              <ul
+                tabIndex={0}
+                className="p-1 shadow menu dropdown-content z-[1] bg-base-100 rounded-box  *:capitalize "
+              >
+                <li>
+                  <p
+                    onClick={() =>
+                      setQueryParams({ ...queryParams, isRelevant: false })
+                    }
+                  >
+                    latest
+                  </p>
+                </li>
+                <li>
+                  <p
+                    onClick={() =>
+                      setQueryParams({ ...queryParams, isRelevant: true })
+                    }
+                  >
+                    relevant
+                  </p>
+                </li>
+              </ul>
+            </div>
           </div>
         )}
       </header>

@@ -1,7 +1,9 @@
+import { queryParamState, SearchQueryParams } from "@/components/libs/recoil-atoms";
 import { unsplashApi } from "@/components/libs/unsplash";
 import { getAspectRatio } from "@/utils/utilFunctions";
 import ImageCard from "@components/ui/ImageCard";
 import { Link, Outlet, useParams } from "react-router-dom";
+import { useRecoilValue } from "recoil";
 import useSWRInfinite from "swr/infinite";
 
 const searchPhotos = async (url: string) => {
@@ -13,14 +15,17 @@ const searchPhotos = async (url: string) => {
 };
 
 export default function PhotoResultsPage() {
+  const { orientation, isRelevant } = useRecoilValue<SearchQueryParams>(queryParamState);
   const { query } = useParams();
-  const {
+   const {
     data: photoResultsArray,
     isLoading,
     size,
     setSize,
   } = useSWRInfinite<Array<Array<any>>>(
-    (index) => `search/photos?page=${index + 1}&query=${query}`,
+    (index) => `search/photos?page=${index + 1}&query=${query}${orientation !== undefined
+      ? `&orientation=${orientation}`
+      : ""}${isRelevant ?  "" :"&order_by=latest" }`,
     searchPhotos,
     {
       revalidateOnFocus: false,
@@ -32,7 +37,7 @@ export default function PhotoResultsPage() {
         return photoResults?.map((photo: Photo) => {
           return (
             <Link
-              to={`s/photo/${query}/photo/${photo.id}`}
+              to={`/s/photo/${query}/photo/${photo.id}`}
               state={{ aspectRatio: getAspectRatio(photo.width, photo.height) }}
             >
               <div
