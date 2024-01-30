@@ -1,13 +1,12 @@
 import { unsplashApi } from "@/components/libs/unsplash";
 import ImageCard from "@/components/ui/ImageCard";
 import { getAspectRatio } from "@/utils/utilFunctions";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import useSWR from "swr";
 import useSWRInfinite from "swr/infinite";
 
 export default function DiscoverPage() {
   const { id } = useParams();
-
  
   const getTopic = async (url: string) => {
     const { data } = await unsplashApi.get(url);
@@ -59,17 +58,19 @@ export default function DiscoverPage() {
         {topicPhotoLists?.map((topicPhotoList: Array<any>) => {
           return topicPhotoList?.map((photo: any) => {
             return (
-              <div
-                className="masonry-item"
-                style={{
-                  aspectRatio: getAspectRatio(photo.width, photo.height),
-                }}
-              >
-                <ImageCard
-                  imageUrl={photo.urls.regular}
-                  blurHash={photo.blur_hash}
-                />
-              </div>
+              <Link to={`/photo/${photo.id}`}  >
+                <div
+                  className="masonry-item"
+                  style={{
+                    aspectRatio: getAspectRatio(photo.width, photo.height),
+                  }}
+                >
+                  <ImageCard
+                    imageUrl={photo.urls.regular}
+                    blurHash={photo.blur_hash}
+                  />
+                </div>
+              </Link>
             );
           });
         })}

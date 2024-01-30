@@ -13,6 +13,7 @@ import Home from "@pages/Home";
 import Photo from "@pages/Photo";
 import Search from "@pages/Search";
 import { createBrowserRouter } from "react-router-dom";
+import PopupModal from "./ui/PopupModal";
 
 const RootRouter = createBrowserRouter([
   {
@@ -26,29 +27,57 @@ const RootRouter = createBrowserRouter([
           {
             path: "",
             element: <Editorial />,
+            children: [
+              {
+                path: "photo/:photoId",
+                element:<PopupModal>
+                  <Photo />
+                </PopupModal>
+               },
+            ],
           },
           {
             path: "discover/:id",
             element: <Discover />,
+            children: [
+              {
+                path: "photo/:photoId",
+                element:<PopupModal>
+                <Photo />
+              </PopupModal>
+              },
+            ],
           },
         ],
       },
 
       {
-        path: "photo/:id",
-        element: <Photo />,
-      },
-      {
         path: "collection/:id",
         element: <Collection />,
+        children: [
+          {
+            path: "photo/:photoId",
+            element:<PopupModal>
+            <Photo />
+          </PopupModal>
+          },
+        ],
       },
       {
         path: "user/:username",
         element: <UserPage />,
-        children: [ 
+        children: [
           {
             path: "",
             element: <UserPhotos />,
+            children: [
+              {
+                path: "photo/:photoId",
+                element: <PopupModal>
+                <Photo />
+              </PopupModal>
+              },
+            ],
           },
           {
             path: "likes",
@@ -58,7 +87,7 @@ const RootRouter = createBrowserRouter([
             path: "collections",
             element: <UserCollections />,
           },
-        ]
+        ],
       },
 
       {
@@ -68,6 +97,14 @@ const RootRouter = createBrowserRouter([
           {
             path: "photo/:query",
             element: <PhotoResultsPage />,
+            children: [
+              {
+                path: "photo/:photoId",
+                element:<PopupModal>
+                <Photo />
+              </PopupModal>
+              },
+            ],
           },
           {
             path: "collection/:query",

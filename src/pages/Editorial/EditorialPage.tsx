@@ -2,6 +2,7 @@
 import { unsplashApi } from "@/components/libs/unsplash";
 import ImageCard from "@/components/ui/ImageCard";
 import { getAspectRatio } from "@/utils/utilFunctions";
+import { Link, Outlet } from "react-router-dom";
 import useSWRInfinite from "swr/infinite";
 import imageUrl from "../../../public/assets/masonry image.png";
 
@@ -45,20 +46,23 @@ export default function EditorialPage() {
         {homeFeeds?.map((homeFeed: Array<Photo>) => {
           return homeFeed?.map((photo: Photo) => {
             return (
-              <div
-                className="masonry-item"
-                style={{
-                  aspectRatio: getAspectRatio(photo.width, photo.height),
-                }}
-              >
-                <ImageCard
-                  imageUrl={photo.urls.regular}
-                  blurHash={photo.blur_hash}
-                />
-              </div>
+              <Link to={`/photo/${photo.id}`}>
+                <div
+                  className="masonry-item"
+                  style={{
+                    aspectRatio: getAspectRatio(photo.width, photo.height),
+                  }}
+                >
+                  <ImageCard
+                    imageUrl={photo.urls.regular}
+                    blurHash={photo.blur_hash}
+                  />
+                </div>
+              </Link>
             );
           });
         })}
+        <Outlet />
       </main>
     </div>
   );
