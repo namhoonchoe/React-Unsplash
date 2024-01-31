@@ -17,30 +17,45 @@ export default function PhotoDetailPage() {
 
   const { data: photo, isLoading } = useSWR<any>(`photos/${photoId}`, getPhoto);
 
-  if(isLoading) return (
-    <section className="w-[80vw] flex flex-col items-center justify-start gap-4 relative mb-8 ">
-      <header className="w-full h-16 flex justify-between items-center shadow-md px-4  sticky top-0 z-[30]  bg-white ">
-      
-      </header>
-      <main className="w-full flex justify-center">
-        { aspectRatio >= 1? 
-        <></>
-        : <></>
-
-        }
-      </main>
-      <footer className="w-full flex flex-col items-start justify-start p-4 gap-6">
-        
-      </footer>
-    </section>
-  )
+  if (isLoading)
+    return (
+      <section className="w-[80vw] flex flex-col items-center justify-start gap-4 relative mb-8 ">
+        <header className="w-full h-16 flex justify-between items-center shadow-md px-4  sticky top-0 z-[30]  bg-white ">
+          <div className="avatar">
+            <div className="skeleton w-12  rounded-full shrink-0"></div>
+          </div>
+        </header>
+        <main className="w-full flex justify-center">
+          {aspectRatio >= 1 ? (
+            <div
+              className="skeleton w-4/5 "
+              style={{
+                aspectRatio: aspectRatio,
+              }}
+            ></div>
+          ) : (
+            <div
+              className="skeleton w-1/3 "
+              style={{
+                aspectRatio: aspectRatio,
+              }}
+            ></div>
+          )}
+        </main>
+        <footer className="w-full flex flex-col items-start justify-start p-4 gap-6">
+          <div className="skeleton h-4 w-28"></div>
+          <div className="skeleton h-4 w-full"></div>
+          <div className="skeleton h-4 w-full"></div>
+        </footer>
+      </section>
+    );
 
   return (
     <section className="w-[80vw] flex flex-col items-center justify-start gap-4 relative mb-8 ">
       <header className="w-full h-16 flex justify-between items-center shadow-md px-4  sticky top-0 z-[30]  bg-white ">
         <div className="flex items-center justify-start gap-2">
           <div className="avatar">
-            <div className="w-12 rounded-full">
+            <div className="w-12 rounded-full bg-slate-200">
               <img src={photo?.user.profile_image.medium} />
             </div>
           </div>
@@ -150,7 +165,9 @@ export default function PhotoDetailPage() {
         </div>
         <section className="w-full flex flex-wrap items-center justify-start gap-2 ">
           {photo?.tags.map((tag) => (
-            <button className="btn btn-sm capitalize text-slate-600 font-medium">{tag.title}</button>
+            <button className="btn btn-sm capitalize text-slate-600 font-medium">
+              {tag.title}
+            </button>
           ))}
         </section>
       </footer>

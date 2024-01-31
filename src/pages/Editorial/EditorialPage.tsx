@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { unsplashApi } from "@/components/libs/unsplash";
 import ImageCard from "@/components/ui/ImageCard";
+import LoadingPlaceHolder from "@/components/ui/LoadingPlaceHolder";
 import { getAspectRatio } from "@/utils/utilFunctions";
 import { Link, Outlet } from "react-router-dom";
 import useSWRInfinite from "swr/infinite";
@@ -24,6 +25,12 @@ export default function EditorialPage() {
     (index) => `/photos?page=${index + 1}`,
     getEditorials
   );
+
+  if(isLoading) return (
+    <main className="masonry-layout">
+      <LoadingPlaceHolder/>
+    </main>
+  )
 
   return (
     <div className="column-layout">

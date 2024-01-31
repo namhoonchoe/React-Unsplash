@@ -1,7 +1,11 @@
-import { queryParamState, SearchQueryParams } from "@/components/libs/recoil-atoms";
-import { unsplashApi } from "@/components/libs/unsplash";
+import {
+  queryParamState,
+  SearchQueryParams,
+} from "@/components/libs/recoil-atoms";
 import { getAspectRatio } from "@/utils/utilFunctions";
+import { unsplashApi } from "@components/libs/unsplash";
 import ImageCard from "@components/ui/ImageCard";
+import LoadingPlaceHolder from "@components/ui/LoadingPlaceHolder";
 import { Link, Outlet, useParams } from "react-router-dom";
 import { useRecoilValue } from "recoil";
 import useSWRInfinite from "swr/infinite";
@@ -15,22 +19,31 @@ const searchPhotos = async (url: string) => {
 };
 
 export default function PhotoResultsPage() {
-  const { orientation, isRelevant } = useRecoilValue<SearchQueryParams>(queryParamState);
+  const { orientation, isRelevant } =
+    useRecoilValue<SearchQueryParams>(queryParamState);
   const { query } = useParams();
-   const {
+  const {
     data: photoResultsArray,
     isLoading,
     size,
     setSize,
   } = useSWRInfinite<Array<Array<any>>>(
-    (index) => `search/photos?page=${index + 1}&query=${query}${orientation !== undefined
-      ? `&orientation=${orientation}`
-      : ""}${isRelevant ?  "" :"&order_by=latest" }`,
+    (index) =>
+      `search/photos?page=${index + 1}&query=${query}${
+        orientation !== undefined ? `&orientation=${orientation}` : ""
+      }${isRelevant ? "" : "&order_by=latest"}`,
     searchPhotos,
     {
       revalidateOnFocus: false,
     }
   );
+  if (isLoading)
+    return (
+      <main className="masonry-layout">
+        <LoadingPlaceHolder />
+      </main>
+    );
+
   return (
     <main className="masonry-layout">
       {photoResultsArray?.map((photoResults: Array<any>) => {

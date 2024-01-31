@@ -20,9 +20,7 @@ export default function UserPage() {
 
   return (
     <div className="w-full flex flex-col items-center justify-start mb-32 gap-10">
-     
-      <header className="w-full aspect-[5] flex flex-col justify-between items-center shadow-sm pt-12">
-       
+      <header className="w-full aspect-[5] flex flex-col justify-between items-center shadow-sm pt-6 gap-6">
         <div className="z-10 w-full max-w-[70.5rem] justify-self-center  flex justify-start items-center gap-1">
           <div className="w-1/4 h-full flex items-center justify-center">
             <div className="avatar">

@@ -1,6 +1,7 @@
-import { unsplashApi } from "@/components/libs/unsplash";
-import ImageCard from "@/components/ui/ImageCard";
 import { getAspectRatio } from "@/utils/utilFunctions";
+import { unsplashApi } from "@components/libs/unsplash";
+import ImageCard from "@components/ui/ImageCard";
+import LoadingPlaceHolder from "@components/ui/LoadingPlaceHolder";
 import { Link, Outlet, useParams } from "react-router-dom";
 import useSWRInfinite from "swr/infinite";
 
@@ -15,10 +16,18 @@ export default function UserPhotosPage() {
     });
     return data;
   };
-  const { data: homeFeeds } = useSWRInfinite<Array<Array<any>>>(
+  const { data: homeFeeds, isLoading } = useSWRInfinite<Array<Array<any>>>(
     (index) => `/users/${username}/photos?page=${index + 1}`,
     getPhotos
   );
+
+  if (isLoading)
+    return (
+      <main className="masonry-layout">
+        <LoadingPlaceHolder />
+      </main>
+    );
+
   return (
     <main className="masonry-layout">
       {homeFeeds?.map((homeFeed: Array<any>) => {
@@ -43,7 +52,7 @@ export default function UserPhotosPage() {
           );
         });
       })}
-        <Outlet />
-      </main>
+      <Outlet />
+    </main>
   );
 }

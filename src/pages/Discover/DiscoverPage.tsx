@@ -1,5 +1,6 @@
 import { unsplashApi } from "@/components/libs/unsplash";
 import ImageCard from "@/components/ui/ImageCard";
+import LoadingPlaceHolder from "@/components/ui/LoadingPlaceHolder";
 import { getAspectRatio } from "@/utils/utilFunctions";
 import { Link, Outlet, useParams } from "react-router-dom";
 import useSWR from "swr";
@@ -34,6 +35,12 @@ export default function DiscoverPage() {
     (index) => `topics/${id}/photos?page=${index + 1}`,
     getTopicPhotos
   );
+
+  if(isPhotosLoading) return (
+    <main className="masonry-layout">
+      <LoadingPlaceHolder/>
+    </main>
+  )
 
   return (
     <div className="column-layout">

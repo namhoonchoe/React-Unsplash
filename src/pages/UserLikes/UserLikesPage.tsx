@@ -1,5 +1,6 @@
 import { unsplashApi } from "@/components/libs/unsplash";
 import ImageCard from "@/components/ui/ImageCard";
+import LoadingPlaceHolder from "@/components/ui/LoadingPlaceHolder";
 import { getAspectRatio } from "@/utils/utilFunctions";
 import { useParams } from "react-router-dom";
 import useSWRInfinite from "swr/infinite";
@@ -16,12 +17,19 @@ export default function UserLikesPage() {
     return data;
   };
   const {
-    data: likeFeeds,
+    data: likeFeeds, isLoading
  
   } = useSWRInfinite<Array<Array<any>>>(
     (index) => `/users/${username}/likes?page=${index + 1}`,
     getPhotos
   );
+
+  if(isLoading) return (
+    <main className="masonry-layout">
+      <LoadingPlaceHolder/>
+    </main>
+  )
+
   return (
     <main className="masonry-layout">
     {likeFeeds?.map((likeFeed: Array<any>) => {
