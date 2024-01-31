@@ -1,51 +1,47 @@
-import { unsplashApi } from "@/components/libs/unsplash";
-import CollectionCard from "@/components/ui/CollectionCard";
+import { unsplashApi } from "@components/libs/unsplash";
+import CollectionCard from "@components/ui/CollectionCard";
+import LoadingSpinner from "@components/ui/LoadingSpinner";
 import { Link, useParams } from "react-router-dom";
-import useSWRInfinite from "swr/infinite";
+import useSWR from "swr";
 
 const searchCollections = async (url: string) => {
-  const {
-    data: { results },
-  } = await unsplashApi.get(url);
-  return results;
+  const { data } = await unsplashApi.get(url);
+  return data;
 };
 
 export default function CollectionReseultPage() {
   const { query } = useParams();
 
-  const {
-    data: collectionResultsArray,
-    isLoading,
-    size,
-    setSize,
-  } = useSWRInfinite<Array<Array<any>>>(
-    (index) => `search/collections?query=${query}&page=${index + 1}`,
+  const { data: collectionResult, isLoading } = useSWR<any>(
+    `search/collections?query=${query}`,
     searchCollections
   );
 
-  if (isLoading) return <p>Loading...</p>;
-  
-  
-  
+  if (isLoading) return <LoadingSpinner />;
+
+  if (collectionResult?.total === 0)
+    return (
+      <main className="w-full h-32 flex justify-center items-center">
+        <p>Cannot find photos</p>
+      </main>
+    );
 
   return (
     <main className="grid grid-cols-3 justify-items-center gap-6">
-      {collectionResultsArray?.map((collectionResults: Array<any>) => {
-        return collectionResults?.map((collection: any) => {
-          return (
-            <Link to={`/collection/${collection.id}`}>
-              <CollectionCard
-                sourceOne={`${collection.preview_photos[0].urls.small}q=50`}
-                sourceTwo={`${collection.preview_photos[1]?.urls.thumb}q=50`}
-                sourceThree={`${collection.preview_photos[2]?.urls.thumb}q=50`}
-                title={collection.title}
-                collectionSize={collection.total_photos}
-                user={collection.user.name}
-                tags={collection.tags.slice(3)}
-              />
-            </Link>
-          );
-        });
+      {collectionResult?.results.map((result: any) => {
+        return (
+          <Link to={`/collection/${result.id}`}>
+            <CollectionCard
+              sourceOne={`${result.preview_photos[0].urls.small}q=50`}
+              sourceTwo={`${result.preview_photos[1]?.urls.thumb}q=50`}
+              sourceThree={`${result.preview_photos[2]?.urls.thumb}q=50`}
+              title={result.title}
+              collectionSize={result.total_photos}
+              user={result.user.name}
+              tags={result.tags.slice(3)}
+            />
+          </Link>
+        );
       })}
     </main>
   );

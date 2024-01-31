@@ -1,5 +1,5 @@
-import ThemeNavigatior from "@/components/ui/ThemeNavigatior";
 import { unsplashApi } from "@components/libs/unsplash";
+import ThemeNavigatior from "@components/ui/ThemeNavigatior";
 import { Outlet } from "react-router-dom";
 import useSWR from "swr";
 

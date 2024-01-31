@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { unsplashApi } from "@/components/libs/unsplash";
-import ImageCard from "@/components/ui/ImageCard";
-import LoadingPlaceHolder from "@/components/ui/LoadingPlaceHolder";
 import { getAspectRatio } from "@/utils/utilFunctions";
+import { unsplashApi } from "@components/libs/unsplash";
+import ImageCard from "@components/ui/ImageCard";
+import LoadingPlaceHolder from "@components/ui/LoadingPlaceHolder";
 import { Link, Outlet } from "react-router-dom";
 import useSWRInfinite from "swr/infinite";
 import imageUrl from "../../../public/assets/masonry image.png";

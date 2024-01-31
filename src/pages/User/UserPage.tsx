@@ -1,11 +1,16 @@
-import { unsplashApi } from "@/components/libs/unsplash";
+import { unsplashApi } from "@components/libs/unsplash";
 import { Link, Outlet, useMatch, useParams } from "react-router-dom";
 import useSWR from "swr";
+
+type ContextType = {   totalPhotos: number,
+  totalCollections: number,
+  totalLikes: number}
 
 const getUserDetail = async (url: string) => {
   const { data } = await unsplashApi.get(url);
   return data;
 };
+
 
 export default function UserPage() {
   const { username } = useParams();
@@ -14,9 +19,35 @@ export default function UserPage() {
   const matchLikesTab = useMatch("/user/:username/likes");
   const matchCollectionsTab = useMatch("/user/:username/collections");
 
-  const { data: userDetail } = useSWR(`/users/${username}`, getUserDetail, {
-    revalidateOnFocus: false,
-  });
+  const { data: userDetail, isLoading } = useSWR(
+    `/users/${username}`,
+    getUserDetail,
+    {
+      revalidateOnFocus: false,
+    }
+  );
+
+  
+const outletProps = {
+  totalPhotos: userDetail?.total_photos,
+  totalCollections: userDetail?.total_collections,
+  totalLikes: userDetail?.total_likes,
+}
+
+  if (isLoading)
+    return (
+      <header className="w-full aspect-[5] flex flex-col justify-between items-center shadow-sm pt-6 gap-6">
+        <div className="z-10 w-full max-w-[70.5rem] justify-self-center  flex justify-start items-center gap-1">
+          <div className="w-1/4 h-full flex items-center justify-center">
+            <div className="w-32 aspect-square rounded-full skeleton shrink-0"></div>
+          </div>
+          <div className="flex flex-col w-3/4 max-w-[432px]   self-center justify-start items-start  gap-4">
+            <div className="skeleton h-4 w-1/4"></div>
+            <div className="skeleton h-4 w-1/4"></div>
+          </div>
+        </div>
+      </header>
+    );
 
   return (
     <div className="w-full flex flex-col items-center justify-start mb-32 gap-10">
@@ -113,13 +144,15 @@ export default function UserPage() {
                 <path d="M2 6H0v5h.01L0 20c0 1.1.9 2 2 2h18v-2H2V6Zm20-2h-8l-2-2H6c-1.1 0-1.99.9-1.99 2L4 16c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2ZM7 15l4.5-6 3.5 4.51 2.5-3.01L21 15H7Z"></path>
               </svg>
               <p style={{ color: matchCollectionsTab ? "#475569" : "#cbd5e1" }}>
-                Collections  {userDetail?.total_collections}
+                Collections {userDetail?.total_collections}
               </p>
             </div>
           </Link>
         </section>
       </header>
-      <Outlet />
+      <Outlet
+        context={outletProps satisfies ContextType }
+      />
     </div>
   );
 }

@@ -1,7 +1,7 @@
-import { unsplashApi } from "@/components/libs/unsplash";
-import ImageCard from "@/components/ui/ImageCard";
-import LoadingPlaceHolder from "@/components/ui/LoadingPlaceHolder";
 import { getAspectRatio } from "@/utils/utilFunctions";
+import { unsplashApi } from "@components/libs/unsplash";
+import ImageCard from "@components/ui/ImageCard";
+import LoadingPlaceHolder from "@components/ui/LoadingPlaceHolder";
 import { Link, Outlet, useParams } from "react-router-dom";
 import useSWR from "swr";
 import useSWRInfinite from "swr/infinite";
@@ -37,9 +37,13 @@ export default function DiscoverPage() {
   );
 
   if(isPhotosLoading) return (
-    <main className="masonry-layout">
+    <div className="column-layout">
+      <header  className="w-full aspect-[3] skeleton  "/>
+      <main className="masonry-layout">
       <LoadingPlaceHolder/>
     </main>
+    </div>
+    
   )
 
   return (

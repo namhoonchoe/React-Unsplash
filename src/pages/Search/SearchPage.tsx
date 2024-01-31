@@ -1,4 +1,4 @@
-import { Orientation, queryParamState } from "@/components/libs/recoil-atoms";
+import { Orientation, queryParamState } from "@components/libs/recoil-atoms";
 import { Link, Outlet, useMatch, useParams } from "react-router-dom";
 import { useRecoilState, useResetRecoilState } from "recoil";
 

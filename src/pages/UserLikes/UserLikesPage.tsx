@@ -1,12 +1,20 @@
-import { unsplashApi } from "@/components/libs/unsplash";
-import ImageCard from "@/components/ui/ImageCard";
-import LoadingPlaceHolder from "@/components/ui/LoadingPlaceHolder";
 import { getAspectRatio } from "@/utils/utilFunctions";
-import { useParams } from "react-router-dom";
+import { unsplashApi } from "@components/libs/unsplash";
+import ImageCard from "@components/ui/ImageCard";
+import LoadingPlaceHolder from "@components/ui/LoadingPlaceHolder";
+import { useOutletContext, useParams } from "react-router-dom";
 import useSWRInfinite from "swr/infinite";
+
+
+type ContextType = {
+  totalPhotos: number;
+  totalCollections: number;
+  totalLikes: number;
+};
 
 export default function UserLikesPage() {
   const { username } = useParams();
+  const { totalLikes } = useOutletContext<ContextType>();
 
   const getPhotos = async (url: string) => {
     const { data } = await unsplashApi.get(url, {
@@ -29,6 +37,13 @@ export default function UserLikesPage() {
       <LoadingPlaceHolder/>
     </main>
   )
+
+  if (totalLikes === 0)
+  return (
+    <main className="w-full h-32 flex justify-center items-center">
+      <p>Cannot find photos</p>
+    </main>
+  );
 
   return (
     <main className="masonry-layout">

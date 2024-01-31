@@ -1,37 +1,44 @@
-import { unsplashApi } from "@/components/libs/unsplash";
+import { unsplashApi } from "@components/libs/unsplash";
+import LoadingSpinner from "@components/ui/LoadingSpinner";
 import { Link, useParams } from "react-router-dom";
-import useSWRInfinite from "swr/infinite";
+import useSWR from "swr";
 
 const searchUsers = async (url: string) => {
   const {
-    data: { results },
+    data ,
   } = await unsplashApi.get(url);
 
-  return results;
+  return data;
 };
 
 export default function UserResultsPage() {
   const { query } = useParams();
 
-  const {
-    data: userResultsArray,
-    isLoading,
-    size,
-    setSize,
-  } = useSWRInfinite<Array<Array<any>>>(
-    (index) => `search/users?page=${index + 1}&query=${query}`,
+  const { data: userResult, isLoading } = useSWR<any>(
+    `search/users?query=${query}`,
     searchUsers,
     {
       revalidateOnFocus: false,
     }
   );
+  
+  
+
+  if (isLoading) return <LoadingSpinner />;
+
+  if(userResult && userResult.total === 0)
+  return (
+    <main className="w-full h-32 flex justify-center items-center">
+      <p>Cannot find users</p>
+    </main>
+  )
+
   return (
     <section className="grid grid-cols-3 justify-items-center gap-6 mt-4">
-      {userResultsArray?.map((userResults: Array<any>) => {
-        return userResults?.map((user: any) => {
-          return (
-            <Link to={`/user/${user.username}`}>
-             <div className="flex justify-start items-center gap-4 w-[356px] aspect-[3] p-3 rounded-xl border">
+      {userResult?.results.map((user: any) => {
+        return (
+          <Link to={`/user/${user.username}`}>
+            <div className="flex justify-start items-center gap-4 w-[356px] aspect-[3] p-3 rounded-xl border">
               <div className="avatar">
                 <div className="w-20 rounded-full">
                   <img src={`${user.profile_image.large}`} />
@@ -47,10 +54,8 @@ export default function UserResultsPage() {
                 </p>
               </div>
             </div>
-            </Link>
-           
-          );
-        });
+          </Link>
+        );
       })}
     </section>
   );
