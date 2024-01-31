@@ -4,7 +4,7 @@ import { getAspectRatio } from "@/utils/utilFunctions";
 import { useParams } from "react-router-dom";
 import useSWRInfinite from "swr/infinite";
 
-export default function UserLikes() {
+export default function UserLikesPage() {
   const { username } = useParams();
 
   const getPhotos = async (url: string) => {

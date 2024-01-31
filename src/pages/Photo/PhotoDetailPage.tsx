@@ -17,6 +17,24 @@ export default function PhotoDetailPage() {
 
   const { data: photo, isLoading } = useSWR<any>(`photos/${photoId}`, getPhoto);
 
+  if(isLoading) return (
+    <section className="w-[80vw] flex flex-col items-center justify-start gap-4 relative mb-8 ">
+      <header className="w-full h-16 flex justify-between items-center shadow-md px-4  sticky top-0 z-[30]  bg-white ">
+      
+      </header>
+      <main className="w-full flex justify-center">
+        { aspectRatio >= 1? 
+        <></>
+        : <></>
+
+        }
+      </main>
+      <footer className="w-full flex flex-col items-start justify-start p-4 gap-6">
+        
+      </footer>
+    </section>
+  )
+
   return (
     <section className="w-[80vw] flex flex-col items-center justify-start gap-4 relative mb-8 ">
       <header className="w-full h-16 flex justify-between items-center shadow-md px-4  sticky top-0 z-[30]  bg-white ">
@@ -65,7 +83,6 @@ export default function PhotoDetailPage() {
           </div>
         )}
       </main>
-
       <footer className="w-full flex flex-col items-start justify-start p-4 gap-6">
         <section className="w-full flex justify-start items-center gap-8 *:capitalize">
           <div className="flex flex-col justify-start gap-1">

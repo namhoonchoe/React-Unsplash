@@ -4,7 +4,7 @@ import { getAspectRatio } from "@/utils/utilFunctions";
 import { Link, Outlet, useParams } from "react-router-dom";
 import useSWRInfinite from "swr/infinite";
 
-export default function UserPhotos() {
+export default function UserPhotosPage() {
   const { username } = useParams();
 
   const getPhotos = async (url: string) => {

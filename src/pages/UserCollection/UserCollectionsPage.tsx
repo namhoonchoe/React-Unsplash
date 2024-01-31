@@ -10,7 +10,7 @@ const getUserCollections = async (url: string) => {
   return data;
 };
 
-export default function UserCollections() {
+export default function UserCollectionsPage() {
   const { username } = useParams();
 
   const { data:collectionResults } = useSWR<Array<any>>(

@@ -1,17 +1,17 @@
-import CollectionResults from "@/pages/Search/CollectionResults";
-import PhotoResultsPage from "@/pages/Search/PhotoResults";
-import UserResults from "@/pages/Search/UserResults";
-import UserPage from "@/pages/User";
-import UserCollections from "@/pages/User/UserCollections";
-import UserLikes from "@/pages/User/UserLikes";
-import UserPhotos from "@/pages/User/UserPhotos";
+import UserCollections from "@/pages/UserCollection/UserCollectionsPage";
+import UserLikes from "@/pages/UserLikes/UserLikesPage";
+import UserPhotos from "@/pages/UserPhoto/UserPhotosPage";
 import Root from "@components/Root";
 import Collection from "@pages/Collection";
+import CollectionResults from "@pages/CollectionResults";
 import Discover from "@pages/Discover";
 import Editorial from "@pages/Editorial";
 import Home from "@pages/Home";
 import Photo from "@pages/Photo";
+import PhotoResultsPage from "@pages/PhotoResults";
 import Search from "@pages/Search";
+import UserPage from "@pages/User";
+import UserResults from "@pages/UserResults";
 import { createBrowserRouter } from "react-router-dom";
 import PopupModal from "./ui/PopupModal";
 
