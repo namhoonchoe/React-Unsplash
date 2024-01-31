@@ -76,7 +76,7 @@ const ThemeNavigatior: React.FC<TnProps> = ({ topics }) => {
           onClick={() => {
             scrollTol(sliderRef.current);
           }}
-          className="slider-button left-0 "
+          className="slider-button left-0  "
           style={{ opacity: isLeftEnd ? 0 : 1 }}
         >
           ❮
@@ -86,7 +86,7 @@ const ThemeNavigatior: React.FC<TnProps> = ({ topics }) => {
           onClick={() => {
             scrollToR(sliderRef.current);
           }}
-          className="slider-button right-0"
+          className="slider-button right-0 "
           style={{ opacity: isRightEnd ? 0 : 1 }}
         >
           ❯

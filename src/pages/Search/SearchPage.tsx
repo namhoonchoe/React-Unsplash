@@ -99,11 +99,11 @@ export default function SearchReseultsPage() {
               </div>
             )}
 
-            <div className="dropdown">
+            <div className="dropdown border rounded-lg">
               <div
                 tabIndex={0}
                 role="button"
-                className="btn btn-sm btn-ghost border  "
+                className="btn btn-sm btn-ghost   "
               >
                 Orientation
               </div>
@@ -158,7 +158,7 @@ export default function SearchReseultsPage() {
                 </li>
               </ul>
             </div>
-            <div className="dropdown">
+            <div className="dropdown border rounded-lg">
               <div
                 tabIndex={0}
                 role="button"
