@@ -1,3 +1,4 @@
+import { scrollToTop } from "@/utils/utilFunctions";
 import { unsplashApi } from "@components/libs/unsplash";
 import { Link, Outlet, useMatch, useParams } from "react-router-dom";
 import useSWR from "swr";
@@ -69,14 +70,14 @@ const outletProps = {
             <div className="flex items-center justify-start gap-2  ">
               <div className="flex items-center justify-start gap-2  ">
                 {userDetail?.tags?.custom?.map((tag: any) => (
-                  <button className="btn btn-sm capitalize">{tag.title}</button>
+                  <button className="tag-button">{tag.title}</button>
                 ))}
               </div>
             </div>
           </div>
         </div>
         <section className="flex justify-start	items-center gap-3  w-full max-w-[70.5rem] h-12  *:text-slate-500 font-semibold">
-          <Link to={`/user/${username}`}>
+          <Link to={`/user/${username}`} onClick={() => scrollToTop}>
             <div
               className="h-full flex justify-start items-center gap-2 p-3"
               style={{
@@ -100,7 +101,7 @@ const outletProps = {
               </p>
             </div>
           </Link>
-          <Link to={`/user/${username}/likes`}>
+          <Link to={`/user/${username}/likes`}  onClick={() => scrollToTop}>
             <div
               className=" h-full flex justify-start items-center gap-2 p-3"
               style={{
@@ -124,7 +125,7 @@ const outletProps = {
               </p>
             </div>
           </Link>
-          <Link to={`/user/${username}/collections`}>
+          <Link to={`/user/${username}/collections`}  onClick={() => scrollToTop}>
             <div
               className=" h-full flex justify-start items-center gap-2 p-3"
               style={{

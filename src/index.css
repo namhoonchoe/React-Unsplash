@@ -15,6 +15,10 @@
     @apply w-8 h-full  bg-white z-10  absolute  transform -translate-y-1/2 top-1/2;
   }
 
+  .tag-button {
+    @apply btn btn-sm capitalize text-slate-600 font-medium
+  }
+
   .masonry-layout {
     @apply w-full  max-w-[70.5rem] columns-4	gap-8 mb-20;
   }

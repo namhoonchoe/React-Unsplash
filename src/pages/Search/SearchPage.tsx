@@ -1,6 +1,7 @@
 import { Orientation, queryParamState } from "@components/libs/recoil-atoms";
 import { Link, Outlet, useMatch, useParams } from "react-router-dom";
 import { useRecoilState, useResetRecoilState } from "recoil";
+import { scrollToTop } from "utils/utilFunctions";
 
 export default function SearchReseultsPage() {
   const { query } = useParams();
@@ -13,7 +14,7 @@ export default function SearchReseultsPage() {
     <>
       <header className="w-full h-12 px-2 flex justify-between items-center  shadow-sm sticky top-16 z-[30] bg-white">
         <section className="flex items-center gap-3  w-1/4 h-full  max-w-[360px]  *:text-slate-500 font-semibold">
-          <Link to={`/s/photo/${query}`}>
+          <Link to={`/s/photo/${query}`} onClick={() => scrollToTop()}>
             <div
               className="h-full flex justify-start items-center gap-2 p-3"
               style={{
@@ -37,7 +38,7 @@ export default function SearchReseultsPage() {
               </p>
             </div>
           </Link>
-          <Link to={`/s/collection/${query}`}>
+          <Link to={`/s/collection/${query}`} onClick={() => scrollToTop()}>
             <div
               className=" h-full flex justify-start items-center gap-2 p-3"
               style={{
@@ -61,7 +62,7 @@ export default function SearchReseultsPage() {
               </p>
             </div>
           </Link>
-          <Link to={`/s/user/${query}`}>
+          <Link to={`/s/user/${query}`} onClick={() => scrollToTop()}>
             <div
               className=" h-full flex justify-start items-center gap-2 p-3"
               style={{

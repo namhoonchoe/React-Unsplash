@@ -26,11 +26,15 @@ export default function EditorialPage() {
     getEditorials
   );
 
-  if(isLoading) return (
-    <main className="masonry-layout">
-      <LoadingPlaceHolder/>
-    </main>
-  )
+  if (isLoading)
+    return (
+      <div className="column-layout">
+        <header className="w-full aspect-[70/24] overflow-hidden skeleton " />
+        <main className="masonry-layout">
+          <LoadingPlaceHolder />
+        </main>
+      </div>
+    );
 
   return (
     <div className="column-layout">
@@ -53,7 +57,12 @@ export default function EditorialPage() {
         {homeFeeds?.map((homeFeed: Array<Photo>) => {
           return homeFeed?.map((photo: Photo) => {
             return (
-              <Link to={`/photo/${photo.id}`} state={{ aspectRatio: getAspectRatio(photo.width, photo.height)}}>
+              <Link
+                to={`/photo/${photo.id}`}
+                state={{
+                  aspectRatio: getAspectRatio(photo.width, photo.height),
+                }}
+              >
                 <div
                   className="masonry-item"
                   style={{

@@ -45,7 +45,7 @@ export default function CollectionPage() {
     );
 
   return (
-    <div className="column-layout gap-0 ">
+    <div className="column-layout gap-0 bg-slate-50 ">
       <header className="w-full max-w-[70.5rem] h-20 px-2 flex flex-col justify-center items-start gap-4 my-10 ">
         <h1 className="text-2xl font-bold">{collection?.title}</h1>
         <p className="text-pretty text-lg capitalize text-slate-500">

@@ -1,3 +1,4 @@
+import { scrollToTop } from "@/utils/utilFunctions";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import CloseIcon from "../svgIcons/CloseIcon";
@@ -22,6 +23,7 @@ export default function SearchInput() {
     e.preventDefault();
     console.log(keyword);
     setIsOpened(!isOpened);
+    scrollToTop()
     navigate(`/s/photo/${keyword}`);
     setKeyword("");
   };

@@ -27,7 +27,7 @@ const CollectionCard: React.FC<CollectionProps> = ({
         sourceTwo={sourceTwo}
         sourceThree={sourceThree}
       />
-      <section className="w-full flex flex-col justify-start items-start gap-3">
+      <section className="w-full flex flex-col justify-start items-start gap-3 overflow-hidden">
         <h1 className="font-semibold capitalize text-nowrap text-clip text-slate-600 text-xl">
           {title}
         </h1>
@@ -39,9 +39,9 @@ const CollectionCard: React.FC<CollectionProps> = ({
           <p>Curated by</p>
           <p className="text-xs text-clip	">{user}</p>
         </section>
-        <div className="flex items-center justify-start gap-2  ">
+        <div className="flex items-center justify-start gap-2 w-full  ">
           {tags.map((tag) => (
-            <button className="btn btn-sm capitalize">{tag.title}</button>
+            <button className="tag-button">{tag.title}</button>
           ))}
         </div>
       </section>
