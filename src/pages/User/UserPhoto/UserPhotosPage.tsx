@@ -5,13 +5,11 @@ import LoadingPlaceHolder from "@components/ui/LoadingPlaceHolder";
 import { Link, Outlet, useOutletContext, useParams } from "react-router-dom";
 import useSWRInfinite from "swr/infinite";
 
-
 type ContextType = {
   totalPhotos: number;
   totalCollections: number;
   totalLikes: number;
 };
-
 
 export default function UserPhotosPage() {
   const { username } = useParams();

@@ -23,7 +23,7 @@ export default function Header() {
 
         <section className="w-[calc(100%-64px)] h-12 px-2 justify-center items-center flex">
           <SearchInput />
-         </section>
+        </section>
         <svg
           width="32"
           height="32"

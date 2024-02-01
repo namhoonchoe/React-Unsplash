@@ -3,15 +3,16 @@ import { unsplashApi } from "@components/libs/unsplash";
 import { Link, Outlet, useMatch, useParams } from "react-router-dom";
 import useSWR from "swr";
 
-type ContextType = {   totalPhotos: number,
-  totalCollections: number,
-  totalLikes: number}
+type ContextType = {
+  totalPhotos: number;
+  totalCollections: number;
+  totalLikes: number;
+};
 
 const getUserDetail = async (url: string) => {
   const { data } = await unsplashApi.get(url);
   return data;
 };
-
 
 export default function UserPage() {
   const { username } = useParams();
@@ -28,12 +29,11 @@ export default function UserPage() {
     }
   );
 
-  
-const outletProps = {
-  totalPhotos: userDetail?.total_photos,
-  totalCollections: userDetail?.total_collections,
-  totalLikes: userDetail?.total_likes,
-}
+  const outletProps = {
+    totalPhotos: userDetail?.total_photos,
+    totalCollections: userDetail?.total_collections,
+    totalLikes: userDetail?.total_likes,
+  };
 
   if (isLoading)
     return (
@@ -67,12 +67,10 @@ const outletProps = {
             {userDetail?.tags?.custom?.length > 0 && (
               <p className="text-md">Interests</p>
             )}
-            <div className="flex items-center justify-start gap-2  ">
-              <div className="flex items-center justify-start gap-2  ">
-                {userDetail?.tags?.custom?.map((tag: any) => (
-                  <button className="tag-button">{tag.title}</button>
-                ))}
-              </div>
+            <div className="flex flex-wrap items-center justify-start gap-2 ">
+              {userDetail?.tags?.custom?.map((tag: any) => (
+                <button className="tag-button">{tag.title}</button>
+              ))}
             </div>
           </div>
         </div>
@@ -101,7 +99,7 @@ const outletProps = {
               </p>
             </div>
           </Link>
-          <Link to={`/user/${username}/likes`}  onClick={() => scrollToTop}>
+          <Link to={`/user/${username}/likes`} onClick={() => scrollToTop}>
             <div
               className=" h-full flex justify-start items-center gap-2 p-3"
               style={{
@@ -125,7 +123,10 @@ const outletProps = {
               </p>
             </div>
           </Link>
-          <Link to={`/user/${username}/collections`}  onClick={() => scrollToTop}>
+          <Link
+            to={`/user/${username}/collections`}
+            onClick={() => scrollToTop}
+          >
             <div
               className=" h-full flex justify-start items-center gap-2 p-3"
               style={{
@@ -151,9 +152,7 @@ const outletProps = {
           </Link>
         </section>
       </header>
-      <Outlet
-        context={outletProps satisfies ContextType }
-      />
+      <Outlet context={outletProps satisfies ContextType} />
     </div>
   );
 }
