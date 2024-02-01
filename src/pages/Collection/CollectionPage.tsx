@@ -1,32 +1,23 @@
 import { getAspectRatio } from "@/utils/utilFunctions";
-import { unsplashApi } from "@components/libs/unsplash";
+import { unsplashFetcher } from "@components/libs/unsplash";
 import ImageCard from "@components/ui/ImageCard";
 import LoadingPlaceHolder from "@components/ui/LoadingPlaceHolder";
 import { Link, Outlet, useParams } from "react-router-dom";
 import useSWR from "swr";
 import useSWRInfinite from "swr/infinite";
-
-const getCollection = async (url: string) => {
-  const { data } = await unsplashApi.get(url);
-  return data;
-};
-
-const getCollectionPhotos = async (url: string) => {
-  const { data } = await unsplashApi.get(url);
-  return data;
-};
+ 
 
 export default function CollectionPage() {
   const { id } = useParams();
 
   const { data: collection, isLoading: collectionLoading } = useSWR(
     `collections/${id}`,
-    getCollection
+    unsplashFetcher
   );
 
   const { data: photoPages, isLoading } = useSWRInfinite<Array<any>>(
     (index) => `/collections/${id}/photos?page=${index + 1}`,
-    getCollectionPhotos
+    unsplashFetcher
   );
 
   if (isLoading)

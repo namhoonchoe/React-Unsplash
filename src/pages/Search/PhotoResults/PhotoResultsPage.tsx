@@ -3,19 +3,14 @@ import {
   queryParamState,
   SearchQueryParams,
 } from "@components/libs/recoil-atoms";
-import { unsplashApi } from "@components/libs/unsplash";
+import { unsplashFetcher } from "@components/libs/unsplash";
 import ImageCard from "@components/ui/ImageCard";
 import LoadingPlaceHolder from "@components/ui/LoadingPlaceHolder";
 import { Link, Outlet, useParams } from "react-router-dom";
 import { useRecoilValue } from "recoil";
 import useSWR from "swr";
 
-const searchPhotos = async (url: string) => {
-  const { data } = await unsplashApi.get(url);
-
-  return data;
-};
-
+ 
 export default function PhotoResultsPage() {
   const { orientation, isRelevant } =
     useRecoilValue<SearchQueryParams>(queryParamState);
@@ -25,7 +20,7 @@ export default function PhotoResultsPage() {
     `search/photos?query=${query}${
       orientation !== undefined ? `&orientation=${orientation}` : ""
     }${isRelevant ? "" : "&order_by=latest"}`,
-    searchPhotos,
+    unsplashFetcher,
     {
       revalidateOnFocus: false,
     }

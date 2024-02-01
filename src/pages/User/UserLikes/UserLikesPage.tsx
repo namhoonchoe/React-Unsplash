@@ -2,14 +2,10 @@ import { getAspectRatio } from "@/utils/utilFunctions";
 import { unsplashApi } from "@components/libs/unsplash";
 import ImageCard from "@components/ui/ImageCard";
 import LoadingPlaceHolder from "@components/ui/LoadingPlaceHolder";
-import { useOutletContext, useParams } from "react-router-dom";
+import { Link, Outlet, useOutletContext, useParams } from "react-router-dom";
 import useSWRInfinite from "swr/infinite";
 
-type ContextType = {
-  totalPhotos: number;
-  totalCollections: number;
-  totalLikes: number;
-};
+
 
 export default function UserLikesPage() {
   const { username } = useParams();
@@ -47,6 +43,12 @@ export default function UserLikesPage() {
       {likeFeeds?.map((likeFeed: Array<any>) => {
         return likeFeed?.map((photo: any) => {
           return (
+            <Link
+            to={`/user/${username}/photo/${photo.id}`}
+            state={{
+              aspectRatio: getAspectRatio(photo.width, photo.height),
+            }}
+          >
             <div
               className="masonry-item"
               style={{
@@ -58,9 +60,11 @@ export default function UserLikesPage() {
                 blurHash={photo.blur_hash}
               />
             </div>
-          );
-        });
-      })}
+          </Link>
+        );
+      });
+    })}
+    <Outlet />
     </main>
   );
 }

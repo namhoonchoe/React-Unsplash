@@ -2,12 +2,7 @@ import { scrollToTop } from "@/utils/utilFunctions";
 import { unsplashApi } from "@components/libs/unsplash";
 import { Link, Outlet, useMatch, useParams } from "react-router-dom";
 import useSWR from "swr";
-
-type ContextType = {
-  totalPhotos: number;
-  totalCollections: number;
-  totalLikes: number;
-};
+ 
 
 const getUserDetail = async (url: string) => {
   const { data } = await unsplashApi.get(url);

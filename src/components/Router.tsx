@@ -82,6 +82,14 @@ const RootRouter = createBrowserRouter([
           {
             path: "likes",
             element: <UserLikes />,
+            children: [
+              {
+                path: "photo/:photoId",
+                element:<PopupModal>
+                <Photo />
+              </PopupModal>
+              },
+            ],
           },
           {
             path: "collections",

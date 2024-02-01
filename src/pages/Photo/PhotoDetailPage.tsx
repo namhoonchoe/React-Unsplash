@@ -1,12 +1,7 @@
-import { unsplashApi } from "@components/libs/unsplash";
+import { unsplashFetcher } from "@components/libs/unsplash";
 import ImageCard from "@components/ui/ImageCard";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import useSWR from "swr";
-
-const getPhoto = async (url: string) => {
-  const { data } = await unsplashApi.get(url);
-  return data;
-};
 
 export default function PhotoDetailPage() {
   const {
@@ -15,7 +10,7 @@ export default function PhotoDetailPage() {
   const { photoId } = useParams();
   const navigate = useNavigate();
 
-  const { data: photo, isLoading } = useSWR<any>(`photos/${photoId}`, getPhoto);
+  const { data: photo, isLoading } = useSWR<any>(`photos/${photoId}`, unsplashFetcher);
 
   if (isLoading)
     return (

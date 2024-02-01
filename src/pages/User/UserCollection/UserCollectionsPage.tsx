@@ -1,14 +1,10 @@
-import { unsplashApi } from "@components/libs/unsplash";
+import { unsplashFetcher } from "@components/libs/unsplash";
 import CollectionCard from "@components/ui/CollectionCard";
 import LoadingSpinner from "@components/ui/LoadingSpinner";
 import { Link, useOutletContext, useParams } from "react-router-dom";
 import useSWR from "swr";
 
-const getUserCollections = async (url: string) => {
-  const { data } = await unsplashApi.get(url);
-  return data;
-};
-
+ 
 type ContextType = {
   totalPhotos: number;
   totalCollections: number;
@@ -21,7 +17,7 @@ export default function UserCollectionsPage() {
 
   const { data: collectionResults, isLoading } = useSWR<Array<any>>(
     `users/${username}/collections`,
-    getUserCollections,
+    unsplashFetcher,
     {
       revalidateOnFocus: false,
     }

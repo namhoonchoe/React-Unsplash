@@ -1,20 +1,16 @@
-import { unsplashApi } from "@components/libs/unsplash";
+import { unsplashFetcher } from "@components/libs/unsplash";
 import CollectionCard from "@components/ui/CollectionCard";
 import LoadingSpinner from "@components/ui/LoadingSpinner";
 import { Link, useParams } from "react-router-dom";
 import useSWR from "swr";
 
-const searchCollections = async (url: string) => {
-  const { data } = await unsplashApi.get(url);
-  return data;
-};
-
+ 
 export default function CollectionReseultPage() {
   const { query } = useParams();
 
   const { data: collectionResult, isLoading } = useSWR<any>(
     `search/collections?query=${query}`,
-    searchCollections
+    unsplashFetcher
   );
 
   if (isLoading) return <LoadingSpinner />;

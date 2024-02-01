@@ -1,22 +1,15 @@
-import { unsplashApi } from "@components/libs/unsplash";
+import { unsplashFetcher } from "@components/libs/unsplash";
 import LoadingSpinner from "@components/ui/LoadingSpinner";
 import { Link, useParams } from "react-router-dom";
 import useSWR from "swr";
-
-const searchUsers = async (url: string) => {
-  const {
-    data ,
-  } = await unsplashApi.get(url);
-
-  return data;
-};
+ 
 
 export default function UserResultsPage() {
   const { query } = useParams();
 
   const { data: userResult, isLoading } = useSWR<any>(
     `search/users?query=${query}`,
-    searchUsers,
+    unsplashFetcher,
     {
       revalidateOnFocus: false,
     }

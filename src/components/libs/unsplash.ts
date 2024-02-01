@@ -9,3 +9,9 @@ export const unsplashApi: AxiosInstance = axios.create({
     per_page: 25,
   },
 });
+
+
+export const unsplashFetcher =  async (url: string) => {
+  const { data } = await unsplashApi.get(url);
+  return data;
+};

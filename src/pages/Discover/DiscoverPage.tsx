@@ -1,5 +1,5 @@
 import { getAspectRatio } from "@/utils/utilFunctions";
-import { unsplashApi } from "@components/libs/unsplash";
+import { unsplashFetcher } from "@components/libs/unsplash";
 import ImageCard from "@components/ui/ImageCard";
 import LoadingPlaceHolder from "@components/ui/LoadingPlaceHolder";
 import { Link, Outlet, useParams } from "react-router-dom";
@@ -8,21 +8,12 @@ import useSWRInfinite from "swr/infinite";
 
 export default function DiscoverPage() {
   const { id } = useParams();
- 
-  const getTopic = async (url: string) => {
-    const { data } = await unsplashApi.get(url);
-    return data;
-  };
-
-  const getTopicPhotos = async (url: string) => {
-    const { data } = await unsplashApi.get(url);
-    return data;
-  };
+  
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const { data: topic, isLoading: isAtopicLoading } = useSWR<any>(
     `topics/${id}`,
-    getTopic
+    unsplashFetcher
   );
 
   const {
@@ -33,7 +24,7 @@ export default function DiscoverPage() {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } = useSWRInfinite<Array<any>>(
     (index) => `topics/${id}/photos?page=${index + 1}`,
-    getTopicPhotos
+    unsplashFetcher
   );
 
   if(isPhotosLoading) return (
