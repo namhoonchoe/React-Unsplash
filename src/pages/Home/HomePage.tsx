@@ -1,7 +1,9 @@
+import { Topic } from "@Types/topic";
 import { unsplashApi } from "@components/libs/unsplash";
 import ThemeNavigatior from "@components/ui/ThemeNavigatior";
 import { Outlet } from "react-router-dom";
 import useSWR from "swr";
+
 
 export default function HomePage() {
   const getTopicList = async (url: string) => {

@@ -1,11 +1,14 @@
+import { Tag } from "@Types/collection";
 import React from "react";
 import ThumbNail from "./ThumbNail";
+
+ 
 
 type CollectionProps = {
   title: string;
   collectionSize: number;
   user: string;
-  tags: Array<any>;
+  tags: Array<Tag>;
   sourceOne: string;
   sourceTwo: string;
   sourceThree: string;

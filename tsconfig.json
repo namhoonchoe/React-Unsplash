@@ -28,6 +28,9 @@
       "@pages/*": [
         "pages/*"
       ],
+      "@Types/*": [
+        "Types/*"
+      ]
     },
     /* Linting */
     "strict": true,
@@ -38,7 +41,6 @@
   "include": [
     "src"
   ],
-  
   "references": [
     {
       "path": "./tsconfig.node.json"

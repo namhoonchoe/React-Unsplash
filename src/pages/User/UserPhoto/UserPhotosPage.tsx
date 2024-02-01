@@ -1,15 +1,11 @@
 import { getAspectRatio } from "@/utils/utilFunctions";
+import { Photo } from "@Types/photo";
 import { unsplashApi } from "@components/libs/unsplash";
 import ImageCard from "@components/ui/ImageCard";
 import LoadingPlaceHolder from "@components/ui/LoadingPlaceHolder";
 import { Link, Outlet, useOutletContext, useParams } from "react-router-dom";
 import useSWRInfinite from "swr/infinite";
-
-type ContextType = {
-  totalPhotos: number;
-  totalCollections: number;
-  totalLikes: number;
-};
+ 
 
 export default function UserPhotosPage() {
   const { username } = useParams();
@@ -22,9 +18,11 @@ export default function UserPhotosPage() {
     });
     return data;
   };
-  const { data: homeFeeds, isLoading } = useSWRInfinite<Array<any>>(
+  const { data: homeFeeds, isLoading } = useSWRInfinite<Array<Photo>>(
     (index) => `/users/${username}/photos?page=${index + 1}`,
-    getPhotos
+    getPhotos, {
+      revalidateOnFocus:false
+    }
   );
 
   if (isLoading)
@@ -44,8 +42,8 @@ export default function UserPhotosPage() {
   if (homeFeeds && homeFeeds.length > 0)
     return (
       <main className="masonry-layout">
-        {homeFeeds?.map((homeFeed: Array<any>) => {
-          return homeFeed?.map((photo: any) => {
+        {homeFeeds?.map((homeFeed: Array<Photo>) => {
+          return homeFeed?.map((photo) => {
             return (
               <Link
                 to={`/user/${username}/photo/${photo.id}`}

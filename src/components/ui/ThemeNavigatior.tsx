@@ -1,6 +1,8 @@
 import { scrollToTop } from "@/utils/utilFunctions";
+import { Topic } from "@Types/topic";
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
+
 
 const scrollToR = (element: HTMLDivElement | null) => {
   if (element) {

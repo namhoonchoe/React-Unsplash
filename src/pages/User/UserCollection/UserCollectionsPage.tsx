@@ -1,21 +1,16 @@
+import { CollectionInfo } from "@/Types/collection";
 import { unsplashFetcher } from "@components/libs/unsplash";
 import CollectionCard from "@components/ui/CollectionCard";
 import LoadingSpinner from "@components/ui/LoadingSpinner";
 import { Link, useOutletContext, useParams } from "react-router-dom";
 import useSWR from "swr";
-
- 
-type ContextType = {
-  totalPhotos: number;
-  totalCollections: number;
-  totalLikes: number;
-};
+  
 
 export default function UserCollectionsPage() {
   const { username } = useParams();
   const { totalCollections } = useOutletContext<ContextType>();
 
-  const { data: collectionResults, isLoading } = useSWR<Array<any>>(
+  const { data: collectionResults, isLoading } = useSWR<Array<CollectionInfo>>(
     `users/${username}/collections`,
     unsplashFetcher,
     {
@@ -35,7 +30,7 @@ export default function UserCollectionsPage() {
   if (collectionResults && collectionResults.length > 0)
     return (
       <main className="w-full mb-20 grid grid-cols-3 justify-items-center gap-6">
-        {collectionResults?.map((collection: any) => {
+        {collectionResults?.map((collection) => {
           return (
             <Link to={`/collection/${collection.id}`}>
               <CollectionCard

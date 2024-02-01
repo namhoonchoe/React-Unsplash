@@ -1,4 +1,6 @@
 import { getAspectRatio } from "@/utils/utilFunctions";
+import { Photo } from "@Types/photo";
+import { Topic } from "@Types/topic";
 import { unsplashFetcher } from "@components/libs/unsplash";
 import ImageCard from "@components/ui/ImageCard";
 import LoadingPlaceHolder from "@components/ui/LoadingPlaceHolder";
@@ -11,9 +13,11 @@ export default function DiscoverPage() {
   
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const { data: topic, isLoading: isAtopicLoading } = useSWR<any>(
+  const { data: topic } = useSWR<Topic>(
     `topics/${id}`,
-    unsplashFetcher
+    unsplashFetcher, {
+      revalidateOnFocus: false,
+    }
   );
 
   const {
@@ -22,9 +26,11 @@ export default function DiscoverPage() {
     setSize,
     isLoading: isPhotosLoading,
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  } = useSWRInfinite<Array<any>>(
+  } = useSWRInfinite<Array<Photo>>(
     (index) => `topics/${id}/photos?page=${index + 1}`,
-    unsplashFetcher
+    unsplashFetcher,  {
+      revalidateOnFocus: false,
+    }
   );
 
   if(isPhotosLoading) return (
@@ -57,8 +63,8 @@ export default function DiscoverPage() {
       </header>
 
       <main className="masonry-layout">
-        {topicPhotoLists?.map((topicPhotoList: Array<any>) => {
-          return topicPhotoList?.map((photo: any) => {
+        {topicPhotoLists?.map((topicPhotoList: Array<Photo>) => {
+          return topicPhotoList?.map((photo: Photo) => {
             return (
               <Link to={`/discover/${id}/photo/${photo.id}`} state={{ aspectRatio: getAspectRatio(photo.width, photo.height)}}>
                 <div

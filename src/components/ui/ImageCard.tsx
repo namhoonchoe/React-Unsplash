@@ -3,7 +3,7 @@ import { Blurhash } from "react-blurhash";
 
 type ImageCardProps = {
   blurHash?: string;
-  imageUrl: string;
+  imageUrl?: string;
   skeleton?: boolean;
 };
 

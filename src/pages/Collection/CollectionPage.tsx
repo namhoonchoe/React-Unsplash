@@ -1,30 +1,31 @@
 import { getAspectRatio } from "@/utils/utilFunctions";
+import { CollectionInfo } from "@Types/collection";
+import { Photo } from "@Types/photo";
 import { unsplashFetcher } from "@components/libs/unsplash";
 import ImageCard from "@components/ui/ImageCard";
 import LoadingPlaceHolder from "@components/ui/LoadingPlaceHolder";
 import { Link, Outlet, useParams } from "react-router-dom";
 import useSWR from "swr";
 import useSWRInfinite from "swr/infinite";
- 
 
 export default function CollectionPage() {
   const { id } = useParams();
 
-  const { data: collection, isLoading: collectionLoading } = useSWR(
+  const { data: collectionInfo  } = useSWR<CollectionInfo>(
     `collections/${id}`,
-    unsplashFetcher
+    unsplashFetcher,
   );
 
-  const { data: photoPages, isLoading } = useSWRInfinite<Array<any>>(
+  const { data: collectionPhotos, isLoading } = useSWRInfinite<Array<Photo>>(
     (index) => `/collections/${id}/photos?page=${index + 1}`,
-    unsplashFetcher
+    unsplashFetcher,
   );
 
   if (isLoading)
     return (
       <div className="column-layout gap-0 ">
-        <header className="w-full max-w-[70.5rem] h-20 px-2 flex flex-col justify-center items-start gap-4 my-10 ">
-          <div className="flex flex-col gap-4 w-full">
+        <header className="my-10 flex h-20 w-full max-w-[70.5rem] flex-col items-start justify-center gap-4 px-2 ">
+          <div className="flex w-full flex-col gap-4">
             <div className="skeleton h-4 w-1/5"></div>
             <div className="skeleton h-4 w-1/5"></div>
           </div>
@@ -37,15 +38,15 @@ export default function CollectionPage() {
 
   return (
     <div className="column-layout gap-0 bg-slate-50 ">
-      <header className="w-full max-w-[70.5rem] h-20 px-2 flex flex-col justify-center items-start gap-4 my-10 ">
-        <h1 className="text-2xl font-bold">{collection?.title}</h1>
+      <header className="my-10 flex h-20 w-full max-w-[70.5rem] flex-col items-start justify-center gap-4 px-2 ">
+        <h1 className="text-2xl font-bold">{collectionInfo?.title}</h1>
         <p className="text-pretty text-lg capitalize text-slate-500">
-          {collection?.total_photos} photos
+          {collectionInfo?.total_photos} photos
         </p>
       </header>
       <main className="masonry-layout">
-        {photoPages?.map((collectionPhotos: Array<any>) => {
-          return collectionPhotos?.map((photo: any) => {
+        {collectionPhotos?.map((collectionPhotos: Array<Photo>) => {
+          return collectionPhotos?.map((photo: Photo) => {
             return (
               <Link
                 to={`/collection/${id}/photo/${photo.id}`}

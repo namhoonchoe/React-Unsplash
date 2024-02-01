@@ -6,17 +6,18 @@ import {
 import { unsplashFetcher } from "@components/libs/unsplash";
 import ImageCard from "@components/ui/ImageCard";
 import LoadingPlaceHolder from "@components/ui/LoadingPlaceHolder";
+import { Photo } from "@Types/photo";
+import { PhotoResults } from "@Types/photoResults";
 import { Link, Outlet, useParams } from "react-router-dom";
 import { useRecoilValue } from "recoil";
 import useSWR from "swr";
-
  
 export default function PhotoResultsPage() {
   const { orientation, isRelevant } =
     useRecoilValue<SearchQueryParams>(queryParamState);
   const { query } = useParams();
 
-  const { data: photoResult, isLoading } = useSWR<any>(
+  const { data: photoResult, isLoading } = useSWR<PhotoResults>(
     `search/photos?query=${query}${
       orientation !== undefined ? `&orientation=${orientation}` : ""
     }${isRelevant ? "" : "&order_by=latest"}`,

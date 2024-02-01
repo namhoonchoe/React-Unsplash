@@ -1,10 +1,10 @@
 import { getAspectRatio } from "@/utils/utilFunctions";
+import { Photo } from "@Types/photo";
 import { unsplashApi } from "@components/libs/unsplash";
 import ImageCard from "@components/ui/ImageCard";
 import LoadingPlaceHolder from "@components/ui/LoadingPlaceHolder";
 import { Link, Outlet, useOutletContext, useParams } from "react-router-dom";
 import useSWRInfinite from "swr/infinite";
-
 
 
 export default function UserLikesPage() {
@@ -19,9 +19,11 @@ export default function UserLikesPage() {
     });
     return data;
   };
-  const { data: likeFeeds, isLoading } = useSWRInfinite<Array<Array<any>>>(
+  const { data: likeFeeds, isLoading } = useSWRInfinite<Array<Photo>>(
     (index) => `/users/${username}/likes?page=${index + 1}`,
-    getPhotos
+    getPhotos, {
+      revalidateOnFocus:false
+    }
   );
 
   if (isLoading)
@@ -40,8 +42,8 @@ export default function UserLikesPage() {
 
   return (
     <main className="masonry-layout">
-      {likeFeeds?.map((likeFeed: Array<any>) => {
-        return likeFeed?.map((photo: any) => {
+      {likeFeeds?.map((likeFeed: Array<Photo>) => {
+        return likeFeed?.map((photo) => {
           return (
             <Link
             to={`/user/${username}/photo/${photo.id}`}

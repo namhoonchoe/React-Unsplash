@@ -1,4 +1,4 @@
-type Photo = {
+export type Photo = {
   id: string;
   slug: string;
   created_at: string;
