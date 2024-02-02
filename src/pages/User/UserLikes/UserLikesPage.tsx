@@ -1,3 +1,4 @@
+import LoadMoreButton from "@/components/ui/LoadMoreButton";
 import { getAspectRatio } from "@/utils/utilFunctions";
 import { Photo } from "@Types/photo";
 import { unsplashApi } from "@components/libs/unsplash";
@@ -5,7 +6,6 @@ import ImageCard from "@components/ui/ImageCard";
 import LoadingPlaceHolder from "@components/ui/LoadingPlaceHolder";
 import { Link, Outlet, useOutletContext, useParams } from "react-router-dom";
 import useSWRInfinite from "swr/infinite";
-
 
 export default function UserLikesPage() {
   const { username } = useParams();
@@ -19,11 +19,18 @@ export default function UserLikesPage() {
     });
     return data;
   };
-  const { data: likeFeeds, isLoading } = useSWRInfinite<Array<Photo>>(
+  const {
+    data: likeFeeds,
+    isLoading,
+    isValidating,
+    size,
+    setSize,
+  } = useSWRInfinite<Array<Photo>>(
     (index) => `/users/${username}/likes?page=${index + 1}`,
-    getPhotos, {
-      revalidateOnFocus:false
-    }
+    getPhotos,
+    {
+      revalidateOnFocus: false,
+    },
   );
 
   if (isLoading)
@@ -35,38 +42,47 @@ export default function UserLikesPage() {
 
   if (totalLikes === 0)
     return (
-      <main className="w-full h-32 flex justify-center items-center">
-        <p>Cannot find photos</p>
+      <main className="flex h-32 w-full items-center justify-center">
+        <p>There are no collections here yet</p>
       </main>
     );
 
-  return (
-    <main className="masonry-layout">
-      {likeFeeds?.map((likeFeed: Array<Photo>) => {
-        return likeFeed?.map((photo) => {
-          return (
-            <Link
-            to={`/user/${username}/photo/${photo.id}`}
-            state={{
-              aspectRatio: getAspectRatio(photo.width, photo.height),
-            }}
-          >
-            <div
-              className="masonry-item"
-              style={{
-                aspectRatio: getAspectRatio(photo.width, photo.height),
-              }}
-            >
-              <ImageCard
-                imageUrl={photo.urls.regular}
-                blurHash={photo.blur_hash}
-              />
-            </div>
-          </Link>
-        );
-      });
-    })}
-    <Outlet />
-    </main>
-  );
+  if (likeFeeds)
+    return (
+      <>
+        <main className="masonry-layout">
+          {likeFeeds?.map((likeFeed: Array<Photo>) => {
+            return likeFeed?.map((photo) => {
+              return (
+                <Link
+                  to={`/user/${username}/photo/${photo.id}`}
+                  state={{
+                    aspectRatio: getAspectRatio(photo.width, photo.height),
+                  }}
+                >
+                  <div
+                    className="masonry-item"
+                    style={{
+                      aspectRatio: getAspectRatio(photo.width, photo.height),
+                    }}
+                  >
+                    <ImageCard
+                      imageUrl={photo.urls.regular}
+                      blurHash={photo.blur_hash}
+                    />
+                  </div>
+                </Link>
+              );
+            });
+          })}
+          <Outlet />
+        </main>
+        <LoadMoreButton
+          isValidating={isValidating}
+          size={size}
+          setSize={setSize}
+          ArrayData={likeFeeds}
+        />
+      </>
+    );
 }

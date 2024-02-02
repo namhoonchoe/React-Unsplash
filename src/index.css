@@ -8,7 +8,7 @@
   }
 
   .column-layout {
-    @apply flex w-full flex-col items-center justify-center gap-20;
+    @apply flex w-full flex-col items-center justify-center gap-20 mb-20;
   }
 
   .slider-button {
@@ -19,8 +19,12 @@
     @apply btn btn-sm font-medium capitalize text-slate-600;
   }
 
+  .loadmore-button {
+    @apply btn btn-md rounded-xl font-medium capitalize text-slate-600 shadow-sm
+  }
+
   .masonry-layout {
-    @apply mb-20  w-full max-w-[70.5rem]	columns-4 gap-8;
+    @apply   w-full max-w-[70.5rem]	columns-4 gap-8;
   }
 
   .masonry-item {

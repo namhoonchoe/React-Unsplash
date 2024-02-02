@@ -3,6 +3,7 @@ import { getAspectRatio } from "@/utils/utilFunctions";
 import { Photo } from "@Types/photo";
 import { unsplashApi } from "@components/libs/unsplash";
 import ImageCard from "@components/ui/ImageCard";
+import LoadMoreButton from "@components/ui/LoadMoreButton";
 import LoadingPlaceHolder from "@components/ui/LoadingPlaceHolder";
 import { Link, Outlet } from "react-router-dom";
 import useSWRInfinite from "swr/infinite";
@@ -21,6 +22,7 @@ export default function EditorialPage() {
     data: homeFeeds,
     size,
     setSize,
+    isValidating,
     isLoading,
   } = useSWRInfinite<Array<Photo>>(
     (index) => `/photos?page=${index + 1}`,
@@ -36,7 +38,7 @@ export default function EditorialPage() {
         </main>
       </div>
     );
-
+if(homeFeeds)
   return (
     <div className="column-layout">
       <header className="w-full aspect-[70/24] overflow-hidden bg-slate-300 relative flex justify-center items-center">
@@ -55,8 +57,8 @@ export default function EditorialPage() {
         </div>
       </header>
       <main className="masonry-layout">
-        {homeFeeds?.map((homeFeed: Array<Photo>) => {
-          return homeFeed?.map((photo: Photo) => {
+        {homeFeeds.map((homeFeed: Array<Photo>) => {
+          return homeFeed.map((photo: Photo) => {
             return (
               <Link
                 to={`/photo/${photo.id}`}
@@ -81,6 +83,12 @@ export default function EditorialPage() {
         })}
         <Outlet />
       </main>
+      <LoadMoreButton
+          isValidating={isValidating}
+          ArrayData={homeFeeds}
+          size={size}
+          setSize={setSize}
+        />
     </div>
   );
 }

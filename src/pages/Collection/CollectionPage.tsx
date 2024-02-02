@@ -1,3 +1,4 @@
+import LoadMoreButton from "@/components/ui/LoadMoreButton";
 import { getAspectRatio } from "@/utils/utilFunctions";
 import { CollectionInfo } from "@Types/collection";
 import { Photo } from "@Types/photo";
@@ -11,12 +12,18 @@ import useSWRInfinite from "swr/infinite";
 export default function CollectionPage() {
   const { id } = useParams();
 
-  const { data: collectionInfo  } = useSWR<CollectionInfo>(
+  const { data: collectionInfo } = useSWR<CollectionInfo>(
     `collections/${id}`,
     unsplashFetcher,
   );
 
-  const { data: collectionPhotos, isLoading } = useSWRInfinite<Array<Photo>>(
+  const {
+    data: collectionPhotos,
+    isLoading,
+    size,
+    setSize,
+    isValidating,
+  } = useSWRInfinite<Array<Photo>>(
     (index) => `/collections/${id}/photos?page=${index + 1}`,
     unsplashFetcher,
   );
@@ -35,42 +42,48 @@ export default function CollectionPage() {
         </main>
       </div>
     );
-
-  return (
-    <div className="column-layout gap-0 bg-slate-50 ">
-      <header className="my-10 flex h-20 w-full max-w-[70.5rem] flex-col items-start justify-center gap-4 px-2 ">
-        <h1 className="text-2xl font-bold">{collectionInfo?.title}</h1>
-        <p className="text-pretty text-lg capitalize text-slate-500">
-          {collectionInfo?.total_photos} photos
-        </p>
-      </header>
-      <main className="masonry-layout">
-        {collectionPhotos?.map((collectionPhotos: Array<Photo>) => {
-          return collectionPhotos?.map((photo: Photo) => {
-            return (
-              <Link
-                to={`/collection/${id}/photo/${photo.id}`}
-                state={{
-                  aspectRatio: getAspectRatio(photo.width, photo.height),
-                }}
-              >
-                <div
-                  className="masonry-item"
-                  style={{
+  if (collectionPhotos)
+    return (
+      <div className="column-layout mb-0 gap-10 bg-slate-50 pb-10 ">
+        <header className="mt-10 flex h-20 w-full max-w-[70.5rem] flex-col items-start justify-center gap-4 px-2 ">
+          <h1 className="text-2xl font-bold">{collectionInfo?.title}</h1>
+          <p className="text-pretty text-lg capitalize text-slate-500">
+            {collectionInfo?.total_photos} photos
+          </p>
+        </header>
+        <main className="masonry-layout">
+          {collectionPhotos?.map((collectionPhotos: Array<Photo>) => {
+            return collectionPhotos?.map((photo: Photo) => {
+              return (
+                <Link
+                  to={`/collection/${id}/photo/${photo.id}`}
+                  state={{
                     aspectRatio: getAspectRatio(photo.width, photo.height),
                   }}
                 >
-                  <ImageCard
-                    imageUrl={photo.urls.regular}
-                    blurHash={photo.blur_hash}
-                  />
-                </div>
-              </Link>
-            );
-          });
-        })}
-        <Outlet />
-      </main>
-    </div>
-  );
+                  <div
+                    className="masonry-item"
+                    style={{
+                      aspectRatio: getAspectRatio(photo.width, photo.height),
+                    }}
+                  >
+                    <ImageCard
+                      imageUrl={photo.urls.regular}
+                      blurHash={photo.blur_hash}
+                    />
+                  </div>
+                </Link>
+              );
+            });
+          })}
+          <Outlet />
+        </main>
+        <LoadMoreButton
+          isValidating={isValidating}
+          ArrayData={collectionPhotos}
+          size={size}
+          setSize={setSize}
+        />
+      </div>
+    );
 }

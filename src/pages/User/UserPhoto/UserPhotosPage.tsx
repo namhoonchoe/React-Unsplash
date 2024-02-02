@@ -2,10 +2,12 @@ import { getAspectRatio } from "@/utils/utilFunctions";
 import { Photo } from "@Types/photo";
 import { unsplashApi } from "@components/libs/unsplash";
 import ImageCard from "@components/ui/ImageCard";
+import LoadMoreButton from "@components/ui/LoadMoreButton";
 import LoadingPlaceHolder from "@components/ui/LoadingPlaceHolder";
 import { Link, Outlet, useOutletContext, useParams } from "react-router-dom";
 import useSWRInfinite from "swr/infinite";
- 
+
+
 
 export default function UserPhotosPage() {
   const { username } = useParams();
@@ -18,7 +20,7 @@ export default function UserPhotosPage() {
     });
     return data;
   };
-  const { data: homeFeeds, isLoading } = useSWRInfinite<Array<Photo>>(
+  const { data: photoFeeds, isLoading, size, setSize, isValidating } = useSWRInfinite<Array<Photo>>(
     (index) => `/users/${username}/photos?page=${index + 1}`,
     getPhotos, {
       revalidateOnFocus:false
@@ -35,14 +37,15 @@ export default function UserPhotosPage() {
   if (totalPhotos === 0)
     return (
       <main className="w-full h-32 flex justify-center items-center">
-        <p>Cannot find photos</p>
+        <p>There are no photos here yet</p>
       </main>
     );
 
-  if (homeFeeds && homeFeeds.length > 0)
+  if (photoFeeds && photoFeeds.length > 0)
     return (
-      <main className="masonry-layout">
-        {homeFeeds?.map((homeFeed: Array<Photo>) => {
+  <>
+  <main className="masonry-layout">
+        {photoFeeds?.map((homeFeed: Array<Photo>) => {
           return homeFeed?.map((photo) => {
             return (
               <Link
@@ -68,5 +71,13 @@ export default function UserPhotosPage() {
         })}
         <Outlet />
       </main>
+      <LoadMoreButton
+          isValidating={isValidating}
+          size={size}
+          setSize={setSize}
+          ArrayData={photoFeeds}
+        />
+  </>
+      
     );
 }
