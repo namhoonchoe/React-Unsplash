@@ -21,17 +21,16 @@ export default function SearchInput() {
 
   const submitHandler: React.FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
-    console.log(keyword);
-    setIsOpened(!isOpened);
-    scrollToTop()
+     setIsOpened(!isOpened);
+    scrollToTop();
     navigate(`/s/photo/${keyword}`);
     setKeyword("");
   };
 
   return (
-    <div className="relative inline-block w-full max-w-[60rem] h-12">
+    <div className="relative inline-block h-full w-full max-w-[60rem]">
       <form
-        className="w-full h-full relative bg-zinc-300 rounded-3xl flex items-center form-control"
+        className="form-control relative flex h-full w-full items-center   rounded-3xl bg-zinc-300"
         id="search-form"
         onSubmit={submitHandler}
       >
@@ -41,11 +40,11 @@ export default function SearchInput() {
               type="text"
               placeholder="Search"
               onChange={changeHandler}
-              className="input w-full h-full bg-transparent rounded-3xl input-info px-[19px] "
+              className="input input-info h-full w-full rounded-3xl bg-transparent px-[19px] "
             />
 
             <button
-              className="btn btn-ghost btn-circle z-1 absolute right-[0]"
+              className="z-1 btn btn-circle btn-ghost btn-xs   absolute right-2 top-2"
               type="reset"
               onClick={handleReset}
             >
@@ -54,7 +53,7 @@ export default function SearchInput() {
           </>
         ) : (
           <div
-            className="w-full h-full px-[19px] absolute flex gap-1 items-center "
+            className="absolute flex h-full w-full items-center gap-1 px-[19px] "
             onClick={() => setIsOpened(!isOpened)}
           >
             <SearchIcon />
@@ -62,7 +61,6 @@ export default function SearchInput() {
           </div>
         )}
       </form>
-      
     </div>
   );
 }

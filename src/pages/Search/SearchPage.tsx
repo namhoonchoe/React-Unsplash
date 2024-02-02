@@ -12,7 +12,7 @@ export default function SearchReseultsPage() {
   const resetFilter = useResetRecoilState(queryParamState);
   return (
     <>
-      <header className="w-full h-12 px-2 flex justify-between items-center  shadow-sm sticky top-16 z-[30] bg-white">
+      <header className="w-full h-12 px-2 flex justify-between items-center  shadow-sm sticky top-14 z-[30] bg-white">
         <section className="flex items-center gap-3  w-1/4 h-full  max-w-[360px]  *:text-slate-500 font-semibold">
           <Link to={`/s/photo/${query}`} onClick={() => scrollToTop()}>
             <div

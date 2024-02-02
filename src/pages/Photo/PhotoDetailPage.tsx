@@ -15,6 +15,8 @@ export default function PhotoDetailPage() {
     unsplashFetcher,
   );
 
+    //useEffect keypress esc navigate back!!
+
   if (isLoading)
     return (
       <section className="relative mb-8 flex w-[80vw] flex-col items-center justify-start gap-4 ">

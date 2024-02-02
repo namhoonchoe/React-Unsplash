@@ -35,7 +35,7 @@ export default function DiscoverPage() {
   if (isPhotosLoading)
     return (
       <div className="column-layout">
-        <header className="skeleton aspect-[3] w-full  " />
+        <header className="skeleton  aspect-[2] w-full  " />
         <main className="masonry-layout">
           <LoadingPlaceHolder />
         </main>
@@ -44,7 +44,7 @@ export default function DiscoverPage() {
   if (topicPhotoLists)
     return (
       <div className="column-layout ">
-        <header className="relative flex aspect-[3]  w-full items-center justify-center overflow-hidden bg-slate-300">
+        <header className="relative flex aspect-[2]  w-full items-center justify-center overflow-hidden bg-slate-300">
           <div className="absolute left-0 top-0 h-full w-full brightness-75 ">
             {topic?.cover_photo.urls.full && (
               <ImageCard
