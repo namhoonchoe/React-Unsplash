@@ -12,7 +12,6 @@ import { Link, Outlet, useParams } from "react-router-dom";
 import { useRecoilValue } from "recoil";
 import useSWRInfinite from "swr/infinite";
 
-
 const getPhotoResults = async (url: string) => {
   const {
     data: { results },
@@ -20,12 +19,10 @@ const getPhotoResults = async (url: string) => {
   return results;
 };
 
-
 export default function PhotoResultsPage() {
   const { orientation, isRelevant } =
     useRecoilValue<SearchQueryParams>(queryParamState);
   const { query } = useParams();
-
 
   const {
     data: photoResult,
@@ -38,7 +35,7 @@ export default function PhotoResultsPage() {
       `search/photos?query=${query}&page=${index + 1}${
         orientation !== undefined ? `&orientation=${orientation}` : ""
       }${isRelevant ? "" : "&order_by=latest"}`,
-      getPhotoResults,
+    getPhotoResults,
     {
       revalidateOnFocus: false,
     },
@@ -54,7 +51,9 @@ export default function PhotoResultsPage() {
   if (photoResult && photoResult[0].length === 0)
     return (
       <main className="flex h-32 w-full items-center justify-center">
-        <p>Cannot find photos</p>
+        <p className="text-lg font-semibold text-slate-500">
+          no results found try different keywords
+        </p>
       </main>
     );
 
@@ -63,7 +62,7 @@ export default function PhotoResultsPage() {
       <>
         <main className="masonry-layout">
           {photoResult.map((photoFeed) => {
-            return photoFeed.map((photo) =>{
+            return photoFeed.map((photo) => {
               return (
                 <Link
                   to={`/s/photo/${query}/photo/${photo.id}`}

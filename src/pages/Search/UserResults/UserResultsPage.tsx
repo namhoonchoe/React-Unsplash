@@ -6,8 +6,6 @@ import LoadingSpinner from "@components/ui/LoadingSpinner";
 import { Link, useParams } from "react-router-dom";
 import useSWRInfinite from "swr/infinite";
 
-
-
 const getUserResults = async (url: string) => {
   const {
     data: { results },
@@ -15,11 +13,16 @@ const getUserResults = async (url: string) => {
   return results;
 };
 
-
 export default function UserResultsPage() {
   const { query } = useParams();
 
-  const { data: userResult, isLoading, isValidating, size, setSize } = useSWRInfinite<Array<User>>(
+  const {
+    data: userResult,
+    isLoading,
+    isValidating,
+    size,
+    setSize,
+  } = useSWRInfinite<Array<User>>(
     (index) => `search/users?query=${query}&page=${index + 1}`,
     getUserResults,
     {
@@ -32,7 +35,9 @@ export default function UserResultsPage() {
   if (userResult && userResult[0].length === 0)
     return (
       <main className="flex h-32 w-full items-center justify-center">
-        <p>Cannot find users</p>
+        <p className="text-lg font-semibold text-slate-500">
+          no results found try different keywords
+        </p>
       </main>
     );
   if (userResult)
@@ -64,7 +69,12 @@ export default function UserResultsPage() {
             });
           })}
         </section>
-        <LoadMoreButton size={size} setSize={setSize} ArrayData={userResult} isValidating={isValidating}/>
+        <LoadMoreButton
+          size={size}
+          setSize={setSize}
+          ArrayData={userResult}
+          isValidating={isValidating}
+        />
       </>
     );
 }

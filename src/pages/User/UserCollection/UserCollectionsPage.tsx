@@ -1,4 +1,5 @@
 import { CollectionInfo } from "@/Types/collection";
+import { scrollToTop } from "@/utils/utilFunctions";
 import { unsplashFetcher } from "@components/libs/unsplash";
 import CollectionCard from "@components/ui/CollectionCard";
 import LoadingSpinner from "@components/ui/LoadingSpinner";
@@ -37,10 +38,10 @@ export default function UserCollectionsPage() {
     return (
       <>
         <main className="mb-20 grid w-full grid-cols-3 justify-items-center gap-6">
-          {collectionResults.map((collectionList) => {
+          {collectionResults.map((collectionList:Array<CollectionInfo>) => {
             return collectionList.map((collection) => {
               return (
-                <Link to={`/collection/${collection.id}`}>
+                <Link to={`/collection/${collection.id}`} onClick={() => scrollToTop}>
                   <CollectionCard
                     sourceOne={`${collection.preview_photos[0].urls.small}q=50`}
                     sourceTwo={`${collection.preview_photos[1]?.urls.thumb}q=50`}

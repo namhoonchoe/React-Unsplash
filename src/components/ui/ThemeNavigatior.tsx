@@ -55,7 +55,7 @@ const ThemeNavigatior: React.FC<TnProps> = ({ topics }) => {
         current.removeEventListener("scroll", positionChecker);
       }
     };
-  }, [current?.scrollLeft, current]);
+  }, [current.scrollLeft, current]);
 
   return (
     <div className="sticky top-14 z-[30] flex h-14  w-full items-center justify-start bg-white shadow-sm  ">

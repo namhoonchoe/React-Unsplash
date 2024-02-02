@@ -43,7 +43,7 @@ export default function UserLikesPage() {
   if (totalLikes === 0)
     return (
       <main className="flex h-32 w-full items-center justify-center">
-        <p>There are no collections here yet</p>
+        <p>There are no likes here yet</p>
       </main>
     );
 

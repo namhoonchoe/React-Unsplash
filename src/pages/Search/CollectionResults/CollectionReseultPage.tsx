@@ -24,7 +24,7 @@ export default function CollectionReseultPage() {
     setSize,
     isValidating,
   } = useSWRInfinite<Array<CollectionInfo>>(
-    (index) => `search/collections?query=${query}&page=${index+1}`,
+    (index) => `search/collections?query=${query}&page=${index + 1}`,
     getCollectionResults,
   );
 
@@ -33,7 +33,9 @@ export default function CollectionReseultPage() {
   if (collectionList && collectionList[0].length === 0)
     return (
       <main className="flex h-32 w-full items-center justify-center">
-        <p>no results found try different keywords</p>
+        <p className="text-lg font-semibold text-slate-500">
+          no results found try different keywords
+        </p>
       </main>
     );
 
@@ -62,7 +64,12 @@ export default function CollectionReseultPage() {
             });
           })}
         </main>
-       <LoadMoreButton ArrayData={collectionList} size={size} setSize={setSize} isValidating={isValidating}/>
+        <LoadMoreButton
+          ArrayData={collectionList}
+          size={size}
+          setSize={setSize}
+          isValidating={isValidating}
+        />
       </>
     );
   }
