@@ -1,20 +1,18 @@
-import React from "react";
-
-type LoadMoreButtonProps = {
+type LoadMoreButtonProps<T> = {
   isValidating: boolean;
-  ArrayData: any[][];
+  ArrayData: T[][];
   size: number;
   setSize: (
     size: number | ((_size: number) => number),
-  ) => Promise<any[][] | undefined>
+  ) => Promise<T[][] | undefined>;
 };
 
-const LoadMoreButton: React.FC<LoadMoreButtonProps> = ({
+const LoadMoreButton = <T extends object>({
   isValidating,
   ArrayData,
   size,
   setSize,
-}) => {
+}: LoadMoreButtonProps<T>) => {
   const isPagenating =
     isValidating ||
     (size > 0 && ArrayData && typeof ArrayData[size - 1] === "undefined");
@@ -27,20 +25,18 @@ const LoadMoreButton: React.FC<LoadMoreButtonProps> = ({
   if (isEmpty) return <></>;
 
   if (isReachingEnd)
-  return (
-    <button
-      className="loadmore-button btn-disabled"
-      tabIndex={-1}
-      role="button"
-      aria-disabled="true"
-    >
-      This is the Last
-    </button>
-  );
+    return (
+      <button
+        className="loadmore-button btn-disabled"
+        tabIndex={-1}
+        role="button"
+        aria-disabled="true"
+      >
+        This is the Last
+      </button>
+    );
 
   if (ArrayData[ArrayData.length - 1]?.length < 25) return <></>;
-
-  
 
   if (isPagenating)
     return (
@@ -51,10 +47,7 @@ const LoadMoreButton: React.FC<LoadMoreButtonProps> = ({
     );
 
   return (
-    <button
-      className="loadmore-button"
-      onClick={() => setSize(size + 1)}
-    >
+    <button className="loadmore-button" onClick={() => setSize(size + 1)}>
       load more
     </button>
   );
