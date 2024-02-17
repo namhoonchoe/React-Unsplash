@@ -24,11 +24,11 @@
   }
 
   .masonry-layout {
-    @apply   w-full max-w-[70.5rem]	columns-4 gap-8;
+    @apply  w-full max-w-[70.5rem] columns-4 gap-8 *:mb-8;
   }
 
   .masonry-item {
-    @apply mb-8 inline-block w-full break-inside-avoid overflow-hidden rounded-xl bg-slate-300 shadow-md hover:brightness-75;
+    @apply inline-block w-full break-inside-avoid overflow-hidden rounded-xl bg-slate-300 shadow-md hover:brightness-75;
   }
 }
 

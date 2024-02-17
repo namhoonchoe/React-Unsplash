@@ -5,6 +5,7 @@ import { unsplashApi } from "@components/libs/unsplash";
 import ImageCard from "@components/ui/ImageCard";
 import LoadMoreButton from "@components/ui/LoadMoreButton";
 import LoadingPlaceHolder from "@components/ui/LoadingPlaceHolder";
+import Masonry from "@mui/lab/Masonry";
 import { Link, Outlet } from "react-router-dom";
 import useSWRInfinite from "swr/infinite";
 import imageUrl from "../../../public/assets/masonry image.png";
@@ -26,69 +27,74 @@ export default function EditorialPage() {
     isLoading,
   } = useSWRInfinite<Array<Photo>>(
     (index) => `/photos?page=${index + 1}`,
-    getEditorials
+    getEditorials,
   );
 
   if (isLoading)
     return (
       <div className="column-layout">
-        <header className="w-full aspect-[70/24] overflow-hidden skeleton " />
+        <header className="skeleton aspect-[70/24] w-full overflow-hidden " />
         <main className="masonry-layout">
           <LoadingPlaceHolder />
         </main>
       </div>
     );
-if(homeFeeds)
-  return (
-    <div className="column-layout">
-      <header className="w-full aspect-[70/24] overflow-hidden bg-slate-300 relative flex justify-center items-center">
-        <img
-          src={imageUrl}
-          className="w-full h-full object-cover brightness-75 absolute top-0 left-0"
-          alt="hero image"
-        />
-        <div className="z-10 w-full  max-w-[70.5rem] flex justify-start items-center *:text-white ">
-          <div className="flex flex-col gap-4 w-1/2 h-1/3">
-            <h1 className="text-4xl font-bold">Unsplash </h1>
-            <p className="text-pretty text-lg font-semibold">
-              The internet's source for visuals. Powered by creators everywhere.
-            </p>
+  if (homeFeeds)
+    return (
+      <div className="column-layout">
+        <header className="relative flex aspect-[70/24] w-full items-center justify-center overflow-hidden bg-slate-300">
+          <img
+            src={imageUrl}
+            className="absolute left-0 top-0 h-full w-full object-cover brightness-75"
+            alt="hero image"
+          />
+          <div className="z-10 flex  w-full max-w-[70.5rem] items-center justify-start *:text-white ">
+            <div className="flex h-1/3 w-1/2 flex-col gap-4">
+              <h1 className="text-4xl font-bold">Unsplash </h1>
+              <p className="text-pretty text-lg font-semibold">
+                The internet's source for visuals. Powered by creators
+                everywhere.
+              </p>
+            </div>
           </div>
-        </div>
-      </header>
-      <main className="masonry-layout">
-        {homeFeeds.map((homeFeed: Array<Photo>) => {
-          return homeFeed.map((photo: Photo) => {
-            return (
-              <Link
-                to={`/photo/${photo.id}`}
-                state={{
-                  aspectRatio: getAspectRatio(photo.width, photo.height),
-                }}
-              >
-                <div
-                  className="masonry-item"
-                  style={{
+        </header>
+        <Masonry
+          columns={4}
+          spacing={4}
+          sx={{ width: "100%", maxWidth: "70.5rem" }}
+        >
+          {homeFeeds.map((homeFeed: Array<Photo>) => {
+            return homeFeed.map((photo: Photo) => {
+              return (
+                <Link
+                  to={`/photo/${photo.id}`}
+                  state={{
                     aspectRatio: getAspectRatio(photo.width, photo.height),
                   }}
                 >
-                  <ImageCard
-                    imageUrl={photo.urls.regular}
-                    blurHash={photo.blur_hash}
-                  />
-                </div>
-              </Link>
-            );
-          });
-        })}
+                  <div
+                    className="masonry-item"
+                    style={{
+                      aspectRatio: getAspectRatio(photo.width, photo.height),
+                    }}
+                  >
+                    <ImageCard
+                      imageUrl={photo.urls.regular}
+                      blurHash={photo.blur_hash}
+                    />
+                  </div>
+                </Link>
+              );
+            });
+          })}
+        </Masonry>
         <Outlet />
-      </main>
-      <LoadMoreButton
+        <LoadMoreButton
           isValidating={isValidating}
           ArrayData={homeFeeds}
           size={size}
           setSize={setSize}
         />
-    </div>
-  );
+      </div>
+    );
 }

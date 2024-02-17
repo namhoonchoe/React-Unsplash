@@ -4,10 +4,9 @@ import { unsplashApi } from "@components/libs/unsplash";
 import ImageCard from "@components/ui/ImageCard";
 import LoadMoreButton from "@components/ui/LoadMoreButton";
 import LoadingPlaceHolder from "@components/ui/LoadingPlaceHolder";
+import Masonry from "@mui/lab/Masonry";
 import { Link, Outlet, useOutletContext, useParams } from "react-router-dom";
 import useSWRInfinite from "swr/infinite";
-
-
 
 export default function UserPhotosPage() {
   const { username } = useParams();
@@ -20,11 +19,18 @@ export default function UserPhotosPage() {
     });
     return data;
   };
-  const { data: photoFeeds, isLoading, size, setSize, isValidating } = useSWRInfinite<Array<Photo>>(
+  const {
+    data: photoFeeds,
+    isLoading,
+    size,
+    setSize,
+    isValidating,
+  } = useSWRInfinite<Array<Photo>>(
     (index) => `/users/${username}/photos?page=${index + 1}`,
-    getPhotos, {
-      revalidateOnFocus:false
-    }
+    getPhotos,
+    {
+      revalidateOnFocus: false,
+    },
   );
 
   if (isLoading)
@@ -36,48 +42,52 @@ export default function UserPhotosPage() {
 
   if (totalPhotos === 0)
     return (
-      <main className="w-full h-32 flex justify-center items-center">
+      <main className="flex h-32 w-full items-center justify-center">
         <p>There are no photos here yet</p>
       </main>
     );
 
   if (photoFeeds && photoFeeds.length > 0)
     return (
-  <>
-  <main className="masonry-layout">
-        {photoFeeds?.map((homeFeed: Array<Photo>) => {
-          return homeFeed?.map((photo) => {
-            return (
-              <Link
-                to={`/user/${username}/photo/${photo.id}`}
-                state={{
-                  aspectRatio: getAspectRatio(photo.width, photo.height),
-                }}
-              >
-                <div
-                  className="masonry-item"
-                  style={{
+      <>
+        <Masonry
+          columns={4}
+          spacing={4}
+          sx={{ width: "100%", maxWidth: "70.5rem" }}
+        >
+          {photoFeeds?.map((homeFeed: Array<Photo>) => {
+            return homeFeed?.map((photo) => {
+              return (
+                <Link
+                  to={`/user/${username}/photo/${photo.id}`}
+                  state={{
                     aspectRatio: getAspectRatio(photo.width, photo.height),
                   }}
                 >
-                  <ImageCard
-                    imageUrl={photo.urls.regular}
-                    blurHash={photo.blur_hash}
-                  />
-                </div>
-              </Link>
-            );
-          });
-        })}
+                  <div
+                    className="masonry-item"
+                    style={{
+                      aspectRatio: getAspectRatio(photo.width, photo.height),
+                    }}
+                  >
+                    <ImageCard
+                      imageUrl={photo.urls.regular}
+                      blurHash={photo.blur_hash}
+                    />
+                  </div>
+                </Link>
+              );
+            });
+          })}
+        </Masonry>
         <Outlet />
-      </main>
-      <LoadMoreButton
+
+        <LoadMoreButton
           isValidating={isValidating}
           size={size}
           setSize={setSize}
           ArrayData={photoFeeds}
         />
-  </>
-      
+      </>
     );
 }

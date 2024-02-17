@@ -4,6 +4,7 @@ import { Photo } from "@Types/photo";
 import { unsplashApi } from "@components/libs/unsplash";
 import ImageCard from "@components/ui/ImageCard";
 import LoadingPlaceHolder from "@components/ui/LoadingPlaceHolder";
+import Masonry from "@mui/lab/Masonry";
 import { Link, Outlet, useOutletContext, useParams } from "react-router-dom";
 import useSWRInfinite from "swr/infinite";
 
@@ -50,7 +51,11 @@ export default function UserLikesPage() {
   if (likeFeeds)
     return (
       <>
-        <main className="masonry-layout">
+        <Masonry
+          columns={4}
+          spacing={4}
+          sx={{ width: "100%", maxWidth: "70.5rem" }}
+        >
           {likeFeeds?.map((likeFeed: Array<Photo>) => {
             return likeFeed?.map((photo) => {
               return (
@@ -75,8 +80,9 @@ export default function UserLikesPage() {
               );
             });
           })}
-          <Outlet />
-        </main>
+        </Masonry>
+        <Outlet />
+
         <LoadMoreButton
           isValidating={isValidating}
           size={size}
