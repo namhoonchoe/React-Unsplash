@@ -1,5 +1,5 @@
+import { User } from "@/Types";
 import { scrollToTop } from "@/utils/utilFunctions";
-import { User } from "@Types/user";
 import { unsplashApi } from "@components/libs/unsplash";
 import LoadMoreButton from "@components/ui/LoadMoreButton";
 import LoadingSpinner from "@components/ui/LoadingSpinner";

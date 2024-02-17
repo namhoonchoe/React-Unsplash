@@ -1,4 +1,4 @@
-import { Tag } from "@Types/collection";
+import { Tag } from "@/Types";
 import React from "react";
 import ThumbNail from "./ThumbNail";
 

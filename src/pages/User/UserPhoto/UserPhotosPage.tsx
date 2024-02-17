@@ -1,5 +1,5 @@
+import { Photo } from "@/Types";
 import { getAspectRatio } from "@/utils/utilFunctions";
-import { Photo } from "@Types/photo";
 import { unsplashApi } from "@components/libs/unsplash";
 import ImageCard from "@components/ui/ImageCard";
 import LoadMoreButton from "@components/ui/LoadMoreButton";

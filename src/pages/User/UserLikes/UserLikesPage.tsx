@@ -1,6 +1,6 @@
+import { Photo } from "@/Types";
 import LoadMoreButton from "@/components/ui/LoadMoreButton";
 import { getAspectRatio } from "@/utils/utilFunctions";
-import { Photo } from "@Types/photo";
 import { unsplashApi } from "@components/libs/unsplash";
 import ImageCard from "@components/ui/ImageCard";
 import LoadingPlaceHolder from "@components/ui/LoadingPlaceHolder";

@@ -1,6 +1,6 @@
+import { CollectionInfo } from "@/Types";
 import LoadMoreButton from "@/components/ui/LoadMoreButton";
 import { scrollToTop } from "@/utils/utilFunctions";
-import { CollectionInfo } from "@Types/collection";
 import { unsplashApi } from "@components/libs/unsplash";
 import CollectionCard from "@components/ui/CollectionCard";
 import LoadingSpinner from "@components/ui/LoadingSpinner";

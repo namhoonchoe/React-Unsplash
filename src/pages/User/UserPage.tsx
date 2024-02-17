@@ -1,5 +1,5 @@
+import { User } from "@/Types";
 import { scrollToTop } from "@/utils/utilFunctions";
-import { User } from "@Types/user";
 import { unsplashApi } from "@components/libs/unsplash";
 import { Link, Outlet, useMatch, useParams } from "react-router-dom";
 import useSWR from "swr";

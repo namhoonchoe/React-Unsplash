@@ -1,6 +1,6 @@
-import { Topic } from "@Types/topic";
+import ThemeNavigatior from "@/components/ui/ThemeNavigator";
+import { Topic } from "@/Types";
 import { unsplashApi } from "@components/libs/unsplash";
-import ThemeNavigatior from "@components/ui/ThemeNavigatior";
 import { Outlet } from "react-router-dom";
 import useSWR from "swr";
 

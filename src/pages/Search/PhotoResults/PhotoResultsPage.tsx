@@ -1,3 +1,4 @@
+import { Photo } from "@/Types";
 import { getAspectRatio } from "@/utils/utilFunctions";
 import {
   queryParamState,
@@ -8,7 +9,6 @@ import ImageCard from "@components/ui/ImageCard";
 import LoadingPlaceHolder from "@components/ui/LoadingPlaceHolder";
 import LoadMoreButton from "@components/ui/LoadMoreButton";
 import Masonry from "@mui/lab/Masonry";
-import { Photo } from "@Types/photo";
 import { Link, Outlet, useParams } from "react-router-dom";
 import { useRecoilValue } from "recoil";
 import useSWRInfinite from "swr/infinite";

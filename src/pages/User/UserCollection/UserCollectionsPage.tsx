@@ -1,4 +1,4 @@
-import { CollectionInfo } from "@/Types/collection";
+import { CollectionInfo } from "@/Types";
 import { scrollToTop } from "@/utils/utilFunctions";
 import { unsplashFetcher } from "@components/libs/unsplash";
 import CollectionCard from "@components/ui/CollectionCard";

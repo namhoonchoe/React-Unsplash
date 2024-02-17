@@ -1,5 +1,5 @@
+import { PhotoDetail } from "@/Types";
 import { scrollToTop } from "@/utils/utilFunctions";
-import { PhotoDetail } from "@Types/photoDetail";
 import { unsplashFetcher } from "@components/libs/unsplash";
 import ImageCard from "@components/ui/ImageCard";
 import { Link, useLocation, useNavigate, useParams } from "react-router-dom";

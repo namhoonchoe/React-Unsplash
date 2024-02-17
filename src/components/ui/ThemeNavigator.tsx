@@ -1,5 +1,5 @@
+import { Topic } from "@/Types";
 import { scrollToTop } from "@/utils/utilFunctions";
-import { Topic } from "@Types/topic";
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 
@@ -26,7 +26,7 @@ type TnProps = {
   topics?: Array<Topic>;
 };
 
-const ThemeNavigatior: React.FC<TnProps> = ({ topics }) => {
+const ThemeNavigator: React.FC<TnProps> = ({ topics }) => {
   const sliderRef = useRef() as React.MutableRefObject<HTMLDivElement>;
   const [isLeftEnd, setIsLeftEnd] = useState<boolean>(true);
   const [isRightEnd, setIsRightEnd] = useState<boolean>(false);
@@ -110,4 +110,4 @@ const ThemeNavigatior: React.FC<TnProps> = ({ topics }) => {
     );
 };
 
-export default ThemeNavigatior;
+export default ThemeNavigator;
