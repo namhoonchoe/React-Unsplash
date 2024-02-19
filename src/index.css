@@ -12,7 +12,11 @@
   }
 
   .slider-button {
-    @apply absolute top-1/2  z-10 h-full  w-8 -translate-y-1/2 transform bg-white shadow-sm;
+    @apply absolute top-1/2 z-10 h-8 w-8 bg-slate-200 rounded-full -translate-y-1/2 transform shadow-sm fade-animation;
+  }
+
+  .fade-animation {
+    @apply transition duration-300 ease-in-out
   }
 
   .tag-button {

@@ -1,24 +1,19 @@
 import { Topic } from "@/Types";
 import { scrollToTop } from "@/utils/utilFunctions";
-import { useEffect, useRef, useState } from "react";
+import { useRef } from "react";
 import { Link } from "react-router-dom";
 
 const scrollToR = (element: HTMLDivElement | null) => {
   if (element) {
-    const step = element.offsetWidth / 5;
+    const step = element.scrollWidth / 5;
     element.scrollLeft += step;
-    console.log(element.scrollWidth);
-    console.log(element.offsetLeft);
-    console.log(element.offsetWidth);
-    console.log(element.scrollLeft);
   }
 };
 
 const scrollTol = (element: HTMLDivElement | null) => {
   if (element) {
-    const step = element.offsetWidth / 5;
+    const step = element.scrollWidth / 5;
     element.scrollLeft -= step;
-    
   }
 };
 
@@ -28,38 +23,7 @@ type TnProps = {
 
 const ThemeNavigator: React.FC<TnProps> = ({ topics }) => {
   const sliderRef = useRef() as React.MutableRefObject<HTMLDivElement>;
-  const [isLeftEnd, setIsLeftEnd] = useState<boolean>(true);
-  const [isRightEnd, setIsRightEnd] = useState<boolean>(false);
-  const { current } = sliderRef;
-  useEffect(() => {
-    function positionChecker() {
-      if (current) {
-        const { scrollWidth, scrollLeft, offsetWidth } = current;
-        switch(scrollLeft) {
-          case 0:
-            setIsLeftEnd(true);
-            break;
-          case scrollWidth - offsetWidth:
-            setIsRightEnd(true);
-            break;
-          default:
-            setIsRightEnd(false);
-            setIsLeftEnd(false);
-          }       
-      }
-    }
-
-    if (current) {
-      current.addEventListener("scroll", positionChecker);
-    }
-
-    return () => {
-      if (current) {
-        current.removeEventListener("scroll", positionChecker);
-      }
-    };
-  }, [current,setIsLeftEnd,setIsRightEnd]);
-  if (topics)
+   if (topics)
     return (
       <div className="sticky top-14 z-[30] flex h-14  w-full items-center justify-start bg-white shadow-sm  ">
         <Link to="/" onClick={() => scrollToTop()}>
@@ -67,11 +31,8 @@ const ThemeNavigator: React.FC<TnProps> = ({ topics }) => {
             <p className=" text-nowrap capitalize">editorial</p>
           </div>
         </Link>
-        <div className="relative w-[calc(100%-10rem)]">
-          <div
-            className="nav-slider z-20 w-full gap-2 pl-2  "
-            ref={sliderRef}
-          >
+        <div className="relative w-[calc(100%-10rem)] p-2">
+          <div className="nav-slider z-20 w-full gap-2 " ref={sliderRef}>
             {topics.map((topic: Topic) => {
               return (
                 <Link
@@ -80,31 +41,31 @@ const ThemeNavigator: React.FC<TnProps> = ({ topics }) => {
                   onClick={() => scrollToTop()}
                 >
                   <div className="flex items-center justify-center rounded-full border px-3 py-2">
-                    <p className=" text-nowrap">{topic.title}</p>
+                    <p className="text-nowrap">{topic.title}</p>
                   </div>
                 </Link>
               );
             })}
           </div>
-          <button
-            onClick={() => {
-              scrollTol(sliderRef.current);
-            }}
-            className="slider-button left-0"
-            style={{ opacity: isLeftEnd ? 0 : 1 }}
-          >
-            ❮
-          </button>
+          <div className="group flex h-full w-full items-center justify-start">
+            <button
+              onClick={() => {
+                scrollTol(sliderRef?.current);
+              }}
+              className="slider-button left-0 opacity-0	group-hover:opacity-100"
+            >
+              ❮
+            </button>
 
-          <button
-            onClick={() => {
-              scrollToR(sliderRef.current);
-            }}
-            className="slider-button right-0 border-none"
-            style={{ opacity: isRightEnd ? 0 : 1 }}
-          >
-            ❯
-          </button>
+            <button
+              onClick={() => {
+                scrollToR(sliderRef?.current);
+              }}
+              className="slider-button right-0  opacity-0	group-hover:opacity-100"
+            >
+              ❯
+            </button>
+          </div>
         </div>
       </div>
     );
