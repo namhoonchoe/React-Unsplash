@@ -1,16 +1,18 @@
 import { Photo, Topic } from "@/Types";
+import MasonryContainer from "@/components/ui/MasonryContainer";
+import useMediaQuery from "@/hooks/useMediaQuery";
 import { getAspectRatio } from "@/utils/utilFunctions";
 import { unsplashFetcher } from "@components/libs/unsplash";
 import ImageCard from "@components/ui/ImageCard";
 import LoadMoreButton from "@components/ui/LoadMoreButton";
 import LoadingPlaceHolder from "@components/ui/LoadingPlaceHolder";
-import Masonry from "@mui/lab/Masonry";
 import { Link, Outlet, useParams } from "react-router-dom";
 import useSWR from "swr";
 import useSWRInfinite from "swr/infinite";
 
 export default function DiscoverPage() {
   const { id } = useParams();
+  const largerThanSm = useMediaQuery("(min-width: 600px)");
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const { data: topic } = useSWR<Topic>(`topics/${id}`, unsplashFetcher, {
@@ -53,20 +55,20 @@ export default function DiscoverPage() {
               />
             )}
           </div>
-          <div className="z-10 flex px-4 w-full max-w-[70.5rem] items-center justify-start *:text-white ">
+          <div className="z-10 flex w-full max-w-[70.5rem] items-center justify-start px-4 *:text-white ">
             <div className="flex h-1/3 w-1/2 flex-col gap-4">
               <h1 className="text-4xl font-bold">{topic?.title}</h1>
-              <p className="text-pretty text-lg">{topic?.description}</p>
+              {largerThanSm ? (
+                <p className="text-pretty text-xs md:text-sm lg:text-lg ">{topic?.description}</p>
+              ) : (
+                <></>
+              )}
             </div>
           </div>
         </header>
 
-        <Masonry
-          columns={4}
-          spacing={4}
-          sx={{ width: "100%", maxWidth: "70.5rem" }}
-        >
-           {topicPhotoLists.map((topicPhotoList: Array<Photo>) => {
+        <MasonryContainer>
+          {topicPhotoLists.map((topicPhotoList: Array<Photo>) => {
             return topicPhotoList.map((photo: Photo) => {
               return (
                 <Link
@@ -90,7 +92,7 @@ export default function DiscoverPage() {
               );
             });
           })}
-        </Masonry>
+        </MasonryContainer>
         <Outlet />
 
         <LoadMoreButton

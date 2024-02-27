@@ -42,7 +42,7 @@ export default function CollectionReseultPage() {
   if (collectionList) {
     return (
       <>
-        <main className="grid grid-cols-3 justify-items-center gap-6">
+        <main className="responsive-grid">
           {collectionList.map((collection) => {
             return collection.map((collectionInfo) => {
               return (

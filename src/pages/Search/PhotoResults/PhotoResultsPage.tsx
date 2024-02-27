@@ -8,7 +8,7 @@ import { unsplashApi } from "@components/libs/unsplash";
 import ImageCard from "@components/ui/ImageCard";
 import LoadingPlaceHolder from "@components/ui/LoadingPlaceHolder";
 import LoadMoreButton from "@components/ui/LoadMoreButton";
-import Masonry from "@mui/lab/Masonry";
+import MasonryContainer from "@components/ui/MasonryContainer";
 import { Link, Outlet, useParams } from "react-router-dom";
 import { useRecoilValue } from "recoil";
 import useSWRInfinite from "swr/infinite";
@@ -61,10 +61,7 @@ export default function PhotoResultsPage() {
   if (photoResult)
     return (
       <>
-     <Masonry
-          columns={4}
-          spacing={4}
-          sx={{ width: "100%", maxWidth: "70.5rem" }}
+     <MasonryContainer
         >
           {photoResult.map((photoFeed) => {
             return photoFeed.map((photo) => {
@@ -90,7 +87,7 @@ export default function PhotoResultsPage() {
               );
             });
           })}
-        </Masonry>
+        </MasonryContainer>
         <Outlet />
 
         <LoadMoreButton

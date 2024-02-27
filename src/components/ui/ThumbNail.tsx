@@ -13,7 +13,7 @@ const ThumbNail: React.FC<ThumbNailProps> = ({
   sourceThree,
 }) => {
   return (
-    <section className="grid grid-cols-7 grid-rows-2 gap-x-[1px] gap-y-[1px] w-full aspect-[3/2] rounded-xl overflow-hidden *:rounded-none">
+    <section className="group-hover:brightness-75 fade-animation grid grid-cols-7 grid-rows-2 gap-x-[1px] gap-y-[1px] w-full aspect-[3/2] rounded-xl overflow-hidden *:rounded-none">
       <div className="flex justify-center items-center col-span-5 row-span-2 bg-slate-400">
         <ImageCard imageUrl={sourceOne} skeleton={true} />
       </div>

@@ -43,19 +43,19 @@ export default function UserResultsPage() {
   if (userResult)
     return (
       <>
-        <section className="mt-4 grid grid-cols-3 justify-items-center gap-6">
+        <section className="my-4 responsive-grid">
           {userResult.map((userFeed) => {
             return userFeed.map((user) => {
               return (
                 <Link to={`/user/${user.username}`} onClick={() => scrollToTop}>
-                  <div className="flex aspect-[3] w-[356px] items-center justify-start gap-4 rounded-xl border p-3">
+                  <div className="flex flex-col sm:flex-row  aspect-[3] w-full max-w-[356px] items-center justify-center sm:justify-start gap-4 rounded-xl border p-3">
                     <div className="avatar">
                       <div className="w-20 rounded-full">
                         <img src={`${user.profile_image.large}`} />
                       </div>
                     </div>
                     <div className="flex flex-col items-start justify-start gap-2">
-                      <h1 className="overflow-hidden text-clip   text-xl font-semibold capitalize text-slate-600  ">
+                      <h1 className="overflow-hidden text-clip text-lg   md:text-xl font-semibold capitalize text-slate-600  ">
                         {user.name}
                       </h1>
 

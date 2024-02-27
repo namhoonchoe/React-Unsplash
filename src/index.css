@@ -20,7 +20,7 @@
   }
 
   .tag-button {
-    @apply btn btn-sm font-medium capitalize text-slate-600;
+    @apply btn btn-xs sm:btn-sm font-normal rounded-full sm:font-medium capitalize text-slate-600;
   }
 
   .loadmore-button {
@@ -28,11 +28,15 @@
   }
 
   .masonry-layout {
-    @apply  w-full max-w-[70.5rem] columns-4 gap-8 *:mb-8;
+    @apply  w-full max-w-[70.5rem] px-4 columns-1 sm:columns-2 md:columns-3 lg:columns-4 gap-8 *:mb-8;
   }
 
   .masonry-item {
     @apply inline-block w-full break-inside-avoid overflow-hidden rounded-xl fade-animation bg-slate-300 shadow-md hover:brightness-75;
+  }
+
+  .responsive-grid {
+    @apply px-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2 sm:gap-4 md:gap-6
   }
 }
 

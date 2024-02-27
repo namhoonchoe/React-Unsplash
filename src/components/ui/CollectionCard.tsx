@@ -24,7 +24,7 @@ const CollectionCard: React.FC<CollectionProps> = ({
   sourceThree
 }) => {
   return (
-    <section className="flex flex-col justify-start gap-2 items-center w-[356px] aspect-square   ">
+    <section className="flex flex-col justify-start gap-2 items-center w-full max-w-[356px] aspect-square  group  ">
       <ThumbNail
         sourceOne={sourceOne}
         sourceTwo={sourceTwo}
@@ -40,11 +40,11 @@ const CollectionCard: React.FC<CollectionProps> = ({
           <p>Photos</p>
           <p className="text-xs"> &bull;</p>
           <p>Curated by</p>
-          <p className="text-xs text-clip	">{user}</p>
+          <p className="text-[8px] text-clip	">{user}</p>
         </section>
         <div className="flex items-center justify-start gap-2 w-full  ">
           {tags.map((tag) => (
-            <button className="tag-button">{tag.title}</button>
+            <button className="tag-button sm:btn-xs">{tag.title}</button>
           ))}
         </div>
       </section>

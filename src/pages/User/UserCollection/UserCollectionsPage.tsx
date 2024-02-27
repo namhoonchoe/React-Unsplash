@@ -18,7 +18,7 @@ export default function UserCollectionsPage() {
     size,
     setSize,
   } = useSWRInfinite<Array<CollectionInfo>>(
-    (index) => `users/${username}/collections/${index}`,
+    (index) => `users/${username}/collections?pages=${index+1}`,
     unsplashFetcher,
     {
       revalidateOnFocus: false,
@@ -37,7 +37,7 @@ export default function UserCollectionsPage() {
   if (collectionResults && collectionResults.length > 0)
     return (
       <>
-        <main className="mb-20 grid w-full grid-cols-3 justify-items-center gap-6">
+        <main className="mb-20 responsive-grid">
           {collectionResults.map((collectionList:Array<CollectionInfo>) => {
             return collectionList.map((collection) => {
               return (

@@ -4,7 +4,7 @@ import { unsplashApi } from "@components/libs/unsplash";
 import ImageCard from "@components/ui/ImageCard";
 import LoadMoreButton from "@components/ui/LoadMoreButton";
 import LoadingPlaceHolder from "@components/ui/LoadingPlaceHolder";
-import Masonry from "@mui/lab/Masonry";
+import MasonryContainer from "@components/ui/MasonryContainer";
 import { Link, Outlet, useOutletContext, useParams } from "react-router-dom";
 import useSWRInfinite from "swr/infinite";
 
@@ -50,10 +50,7 @@ export default function UserPhotosPage() {
   if (photoFeeds && photoFeeds.length > 0)
     return (
       <>
-        <Masonry
-          columns={4}
-          spacing={4}
-          sx={{ width: "100%", maxWidth: "70.5rem" }}
+        <MasonryContainer
         >
           {photoFeeds?.map((homeFeed: Array<Photo>) => {
             return homeFeed?.map((photo) => {
@@ -79,7 +76,7 @@ export default function UserPhotosPage() {
               );
             });
           })}
-        </Masonry>
+        </MasonryContainer>
         <Outlet />
 
         <LoadMoreButton

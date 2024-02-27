@@ -28,7 +28,7 @@ const ThemeNavigator: React.FC<TnProps> = ({ topics }) => {
       <div className="sticky top-14 z-[30] flex h-14  w-full items-center justify-start bg-white shadow-sm  ">
         <Link to="/" onClick={() => scrollToTop()}>
           <div className="flex h-full w-40 items-center justify-center border-r-2">
-            <p className=" text-nowrap capitalize">editorial</p>
+            <p className=" text-nowrap capitalize text-sm lg:text-base">editorial</p>
           </div>
         </Link>
         <div className="relative w-[calc(100%-10rem)] p-2">
@@ -41,7 +41,7 @@ const ThemeNavigator: React.FC<TnProps> = ({ topics }) => {
                   onClick={() => scrollToTop()}
                 >
                   <div className="fade-animation group flex items-center justify-center rounded-full border px-3 py-2 hover:bg-black">
-                    <p className="fade-animation text-nowrap group-hover:text-white">
+                    <p className="fade-animation text-nowrap text-sm lg:text-base group-hover:text-white">
                       {topic.title}
                     </p>
                   </div>

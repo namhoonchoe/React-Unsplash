@@ -20,7 +20,7 @@ export default function PhotoDetailPage() {
 
   if (isLoading)
     return (
-      <section className="relative mb-8 flex w-[80vw] flex-col items-center justify-start gap-4 ">
+      <section className="relative mb-8 flex w-[80vw] max-w-[1200px] flex-col items-center justify-start gap-4 ">
         <header className="sticky top-0 z-[30] flex h-16 w-full items-center  justify-between bg-white px-4  shadow-md ">
           <div className="avatar">
             <div className="skeleton w-12  shrink-0 rounded-full"></div>
@@ -29,14 +29,14 @@ export default function PhotoDetailPage() {
         <main className="flex w-full justify-center">
           {aspectRatio >= 1 ? (
             <div
-              className="skeleton w-4/5 "
+              className="skeleton  w-[90%] md:w-4/5  max-w-[800px]"
               style={{
                 aspectRatio: aspectRatio,
               }}
             ></div>
           ) : (
             <div
-              className="skeleton w-1/3 "
+              className="skeleton w-[90%] md:w-1/2 max-w-[800px]"
               style={{
                 aspectRatio: aspectRatio,
               }}
@@ -53,7 +53,7 @@ export default function PhotoDetailPage() {
 
   if (photo)
     return (
-      <section className="relative mb-8 flex w-[80vw] flex-col items-center justify-start gap-4 ">
+      <section className="relative mb-8 flex w-[90vw]  max-w-[1200px]  flex-col items-center justify-start gap-4 ">
         <header className="sticky top-0 z-[30] flex h-16 w-full items-center  justify-between bg-white px-4  shadow-md ">
           <div className="flex items-center justify-start gap-2">
             <Link
@@ -69,7 +69,7 @@ export default function PhotoDetailPage() {
 
             <div>
               <p className="font-semibold">{photo.user.name} </p>
-              <p className="text-sm text-slate-400">{photo.user.username} </p>
+              <p className="text-xs sm:text-sm text-slate-400">{photo.user.username} </p>
             </div>
           </div>
           <button
@@ -82,7 +82,7 @@ export default function PhotoDetailPage() {
         <main className="flex w-full justify-center">
           {aspectRatio >= 1 ? (
             <div
-              className="-z-10 w-4/5"
+              className="-z-10 w-[90%] md:w-4/5  max-w-[800px]"
               style={{
                 aspectRatio: aspectRatio,
               }}
@@ -94,7 +94,7 @@ export default function PhotoDetailPage() {
             </div>
           ) : (
             <div
-              className="w-1/3 "
+              className="w-[90%] md:w-1/2 max-w-[800px]"
               style={{
                 aspectRatio: aspectRatio,
               }}
@@ -107,24 +107,22 @@ export default function PhotoDetailPage() {
           )}
         </main>
         <footer className="flex w-full flex-col items-start justify-start gap-6 p-4">
-          <section className="flex w-full items-center justify-start gap-8 *:capitalize">
+          <section className="flex flex-wrap items-center justify-start gap-8 *:capitalize">
             <>
-              
               {photo.views && (
                 <div className="flex flex-col justify-start gap-1">
-                  <p className="text-sm text-slate-400 ">views</p>
-                  <p className="  text-slate-600">
+                  <p className="text-xs sm:text-sm text-slate-400 ">views</p>
+                  <p className="  text-slate-600 text-xs sm:text-sm">
                     {photo.views.toLocaleString()}
                   </p>
                 </div>
               )}
             </>
             <>
-               
-              {photo.downloads > 0 &&  (
+              {photo.downloads > 0 && (
                 <div className="flex flex-col justify-start gap-1">
-                  <p className="text-sm text-slate-400">downloads</p>
-                  <p className="text-slate-600">
+                  <p className="text-xs sm:text-sm text-slate-400">downloads</p>
+                  <p className="text-slate-600 text-xs sm:text-sm">
                     {photo.downloads.toLocaleString()}
                   </p>
                 </div>
@@ -133,10 +131,10 @@ export default function PhotoDetailPage() {
             <>
               {photo.topics && photo.topics.length > 0 && (
                 <div className="flex flex-col justify-start gap-1">
-                  <p className="text-sm text-slate-400 ">topics</p>
+                  <p className="text-xs sm:text-sm text-slate-400 ">topics</p>
                   <div className="flex items-center justify-start gap-1">
                     {photo.topics.map((topic, index) => (
-                      <p className="text-slate-600">
+                      <p className="text-slate-600 text-xs sm:text-sm">
                         {topic.title}
                         {index != photo.topics.length - 1 ? "," : ""}
                       </p>
@@ -148,7 +146,7 @@ export default function PhotoDetailPage() {
           </section>
           {photo.description && (
             <div className="w-full">
-              <p className="text-sm text-slate-500">{photo.description}</p>
+              <p className="text-xs sm:text-sm text-slate-500">{photo.description}</p>
             </div>
           )}
           <div className="flex flex-col items-start justify-start gap-2">
@@ -165,7 +163,7 @@ export default function PhotoDetailPage() {
                   <desc lang="en-US">A map marker</desc>
                   <path d="M17.6 4.2C16 2.7 14.1 2 12 2s-4 .7-5.6 2.2C4.8 5.7 4 7.7 4 10.2c0 1.7.7 3.5 2 5.4 1.3 2 3.3 4.1 6 6.4 2.7-2.3 4.7-4.4 6-6.4 1.3-2 2-3.8 2-5.4 0-2.5-.8-4.5-2.4-6zm-1.1 10.1c-1 1.5-2.5 3.2-4.5 5.1-2-1.9-3.5-3.6-4.5-5.1-1-1.5-1.5-2.9-1.5-4.1 0-1.8.6-3.3 1.7-4.5C8.9 4.6 10.3 4 12 4s3.1.6 4.3 1.7c1.2 1.2 1.7 2.6 1.7 4.5 0 1.2-.5 2.5-1.5 4.1zm-2-4.3c0 1.4-1.1 2.5-2.5 2.5S9.5 11.4 9.5 10s1.1-2.5 2.5-2.5 2.5 1.1 2.5 2.5z"></path>
                 </svg>
-                <p className="text-sm text-slate-400">{photo.location.name}</p>
+                <p className="text-xs sm:text-sm text-slate-400">{photo.location.name}</p>
               </div>
             )}
             {photo.created_at && (
@@ -181,7 +179,9 @@ export default function PhotoDetailPage() {
                   <desc lang="en-US">Calendar outlined</desc>
                   <path d="M21 6v14c0 1.1-.9 2-2 2H5c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2h1V2h2v2h8V2h2v2h1c1.1 0 2 .9 2 2zM5 8h14V6H5v2zm14 12V10H5v10h14z"></path>
                 </svg>
-                <p className="text-sm text-slate-400">{dateConverter(photo.created_at.substring(0,10))}</p>
+                <p className="text-xs sm:text-sm text-slate-400">
+                  {dateConverter(photo.created_at.substring(0, 10))}
+                </p>
               </div>
             )}
 
@@ -198,7 +198,7 @@ export default function PhotoDetailPage() {
                   <desc lang="en-US">Camera</desc>
                   <path d="m14.12 4 1.83 2H20v12H4V6h4.05l1.83-2h4.24ZM15 2H9L7.17 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2h-3.17L15 2Zm-3 7c1.65 0 3 1.35 3 3s-1.35 3-3 3-3-1.35-3-3 1.35-3 3-3Zm0-2c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5Z"></path>
                 </svg>
-                <p className="text-sm text-slate-400">{photo.exif.name}</p>
+                <p className="text-xs sm:text-sm text-slate-400">{photo.exif.name}</p>
               </div>
             )}
           </div>

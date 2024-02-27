@@ -1,17 +1,17 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Photo } from "@/Types";
+import MasonryContainer from "@/components/ui/MasonryContainer";
 import { getAspectRatio } from "@/utils/utilFunctions";
 import { unsplashApi } from "@components/libs/unsplash";
 import ImageCard from "@components/ui/ImageCard";
 import LoadMoreButton from "@components/ui/LoadMoreButton";
 import LoadingPlaceHolder from "@components/ui/LoadingPlaceHolder";
-import Masonry from "@mui/lab/Masonry";
 import { Link, Outlet } from "react-router-dom";
 import useSWRInfinite from "swr/infinite";
 import imageUrl from "../../../public/assets/masonry image.png";
 
 export default function EditorialPage() {
-  const getEditorials = async (url: string) => {
+   const getEditorials = async (url: string) => {
     const { data } = await unsplashApi.get(url, {
       params: {
         order_by: "latest",
@@ -42,27 +42,26 @@ export default function EditorialPage() {
   if (homeFeeds)
     return (
       <div className="column-layout">
-        <header className="relative flex aspect-[70/24] w-full items-center justify-center overflow-hidden bg-slate-300">
+        <header className="relative flex aspect-[2] w-full items-center justify-center overflow-hidden bg-slate-300 md:aspect-[70/24]">
           <img
             src={imageUrl}
             className="absolute left-0 top-0 h-full w-full object-cover brightness-75"
             alt="hero image"
           />
-          <div className="z-10 flex  w-full max-w-[70.5rem] items-center justify-start *:text-white ">
+          <div className="z-10 flex w-full max-w-[70.5rem] items-center justify-start px-4 *:text-white ">
             <div className="flex h-1/3 w-1/2 flex-col gap-4">
-              <h1 className="text-4xl font-bold">Unsplash </h1>
-              <p className="text-pretty text-lg font-semibold">
+              <h1 className="font-bold text-2xl md:text-3xl  lg:text-4xl">
+                Unsplash
+              </h1>
+
+              <p className="text-pretty  font-semibold text-xs sm:text-sm	 md:text-lg">
                 The internet's source for visuals. Powered by creators
                 everywhere.
               </p>
             </div>
           </div>
         </header>
-        <Masonry
-          columns={4}
-          spacing={4}
-          sx={{ width: "100%", maxWidth: "70.5rem" }}
-        >
+        <MasonryContainer>
           {homeFeeds.map((homeFeed: Array<Photo>) => {
             return homeFeed.map((photo: Photo) => {
               return (
@@ -87,7 +86,7 @@ export default function EditorialPage() {
               );
             });
           })}
-        </Masonry>
+        </MasonryContainer>
         <Outlet />
         <LoadMoreButton
           isValidating={isValidating}
