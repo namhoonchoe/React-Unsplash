@@ -53,7 +53,7 @@ export default function DiscoverPage() {
               />
             )}
           </div>
-          <div className="z-10 flex  w-full max-w-[70.5rem] items-center justify-start *:text-white ">
+          <div className="z-10 flex px-4 w-full max-w-[70.5rem] items-center justify-start *:text-white ">
             <div className="flex h-1/3 w-1/2 flex-col gap-4">
               <h1 className="text-4xl font-bold">{topic?.title}</h1>
               <p className="text-pretty text-lg">{topic?.description}</p>

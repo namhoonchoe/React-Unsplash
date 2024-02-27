@@ -32,7 +32,7 @@
   }
 
   .masonry-item {
-    @apply inline-block w-full break-inside-avoid overflow-hidden rounded-xl bg-slate-300 shadow-md hover:brightness-75;
+    @apply inline-block w-full break-inside-avoid overflow-hidden rounded-xl fade-animation bg-slate-300 shadow-md hover:brightness-75;
   }
 }
 

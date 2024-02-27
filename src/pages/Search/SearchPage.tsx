@@ -1,3 +1,4 @@
+import CheckIcon from "@/components/svgIcons/CheckIcon";
 import { Orientation, queryParamState } from "@components/libs/recoil-atoms";
 import { Link, Outlet, useMatch, useParams } from "react-router-dom";
 import { useRecoilState, useResetRecoilState } from "recoil";
@@ -12,11 +13,11 @@ export default function SearchReseultsPage() {
   const resetFilter = useResetRecoilState(queryParamState);
   return (
     <>
-      <header className="w-full h-12 px-2 flex justify-between items-center  shadow-sm sticky top-14 z-[30] bg-white">
-        <section className="flex items-center gap-3  w-1/4 h-full  max-w-[360px]  *:text-slate-500 font-semibold">
+      <header className="sticky top-14 z-[30] flex h-12 w-full  items-center justify-between bg-white px-2 shadow-sm">
+        <section className="flex h-full w-1/4  max-w-[360px] items-center  gap-3  font-semibold *:text-slate-500">
           <Link to={`/s/photo/${query}`} onClick={() => scrollToTop()}>
             <div
-              className="h-full flex justify-start items-center gap-2 p-3"
+              className="flex h-full items-center justify-start gap-2 p-3"
               style={{
                 borderBottom: matchPhotoTab ? "solid" : "none",
                 borderBottomColor: "#475569",
@@ -40,7 +41,7 @@ export default function SearchReseultsPage() {
           </Link>
           <Link to={`/s/collection/${query}`} onClick={() => scrollToTop()}>
             <div
-              className=" h-full flex justify-start items-center gap-2 p-3"
+              className=" flex h-full items-center justify-start gap-2 p-3"
               style={{
                 borderBottom: matchCollectionTab ? "solid" : "none",
                 borderBottomColor: "#475569",
@@ -64,7 +65,7 @@ export default function SearchReseultsPage() {
           </Link>
           <Link to={`/s/user/${query}`} onClick={() => scrollToTop()}>
             <div
-              className=" h-full flex justify-start items-center gap-2 p-3"
+              className=" flex h-full items-center justify-start gap-2 p-3"
               style={{
                 borderBottom: matchUserTab ? "solid" : "none",
                 borderBottomColor: "#475569",
@@ -88,35 +89,36 @@ export default function SearchReseultsPage() {
           </Link>
         </section>
         {matchPhotoTab && (
-          <div className="flex justify-start items-center gap-4 pr-4 *:text-slate-500 font-semibold">
+          <div className="flex items-center justify-start gap-4 pr-4 font-semibold *:text-slate-500">
             {(queryParams.isRelevant === false ||
               queryParams.orientation !== undefined) && (
               <div
                 role="button"
                 onClick={resetFilter}
-                className="btn btn-sm btn-ghost border  "
+                className="btn btn-sm border bg-white  "
               >
                 reset
               </div>
             )}
 
-            <div className="dropdown border rounded-lg">
+            <div className="dropdown rounded-lg border">
               <div
                 tabIndex={0}
                 role="button"
-                className="btn btn-sm btn-ghost   "
+                className="btn btn-sm  bg-white  "
               >
                 Orientation
               </div>
               <ul
                 tabIndex={0}
-                className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box  *:capitalize"
+                className="menu dropdown-content z-[1] mt-2 rounded-box border bg-base-100 p-2 shadow *:capitalize"
               >
                 <li>
                   <p
                     onClick={() =>
                       setQueryParams({ ...queryParams, orientation: undefined })
                     }
+                    style={{color:queryParams.orientation === undefined ? "black" : ""}}
                   >
                     ALL
                   </p>
@@ -129,6 +131,7 @@ export default function SearchReseultsPage() {
                         orientation: Orientation.Landscape,
                       })
                     }
+                    style={{color:queryParams.orientation === Orientation.Landscape ? "black" : ""}}
                   >
                     landscape
                   </p>
@@ -141,6 +144,7 @@ export default function SearchReseultsPage() {
                         orientation: Orientation.Portrait,
                       })
                     }
+                    style={{color:queryParams.orientation === Orientation.Portrait ? "black" : ""}}
                   >
                     portrait
                   </p>
@@ -153,49 +157,62 @@ export default function SearchReseultsPage() {
                         orientation: Orientation.Squarish,
                       })
                     }
+                    style={{color:queryParams.orientation === Orientation.Squarish ? "black" : ""}}
                   >
                     squarish
                   </p>
                 </li>
               </ul>
             </div>
-            <div className="dropdown border rounded-lg">
+            <div className="dropdown dropdown-end rounded-lg  border">
               <div
                 tabIndex={0}
                 role="button"
-                className="btn btn-sm btn-ghost border "
+                className="btn btn-sm  border bg-white "
               >
                 Order by
               </div>
               <ul
                 tabIndex={0}
-                className="p-1 shadow menu dropdown-content z-[1] bg-base-100 rounded-box  *:capitalize "
+                className="menu dropdown-content z-[1] mt-2 rounded-box border bg-base-100 p-1 shadow *:capitalize "
               >
                 <li>
-                  <p
+                  <div
+                    className="flex items-center justify-start"
                     onClick={() =>
                       setQueryParams({ ...queryParams, isRelevant: false })
                     }
                   >
-                    latest
-                  </p>
+                    {queryParams.isRelevant === false ? (
+                      <CheckIcon />
+                    ) : (
+                      <div className="h-6 w-6"></div>
+                    )}
+                    <p>latest</p>
+                  </div>
                 </li>
                 <li>
-                  <p
+                  <div
+                    className="flex items-center justify-start "
                     onClick={() =>
                       setQueryParams({ ...queryParams, isRelevant: true })
                     }
                   >
-                    relevant
-                  </p>
+                    {queryParams.isRelevant ? (
+                      <CheckIcon />
+                    ) : (
+                      <div className="h-6 w-6"></div>
+                    )}
+                    <p>relevant</p>
+                  </div>
                 </li>
               </ul>
             </div>
           </div>
         )}
       </header>
-      <div className="w-full flex flex-col items-center justify-start mb-32">
-        <header className="w-full max-w-[70.5rem] h-20 flex justify-start items-center">
+      <div className="mb-32 flex w-full flex-col items-center justify-start">
+        <header className="flex h-20 w-full max-w-[70.5rem] items-center justify-start">
           <p className="text-2xl font-semibold capitalize">{query}</p>
         </header>
         <Outlet />

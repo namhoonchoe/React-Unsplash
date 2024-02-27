@@ -45,7 +45,7 @@ const ImageCard: React.FC<ImageCardProps> = ({
         <Blurhash hash={blurHash} width={"100%"} height={"100%"} punch={1} />
       )}
       {isImageLoading && skeleton && (
-        <div className="w-full h-full bg-gray-300 skeleton rounded-none"></div>
+        <div className="skeleton h-full w-full rounded-none bg-gray-300"></div>
       )}
     </>
   );

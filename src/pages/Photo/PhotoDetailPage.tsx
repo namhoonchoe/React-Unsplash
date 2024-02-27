@@ -1,5 +1,5 @@
 import { PhotoDetail } from "@/Types";
-import { scrollToTop } from "@/utils/utilFunctions";
+import { dateConverter, scrollToTop } from "@/utils/utilFunctions";
 import { unsplashFetcher } from "@components/libs/unsplash";
 import ImageCard from "@components/ui/ImageCard";
 import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
@@ -56,7 +56,10 @@ export default function PhotoDetailPage() {
       <section className="relative mb-8 flex w-[80vw] flex-col items-center justify-start gap-4 ">
         <header className="sticky top-0 z-[30] flex h-16 w-full items-center  justify-between bg-white px-4  shadow-md ">
           <div className="flex items-center justify-start gap-2">
-            <Link to={`/user/${photo.user.username}`} onClick={() => scrollToTop}>
+            <Link
+              to={`/user/${photo.user.username}`}
+              onClick={() => scrollToTop}
+            >
               <div className="avatar">
                 <div className="w-12 rounded-full border bg-slate-200">
                   <img src={photo.user.profile_image.medium} />
@@ -105,30 +108,43 @@ export default function PhotoDetailPage() {
         </main>
         <footer className="flex w-full flex-col items-start justify-start gap-6 p-4">
           <section className="flex w-full items-center justify-start gap-8 *:capitalize">
-            {photo.views && (
-              <div className="flex flex-col justify-start gap-1">
-                <p className="text-sm text-slate-400 ">views</p>
-                <p className="  text-slate-600">{photo.views}</p>
-              </div>
-            )}
-
-            {photo.downloads && (
-              <div className="flex flex-col justify-start gap-1">
-                <p className="text-sm text-slate-400">downloads</p>
-                <p className="   text-slate-600">{photo.downloads}</p>
-              </div>
-            )}
-
-            {photo.topics && photo.topics.length > 0 && (
-              <div className="flex flex-col justify-start gap-1">
-                <p className="text-sm text-slate-400 ">topics</p>
-                <div className="flex items-center justify-start gap-2">
-                  {photo.topics.map((topic) => (
-                    <p className="   text-slate-600">{topic.title}</p>
-                  ))}
+            <>
+              
+              {photo.views && (
+                <div className="flex flex-col justify-start gap-1">
+                  <p className="text-sm text-slate-400 ">views</p>
+                  <p className="  text-slate-600">
+                    {photo.views.toLocaleString()}
+                  </p>
                 </div>
-              </div>
-            )}
+              )}
+            </>
+            <>
+               
+              {photo.downloads > 0 &&  (
+                <div className="flex flex-col justify-start gap-1">
+                  <p className="text-sm text-slate-400">downloads</p>
+                  <p className="text-slate-600">
+                    {photo.downloads.toLocaleString()}
+                  </p>
+                </div>
+              )}
+            </>
+            <>
+              {photo.topics && photo.topics.length > 0 && (
+                <div className="flex flex-col justify-start gap-1">
+                  <p className="text-sm text-slate-400 ">topics</p>
+                  <div className="flex items-center justify-start gap-1">
+                    {photo.topics.map((topic, index) => (
+                      <p className="text-slate-600">
+                        {topic.title}
+                        {index != photo.topics.length - 1 ? "," : ""}
+                      </p>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </>
           </section>
           {photo.description && (
             <div className="w-full">
@@ -165,7 +181,7 @@ export default function PhotoDetailPage() {
                   <desc lang="en-US">Calendar outlined</desc>
                   <path d="M21 6v14c0 1.1-.9 2-2 2H5c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2h1V2h2v2h8V2h2v2h1c1.1 0 2 .9 2 2zM5 8h14V6H5v2zm14 12V10H5v10h14z"></path>
                 </svg>
-                <p className="text-sm text-slate-400">{photo.created_at}</p>
+                <p className="text-sm text-slate-400">{dateConverter(photo.created_at.substring(0,10))}</p>
               </div>
             )}
 

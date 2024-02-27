@@ -23,7 +23,7 @@ type TnProps = {
 
 const ThemeNavigator: React.FC<TnProps> = ({ topics }) => {
   const sliderRef = useRef() as React.MutableRefObject<HTMLDivElement>;
-   if (topics)
+  if (topics)
     return (
       <div className="sticky top-14 z-[30] flex h-14  w-full items-center justify-start bg-white shadow-sm  ">
         <Link to="/" onClick={() => scrollToTop()}>
@@ -40,8 +40,10 @@ const ThemeNavigator: React.FC<TnProps> = ({ topics }) => {
                   to={`discover/${topic.id}`}
                   onClick={() => scrollToTop()}
                 >
-                  <div className="flex items-center justify-center rounded-full border px-3 py-2">
-                    <p className="text-nowrap">{topic.title}</p>
+                  <div className="fade-animation group flex items-center justify-center rounded-full border px-3 py-2 hover:bg-black">
+                    <p className="fade-animation text-nowrap group-hover:text-white">
+                      {topic.title}
+                    </p>
                   </div>
                 </Link>
               );
