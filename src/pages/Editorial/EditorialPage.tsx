@@ -42,7 +42,7 @@ export default function EditorialPage() {
   if (homeFeeds)
     return (
       <div className="column-layout">
-        <header className="relative flex aspect-[2] w-full items-center justify-center overflow-hidden bg-slate-300 md:aspect-[70/24]">
+        <header className="relative flex  w-full items-center justify-center overflow-hidden bg-slate-300 aspect-[1.2] sm:aspect-[2] md:aspect-[70/24]">
           <img
             src={imageUrl}
             className="absolute left-0 top-0 h-full w-full object-cover brightness-75"

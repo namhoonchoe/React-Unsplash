@@ -27,11 +27,11 @@ const ThemeNavigator: React.FC<TnProps> = ({ topics }) => {
     return (
       <div className="sticky top-14 z-[30] flex h-14  w-full items-center justify-start bg-white shadow-sm  ">
         <Link to="/" onClick={() => scrollToTop()}>
-          <div className="flex h-full w-40 items-center justify-center border-r-2">
+          <div className="flex h-full w-24 sm:w-32  md:w-40 items-center justify-center border-r-2">
             <p className=" text-nowrap capitalize text-sm lg:text-base">editorial</p>
           </div>
         </Link>
-        <div className="relative w-[calc(100%-10rem)] p-2">
+        <div className="relative w-[calc(100%-6rem)] sm:w-[calc(100%-8rem)] md:w-[calc(100%-10rem)] p-2">
           <div className="nav-slider z-20 w-full gap-2 " ref={sliderRef}>
             {topics.map((topic: Topic) => {
               return (

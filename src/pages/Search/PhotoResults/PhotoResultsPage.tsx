@@ -115,7 +115,7 @@ export default function PhotoResultsPage() {
               Filters
             </button>
             <dialog ref={modalRef} className="modal modal-bottom	 ">
-              <div className="modal-box h-3/5">
+              <div className="modal-box h-96">
                 <section className="flex w-full flex-col items-start gap-2">
                   <header className="flex w-full justify-between border-b-2 border-slate-200  py-2 text-lg	font-bold">
                     <p className="text-lg	font-bold">Filters</p>
