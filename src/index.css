@@ -4,7 +4,7 @@
 
 @layer components {
   .fit-center {
-    @apply absolute left-1/2 m-0 flex min-h-dvh w-full -translate-x-1/2 flex-col items-center justify-start;
+    @apply mx-auto my-0 flex min-h-dvh w-full flex-col items-center justify-start;
   }
 
   .column-layout {

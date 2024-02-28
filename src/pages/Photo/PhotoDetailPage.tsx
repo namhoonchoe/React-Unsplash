@@ -20,7 +20,7 @@ export default function PhotoDetailPage() {
 
   if (isLoading)
     return (
-      <section className="relative mb-8 flex w-[80vw] max-w-[1200px] flex-col items-center justify-start gap-4 ">
+      <section className="relative mb-8 flex w-[90vw]  max-w-[1200px] flex-col items-center justify-start gap-4 ">
         <header className="sticky top-0 z-[30] flex h-16 w-full items-center  justify-between bg-white px-4  shadow-md ">
           <div className="avatar">
             <div className="skeleton w-12  shrink-0 rounded-full"></div>

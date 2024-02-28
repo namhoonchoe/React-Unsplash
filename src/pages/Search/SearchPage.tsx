@@ -16,7 +16,7 @@ export default function SearchReseultsPage() {
   return (
     <>
       <header className="sticky top-14 z-[30] flex h-12 w-full  items-center justify-between bg-white px-2 shadow-sm">
-        <section className="flex h-full w-1/4  max-w-[360px] items-center  gap-3 *:text-sm *:md:text-base	   font-semibold *:text-slate-500">
+        <section className="flex h-full w-1/4  max-w-[360px] items-center  gap-3 font-semibold *:text-sm	   *:text-slate-500 *:md:text-base">
           <Link to={`/s/photo/${query}`} onClick={() => scrollToTop()}>
             <div
               className="flex h-full items-center justify-start gap-2 p-3"
@@ -105,14 +105,14 @@ export default function SearchReseultsPage() {
             </div>
           </Link>
         </section>
-        {matchPhotoTab && (
-          <div className="flex items-center justify-start gap-4 pr-4 font-semibold *:text-slate-500">
+        {matchPhotoTab && largerThanMd && (
+          <div className="flex items-center justify-start gap-4 pr-4 font-semibold *:text-slate-400">
             {(queryParams.isRelevant === false ||
               queryParams.orientation !== undefined) && (
               <div
                 role="button"
                 onClick={resetFilter}
-                className="btn  btn-xs sm:btn-sm border bg-white  "
+                className="btn  btn-xs border bg-white sm:btn-sm  "
               >
                 reset
               </div>
@@ -122,7 +122,7 @@ export default function SearchReseultsPage() {
               <div
                 tabIndex={0}
                 role="button"
-                className="btn  btn-xs sm:btn-sm  bg-white  "
+                className="btn  btn-xs bg-white  sm:btn-sm  "
               >
                 Orientation
               </div>
@@ -131,79 +131,100 @@ export default function SearchReseultsPage() {
                 className="menu dropdown-content z-[1] mt-2 rounded-box border bg-base-100 p-2 shadow *:capitalize"
               >
                 <li>
-                  <p
-                    onClick={() =>
-                      setQueryParams({ ...queryParams, orientation: undefined })
-                    }
-                    style={{
-                      color:
-                        queryParams.orientation === undefined ? "black" : "",
-                    }}
-                  >
-                    ALL
-                  </p>
-                </li>
-                <li>
-                  <p
-                    onClick={() =>
-                      setQueryParams({
-                        ...queryParams,
-                        orientation: Orientation.Landscape,
-                      })
-                    }
-                    style={{
-                      color:
-                        queryParams.orientation === Orientation.Landscape
-                          ? "black"
-                          : "",
-                    }}
-                  >
-                    landscape
-                  </p>
-                </li>
-                <li>
-                  <p
-                    onClick={() =>
-                      setQueryParams({
-                        ...queryParams,
-                        orientation: Orientation.Portrait,
-                      })
-                    }
-                    style={{
-                      color:
-                        queryParams.orientation === Orientation.Portrait
-                          ? "black"
-                          : "",
-                    }}
-                  >
-                    portrait
-                  </p>
-                </li>
-                <li>
-                  <p
-                    onClick={() =>
-                      setQueryParams({
-                        ...queryParams,
-                        orientation: Orientation.Squarish,
-                      })
-                    }
-                    style={{
-                      color:
-                        queryParams.orientation === Orientation.Squarish
-                          ? "black"
-                          : "",
-                    }}
-                  >
-                    squarish
-                  </p>
-                </li>
+                        <p
+                          onClick={() =>
+                            setQueryParams({
+                              ...queryParams,
+                              orientation: undefined,
+                            })
+                          }
+                          style={{
+                            color:
+                              queryParams.orientation === undefined
+                                ? "black"
+                                : "",
+                            fontWeight:
+                              queryParams.orientation === undefined
+                                ? "600"
+                                : "",
+                          }}
+                        >
+                          ALL
+                        </p>
+                      </li>
+                      <li>
+                        <p
+                          onClick={() =>
+                            setQueryParams({
+                              ...queryParams,
+                              orientation: Orientation.Landscape,
+                            })
+                          }
+                          style={{
+                            color:
+                              queryParams.orientation === Orientation.Landscape
+                                ? "black"
+                                : "",
+                            fontWeight:
+                              queryParams.orientation === Orientation.Landscape
+                                ? "600"
+                                : "",
+                          }}
+                        >
+                          landscape
+                        </p>
+                      </li>
+                      <li>
+                        <p
+                          onClick={() =>
+                            setQueryParams({
+                              ...queryParams,
+                              orientation: Orientation.Portrait,
+                            })
+                          }
+                          style={{
+                            color:
+                              queryParams.orientation === Orientation.Portrait
+                                ? "black"
+                                : "",
+                            fontWeight:
+                              queryParams.orientation === Orientation.Portrait
+                                ? "600"
+                                : "",
+                          }}
+                        >
+                          portrait
+                        </p>
+                      </li>
+                      <li>
+                        <p
+                          onClick={() =>
+                            setQueryParams({
+                              ...queryParams,
+                              orientation: Orientation.Squarish,
+                            })
+                          }
+                          style={{
+                            color:
+                              queryParams.orientation === Orientation.Squarish
+                                ? "black"
+                                : "",
+                            fontWeight:
+                              queryParams.orientation === Orientation.Squarish
+                                ? "600"
+                                : "",
+                          }}
+                        >
+                          squarish
+                        </p>
+                      </li>
               </ul>
             </div>
             <div className="dropdown dropdown-end rounded-lg  border">
               <div
                 tabIndex={0}
                 role="button"
-                className="btn  btn-xs sm:btn-sm  border bg-white "
+                className="btn  btn-xs border  bg-white sm:btn-sm "
               >
                 Order by
               </div>
@@ -248,7 +269,9 @@ export default function SearchReseultsPage() {
       </header>
       <div className="mb-32 flex w-full flex-col items-center justify-start">
         <header className="flex h-20 w-full max-w-[70.5rem] items-center justify-start px-4">
-          <p className="text-lg sm:text-xl md:text-2xl font-semibold capitalize">{query}</p>
+          <p className="text-lg font-semibold capitalize sm:text-xl md:text-2xl">
+            {query}
+          </p>
         </header>
         <Outlet />
       </div>
