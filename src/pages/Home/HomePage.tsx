@@ -15,9 +15,7 @@ export default function HomePage() {
     return data;
   };
 
-  const { data: topics } = useSWR<Array<Topic>>("/topics", getTopicList, {
-    revalidateOnFocus: false,
-  });
+  const { data: topics } = useSWR<Array<Topic>>("/topics", getTopicList);
 
   return (
     <>

@@ -19,10 +19,7 @@ export default function UserPage() {
 
   const { data: userDetail, isLoading } = useSWR<User>(
     `/users/${username}`,
-    getUserDetail,
-    {
-      revalidateOnFocus: false,
-    },
+    getUserDetail
   );
 
   const outletProps = {

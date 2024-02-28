@@ -27,10 +27,7 @@ export default function UserPhotosPage() {
     isValidating,
   } = useSWRInfinite<Array<Photo>>(
     (index) => `/users/${username}/photos?page=${index + 1}`,
-    getPhotos,
-    {
-      revalidateOnFocus: false,
-    },
+    getPhotos
   );
 
   if (isLoading)

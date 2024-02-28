@@ -44,10 +44,7 @@ export default function PhotoResultsPage() {
       `search/photos?query=${query}&page=${index + 1}${
         orientation !== undefined ? `&orientation=${orientation}` : ""
       }${isRelevant ? "" : "&order_by=latest"}`,
-    getPhotoResults,
-    {
-      revalidateOnFocus: false,
-    },
+    getPhotoResults
   );
 
   if (isLoading)

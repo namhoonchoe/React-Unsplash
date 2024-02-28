@@ -19,10 +19,7 @@ export default function UserCollectionsPage() {
     setSize,
   } = useSWRInfinite<Array<CollectionInfo>>(
     (index) => `users/${username}/collections?pages=${index+1}`,
-    unsplashFetcher,
-    {
-      revalidateOnFocus: false,
-    },
+    unsplashFetcher
   );
 
   if (isLoading) return <LoadingSpinner />;

@@ -28,10 +28,7 @@ export default function UserLikesPage() {
     setSize,
   } = useSWRInfinite<Array<Photo>>(
     (index) => `/users/${username}/likes?page=${index + 1}`,
-    getPhotos,
-    {
-      revalidateOnFocus: false,
-    },
+    getPhotos
   );
 
   if (isLoading)

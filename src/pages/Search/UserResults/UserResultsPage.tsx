@@ -24,10 +24,7 @@ export default function UserResultsPage() {
     setSize,
   } = useSWRInfinite<Array<User>>(
     (index) => `search/users?query=${query}&page=${index + 1}`,
-    getUserResults,
-    {
-      revalidateOnFocus: false,
-    },
+    getUserResults
   );
 
   if (isLoading) return <LoadingSpinner />;

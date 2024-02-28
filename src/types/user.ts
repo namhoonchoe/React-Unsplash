@@ -5,13 +5,13 @@ export interface User {
   name: string
   first_name: string
   last_name: string
-  twitter_username: any
-  portfolio_url: string
+  twitter_username?: string
+  portfolio_url?: string
   bio: string
-  location: string
+  location?: string
   links: Links
   profile_image: ProfileImage
-  instagram_username: string
+  instagram_username?: string
   total_collections: number
   total_likes: number
   total_photos: number
@@ -48,9 +48,9 @@ export interface ProfileImage {
 }
 
 export interface Social {
-  instagram_username: string
-  portfolio_url: string
-  twitter_username: any
+  instagram_username?: string
+  portfolio_url?: string
+  twitter_username?: string
   paypal_email: any
 }
 
@@ -184,7 +184,7 @@ export interface User {
   total_promoted_photos: number
   accepted_tos: boolean
   for_hire: boolean
-  social: Social2
+  social: Social
 }
 
 export interface Links3 {
@@ -202,13 +202,7 @@ export interface ProfileImage2 {
   medium: string
   large: string
 }
-
-export interface Social2 {
-  instagram_username?: string
-  portfolio_url?: string
-  twitter_username?: string
-  paypal_email: any
-}
+ 
 
 export interface Aggregated {
   type: string
@@ -360,7 +354,7 @@ export interface User2 {
   total_promoted_photos: number
   accepted_tos: boolean
   for_hire: boolean
-  social: Social3
+  social: Social
 }
 
 export interface Links5 {
@@ -378,14 +372,7 @@ export interface ProfileImage3 {
   medium: string
   large: string
 }
-
-export interface Social3 {
-  instagram_username?: string
-  portfolio_url?: string
-  twitter_username?: string
-  paypal_email: any
-}
-
+ 
 export interface Meta {
   index: boolean
 }

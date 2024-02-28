@@ -1,11 +1,19 @@
 import RootRouter from "@components/Router";
 import { RouterProvider } from "react-router-dom";
+import { SWRConfig } from "swr";
 
 function App() {
   return (
-    <div className="fit-center">
-      <RouterProvider router={RootRouter} />
-    </div>
+    <SWRConfig
+      value={{
+        revalidateOnFocus: false,
+        onError: (error, key) => {},
+      }}
+    >
+      <div className="fit-center">
+        <RouterProvider router={RootRouter} />
+      </div>
+    </SWRConfig>
   );
 }
 

@@ -15,9 +15,7 @@ export default function DiscoverPage() {
   const largerThanSm = useMediaQuery("(min-width: 600px)");
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const { data: topic } = useSWR<Topic>(`topics/${id}`, unsplashFetcher, {
-    revalidateOnFocus: false,
-  });
+  const { data: topic } = useSWR<Topic>(`topics/${id}`, unsplashFetcher);
 
   const {
     data: topicPhotoLists,
@@ -28,10 +26,7 @@ export default function DiscoverPage() {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } = useSWRInfinite<Array<Photo>>(
     (index) => `topics/${id}/photos?page=${index + 1}`,
-    unsplashFetcher,
-    {
-      revalidateOnFocus: false,
-    },
+    unsplashFetcher
   );
 
   if (isPhotosLoading)
