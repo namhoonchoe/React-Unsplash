@@ -32,7 +32,7 @@ export default function DiscoverPage() {
   if (isPhotosLoading)
     return (
       <div className="column-layout">
-        <header className="skeleton  aspect-[2] w-full  " />
+        <header className="skeleton rounded-none  aspect-[2] w-full  " />
         <main className="masonry-layout">
           <LoadingPlaceHolder />
         </main>

@@ -40,7 +40,7 @@ const ThemeNavigator: React.FC<TnProps> = ({ topics }) => {
                   to={`discover/${topic.id}`}
                   onClick={() => scrollToTop()}
                 >
-                  <div className="fade-animation group flex items-center justify-center rounded-full border px-3 py-2 hover:bg-black">
+                  <div className="fade-animation group flex items-center justify-center rounded-full border px-3 py-1 hover:bg-black">
                     <p className="fade-animation text-nowrap text-sm lg:text-base group-hover:text-white">
                       {topic.title}
                     </p>

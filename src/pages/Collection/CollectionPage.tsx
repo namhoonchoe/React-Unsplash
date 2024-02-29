@@ -33,7 +33,7 @@ export default function CollectionPage() {
       <div className="column-layout gap-0 ">
         <header className="my-10 flex h-20 w-full max-w-[70.5rem] flex-col items-start justify-center gap-4 px-2 ">
           <div className="flex w-full flex-col gap-4">
-            <div className="skeleton h-4 w-1/5"></div>
+            <div className="skeleton rounded-none h-4 w-1/5"></div>
             <div className="skeleton h-4 w-1/5"></div>
           </div>
         </header>

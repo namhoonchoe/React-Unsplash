@@ -33,7 +33,7 @@ export default function EditorialPage() {
   if (isLoading)
     return (
       <div className="column-layout">
-        <header className="skeleton aspect-[70/24] w-full overflow-hidden " />
+        <header className="skeleton rounded-none aspect-[70/24] w-full overflow-hidden " />
         <main className="masonry-layout">
           <LoadingPlaceHolder />
         </main>
