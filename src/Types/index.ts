@@ -1,4 +1,4 @@
-export type { CollectionInfo } from "./collection";
+export type { CollectionInfo, Tag } from "./collection";
 export type { CollectionResult } from "./collectionResult";
 export type { Photo } from "./photo";
 export type { PhotoDetail } from "./photoDetail";
