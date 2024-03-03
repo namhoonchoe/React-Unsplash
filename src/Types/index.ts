@@ -1,12 +1,12 @@
-export * from "@Types/collection"
-export * from "@Types/collectionResult"
-export * from "@Types/photo"
-export * from "@Types/photoDetail"
-export * from "@Types/photoResults"
-export * from "@Types/topic"
-export type { topicPhoto } from "@Types/topicPhoto"
-export type { User } from "@Types/user"
-export type { UserResult } from "@Types/userResult"
+export * from "./collection"
+export * from "./collectionResult"
+export * from "./photo"
+export * from "./photoDetail"
+export * from "./photoResults"
+export * from "./topic"
+export type { topicPhoto } from "./topicPhoto"
+export type { User } from "./user"
+export type { UserResult } from "./userResult"
 
 
 
