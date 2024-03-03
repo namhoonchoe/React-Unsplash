@@ -22,18 +22,10 @@ const GlobalConfig: React.FC<ConfigProps> = ({ children }) => {
     <SWRConfig
       value={{
         revalidateOnFocus: false,
-        onError: (error) => {
+        onError: ( ) => {
           setIsOpen(true);
         },
-        onErrorRetry: (error, key, config, revalidate, { retryCount }) => {
-          // Never retry on 404.
-          if (error.status === 404) return;
-          if (error.status === 403) return;
-          if (retryCount >= 5) return;
-
-          // Retry after 5 seconds.
-          setTimeout(() => revalidate({ retryCount }), 3000);
-        },
+       
       }}
     >
       {children}

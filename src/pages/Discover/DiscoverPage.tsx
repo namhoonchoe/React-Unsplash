@@ -26,13 +26,13 @@ export default function DiscoverPage() {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } = useSWRInfinite<Array<Photo>>(
     (index) => `topics/${id}/photos?page=${index + 1}`,
-    unsplashFetcher
+    unsplashFetcher,
   );
 
   if (isPhotosLoading)
     return (
       <div className="column-layout">
-        <header className="skeleton rounded-none  aspect-[2] w-full  " />
+        <header className="skeleton aspect-[2]  w-full rounded-none  " />
         <main className="masonry-layout">
           <LoadingPlaceHolder />
         </main>
@@ -41,7 +41,7 @@ export default function DiscoverPage() {
   if (topicPhotoLists)
     return (
       <div className="column-layout ">
-        <header className="relative flex aspect-[2]  w-full items-center justify-center overflow-hidden bg-slate-300">
+        <header className="relative flex  aspect-[1.2] w-full  items-center justify-center overflow-hidden bg-slate-300 sm:aspect-[2] md:aspect-[70/24]">
           <div className="absolute left-0 top-0 h-full w-full brightness-75 ">
             {topic?.cover_photo.urls.full && (
               <ImageCard
@@ -52,9 +52,13 @@ export default function DiscoverPage() {
           </div>
           <div className="z-10 flex w-full max-w-[70.5rem] items-center justify-start px-4 *:text-white ">
             <div className="flex h-1/3 w-1/2 flex-col gap-4">
-              <h1 className="text-4xl font-bold">{topic?.title}</h1>
+              <h1 className="  text-2xl font-bold md:text-3xl  lg:text-4xl">
+                {topic?.title}
+              </h1>
               {largerThanSm ? (
-                <p className="text-pretty text-xs md:text-sm lg:text-lg ">{topic?.description}</p>
+                <p className="text-pretty text-xs md:text-sm lg:text-lg ">
+                  {topic?.description}
+                </p>
               ) : (
                 <></>
               )}
