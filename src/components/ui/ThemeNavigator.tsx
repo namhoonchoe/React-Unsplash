@@ -35,8 +35,7 @@ const ThemeNavigator: React.FC<TnProps> = ({ topics }) => {
     // Update state or perform other actions based on position
     setMaxPosition(scrollWidth - clientWidth);
     setPosition(position);
-    console.log(position, maxPosition);
-  }, [maxPosition]);
+   }, [ ]);
 
   if (topics)
     return (
