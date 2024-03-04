@@ -1,29 +1,25 @@
 
 ## Description
----
-React + Unsplash api 이용한 이미지 갤러리 
+ React + Unsplash api 이용한 이미지 갤러리 
 
 ## Preview
----
-https://react-unsplash-eight.vercel.app/
+ https://react-unsplash-eight.vercel.app/
 ## **Stacks**
----
-React+TS
-React-Router-dom
-Recoil
+React+TS <br/>
+React-Router-dom  <br/>
+Recoil  <br/>
 
-Tailwind css 
-Daisy ui
-Mui
-react-blurhash
+Tailwind css  <br/>
+Daisy ui <br/>
+Mui <br/>
+react-blurhash <br/>
 
-Swr
-Axios
-Msw
+Swr <br/>
+Axios <br/>
+Msw <br/>
 
 ## Key Features
----
-- [ ] 반응형 UI
+ - [ ] 반응형 UI
 - [ ] 이미지 조회  
 - [ ] 이미지 검색
 - [ ] 검색 필터
