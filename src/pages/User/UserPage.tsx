@@ -30,8 +30,8 @@ export default function UserPage() {
 
   if (isLoading)
     return (
-      <header className="flex aspect-[5] w-full flex-col items-center justify-between gap-6 pt-6 shadow-sm">
-        <div className="z-10 flex w-full max-w-[70.5rem]  items-center justify-start gap-1 justify-self-center">
+      <header className="flex aspect-[5] w-full  items-center justify-between gap-6 pt-6 shadow-sm">
+        <div className="z-10 flex flex-col md:flex-row w-full max-w-[70.5rem]  items-center justify-start gap-1 justify-self-center">
           <div className="flex h-full w-1/4 items-center justify-center">
             <div className="skeleton aspect-square w-32 shrink-0 rounded-full"></div>
           </div>

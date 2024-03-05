@@ -30,10 +30,12 @@ const RootRouter = createBrowserRouter([
             children: [
               {
                 path: "photo/:photoId",
-                element:<PopupModal>
-                  <Photo />
-                </PopupModal>
-               },
+                element: (
+                  <PopupModal>
+                    <Photo />
+                  </PopupModal>
+                ),
+              },
             ],
           },
           {
@@ -42,9 +44,11 @@ const RootRouter = createBrowserRouter([
             children: [
               {
                 path: "photo/:photoId",
-                element:<PopupModal>
-                <Photo />
-              </PopupModal>
+                element: (
+                  <PopupModal>
+                    <Photo />
+                  </PopupModal>
+                ),
               },
             ],
           },
@@ -57,9 +61,11 @@ const RootRouter = createBrowserRouter([
         children: [
           {
             path: "photo/:photoId",
-            element:<PopupModal>
-            <Photo />
-          </PopupModal>
+            element: (
+              <PopupModal>
+                <Photo />
+              </PopupModal>
+            ),
           },
         ],
       },
@@ -73,9 +79,11 @@ const RootRouter = createBrowserRouter([
             children: [
               {
                 path: "photo/:photoId",
-                element: <PopupModal>
-                <Photo />
-              </PopupModal>
+                element: (
+                  <PopupModal>
+                    <Photo />
+                  </PopupModal>
+                ),
               },
             ],
           },
@@ -85,9 +93,11 @@ const RootRouter = createBrowserRouter([
             children: [
               {
                 path: "photo/:photoId",
-                element:<PopupModal>
-                <Photo />
-              </PopupModal>
+                element: (
+                  <PopupModal>
+                    <Photo />
+                  </PopupModal>
+                ),
               },
             ],
           },
@@ -108,9 +118,11 @@ const RootRouter = createBrowserRouter([
             children: [
               {
                 path: "photo/:photoId",
-                element:<PopupModal>
-                <Photo />
-              </PopupModal>
+                element: (
+                  <PopupModal>
+                    <Photo />
+                  </PopupModal>
+                ),
               },
             ],
           },

@@ -45,7 +45,7 @@ export default function UserResultsPage() {
             return userFeed.map((user) => {
               return (
                 <Link to={`/user/${user.username}`} onClick={() => scrollToTop}>
-                  <div className="flex flex-col sm:flex-row  aspect-[3] w-full max-w-[356px] items-center justify-center sm:justify-start gap-4 rounded-xl border p-3">
+                  <div className="flex flex-col sm:flex-row aspect-[1.2] sm:aspect-[3] w-full max-w-[356px] items-center justify-center sm:justify-start gap-4 rounded-xl border p-3">
                     <div className="avatar">
                       <div className="w-20 rounded-full">
                         <img src={`${user.profile_image.large}`} />

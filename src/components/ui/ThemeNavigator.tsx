@@ -35,25 +35,25 @@ const ThemeNavigator: React.FC<TnProps> = ({ topics }) => {
     // Update state or perform other actions based on position
     setMaxPosition(scrollWidth - clientWidth);
     setPosition(position);
-   }, [ ]);
+  }, []);
 
-  if (topics)
-    return (
-      <div className="sticky top-14 z-[30] flex h-14  w-full items-center justify-start bg-white shadow-sm  ">
-        <Link to="/" onClick={() => scrollToTop()}>
-          <div className="flex h-full w-24 items-center  justify-center border-r-2 sm:w-32 md:w-40">
-            <p className=" text-nowrap text-sm capitalize lg:text-base">
-              editorial
-            </p>
-          </div>
-        </Link>
-        <div className="relative w-[calc(100%-6rem)] p-2 sm:w-[calc(100%-8rem)] md:w-[calc(100%-10rem)]">
-          <div
-            className="nav-slider z-20 w-full gap-2 "
-            ref={sliderRef}
-            onScroll={() => scrollDetector()}
-          >
-            {topics.map((topic: Topic) => {
+  return (
+    <div className="sticky top-14 z-[30] flex h-14  w-full items-center justify-start bg-white shadow-sm  ">
+      <Link to="/" onClick={() => scrollToTop()}>
+        <div className="flex h-full w-24 items-center  justify-center border-r-2 sm:w-32 md:w-40">
+          <p className=" text-nowrap text-sm capitalize lg:text-base">
+            editorial
+          </p>
+        </div>
+      </Link>
+      <div className="relative w-[calc(100%-6rem)] p-2 sm:w-[calc(100%-8rem)] md:w-[calc(100%-10rem)]">
+        <div
+          className="nav-slider z-20 w-full gap-2 "
+          ref={sliderRef}
+          onScroll={() => scrollDetector()}
+        >
+          {topics &&
+            topics.map((topic: Topic) => {
               return (
                 <Link
                   key={topic.id}
@@ -68,33 +68,33 @@ const ThemeNavigator: React.FC<TnProps> = ({ topics }) => {
                 </Link>
               );
             })}
-          </div>
-          {largerThanMd && (
-            <div className="group flex h-full w-full items-center justify-start">
-              <button
-                onClick={() => {
-                  scrollTol(sliderRef?.current);
-                }}
-                className="slider-button left-0  "
-                style={{ opacity: position === 0 ? 0 : 1 }}
-              >
-                ❮
-              </button>
-
-              <button
-                onClick={() => {
-                  scrollToR(sliderRef?.current);
-                }}
-                className="slider-button right-0  "
-                style={{ opacity: maxPosition - position <= 0.9 ? 0 : 1 }}
-              >
-                ❯
-              </button>
-            </div>
-          )}
         </div>
+        {largerThanMd && (
+          <div className="group flex h-full w-full items-center justify-start">
+            <button
+              onClick={() => {
+                scrollTol(sliderRef?.current);
+              }}
+              className="slider-button left-0  "
+              style={{ opacity: position === 0 ? 0 : 1 }}
+            >
+              ❮
+            </button>
+
+            <button
+              onClick={() => {
+                scrollToR(sliderRef?.current);
+              }}
+              className="slider-button right-0  "
+              style={{ opacity: maxPosition - position <= 0.9 ? 0 : 1 }}
+            >
+              ❯
+            </button>
+          </div>
+        )}
       </div>
-    );
+    </div>
+  );
 };
 
 export default ThemeNavigator;
