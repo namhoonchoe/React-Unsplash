@@ -1,6 +1,5 @@
 import { CollectionInfo } from "@/Types";
 import LoadMoreButton from "@/components/ui/LoadMoreButton";
-import { scrollToTop } from "@/utils/utilFunctions";
 import { unsplashApi } from "@components/libs/unsplash";
 import CollectionCard from "@components/ui/CollectionCard";
 import LoadingSpinner from "@components/ui/LoadingSpinner";
@@ -48,7 +47,7 @@ export default function CollectionReseultPage() {
               return (
                 <Link
                   to={`/collection/${collectionInfo.id}`}
-                  onClick={() => scrollToTop}
+                 
                 >
                   <CollectionCard
                     sourceOne={`${collectionInfo.preview_photos[0].urls.small}q=50`}

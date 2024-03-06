@@ -36,7 +36,7 @@
   }
 
   .responsive-grid {
-    @apply w-full  max-w-[70.5rem]  px-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2 sm:gap-4 md:gap-6
+    @apply w-full  max-w-[70.5rem]  px-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2 sm:gap-4 md:gap-6 justify-items-center
   }
 
   .hero-aspect {
