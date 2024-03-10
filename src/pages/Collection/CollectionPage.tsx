@@ -12,8 +12,6 @@ import useSWRInfinite from "swr/infinite";
 export default function CollectionPage() {
   const { id } = useParams();
 
- 
-
   const { data: collectionInfo } = useSWR<CollectionInfo>(
     `collections/${id}`,
     unsplashFetcher,

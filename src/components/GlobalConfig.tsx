@@ -25,7 +25,6 @@ const GlobalConfig: React.FC<ConfigProps> = ({ children }) => {
         onError: ( ) => {
           setIsOpen(true);
         },
-       
       }}
     >
       {children}

@@ -24,7 +24,7 @@ export default function UserResultsPage() {
     setSize,
   } = useSWRInfinite<Array<User>>(
     (index) => `search/users?query=${query}&page=${index + 1}`,
-    getUserResults
+    getUserResults,
   );
 
   if (isLoading) return <LoadingSpinner />;
@@ -40,19 +40,23 @@ export default function UserResultsPage() {
   if (userResult)
     return (
       <>
-        <section className="my-4 responsive-grid">
+        <section className="responsive-grid my-4">
           {userResult.map((userFeed) => {
             return userFeed.map((user) => {
               return (
-                <Link to={`/user/${user.username}`} onClick={() => scrollToTop}>
-                  <div className="flex flex-col sm:flex-row aspect-[1.2] sm:aspect-[3] w-full max-w-[356px] items-center justify-center sm:justify-start gap-4 rounded-xl border p-3">
+                <Link
+                  to={`/user/${user.username}`}
+                  onClick={() => scrollToTop}
+                  className="w-full max-w-[356px] "
+                >
+                  <div className="flex flex-col sm:flex-row aspect-[3/2] sm:aspect-[3] w-full  items-center justify-center sm:justify-start gap-4 rounded-xl border p-3">
                     <div className="avatar">
                       <div className="w-20 rounded-full">
                         <img src={`${user.profile_image.large}`} />
                       </div>
                     </div>
                     <div className="flex flex-col items-start justify-start gap-2">
-                      <h1 className="overflow-hidden text-clip text-lg   md:text-xl font-semibold capitalize text-slate-600  ">
+                      <h1 className="overflow-hidden text-clip text-lg   font-semibold capitalize text-slate-600 md:text-xl  ">
                         {user.name}
                       </h1>
 
