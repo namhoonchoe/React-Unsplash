@@ -24,7 +24,7 @@ const CollectionCard: React.FC<CollectionProps> = ({
   sourceThree
 }) => {
   return (
-    <section className="flex flex-col justify-start gap-2 items-center w-full max-w-[356px] aspect-square  group  ">
+    <section className="flex flex-col justify-start gap-2 items-center w-full  aspect-square  group  ">
       <ThumbNail
         sourceOne={sourceOne}
         sourceTwo={sourceTwo}

@@ -47,7 +47,7 @@ export default function CollectionReseultPage() {
               return (
                 <Link
                   to={`/collection/${collectionInfo.id}`}
-                 
+                  className="w-full max-w-[356px]"
                 >
                   <CollectionCard
                     sourceOne={`${collectionInfo.preview_photos[0].urls.small}q=50`}
